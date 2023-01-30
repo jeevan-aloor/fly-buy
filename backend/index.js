@@ -1,6 +1,7 @@
 const express=require('express')
 const {connection} =require("./conflict/db")
 const {productRouter} =require("./router/productrouter")
+require('dotenv').config()
 
 
 
@@ -12,7 +13,7 @@ app.use("/",productRouter)
 
 
 
-app.listen(8000,async()=>{
+app.listen(process.env.port,async()=>{
     try {
         await connection
         console.log("connected to db")
