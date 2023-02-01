@@ -34,12 +34,12 @@ function Home() {
             </Box>
             <Slider />
             <Heading mt="20px">TRENDING PRODUCTS</Heading>
-            <Grid templateColumns='repeat(4, 1fr)' gap={6} h="300px" w="95%" m="auto" mt="20px">
+            <Grid templateColumns='repeat(4, 1fr)' gap={6} h="300px" w="95%" m="auto" mt="20px" >
                 {
                     mongodata.length > 0 && mongodata.map((ele) => (
                         <>
-                            <GridItem w='100%' h='100%' border="1px solid blue" boxShadow=" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" key={ele._id}  >
-                               <Link to={`/singleproduct/${ele._id}`}><Image src={ele.productimage} h="70%" w="90%" m="auto" mt="10px" borderRadius="20px" _hover={{ width:"95%" }} /></Link> 
+                            <GridItem w='100%' h='600px' border="1px solid blue" boxShadow=" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" key={ele._id}  >
+                               <Link to={`/singleproduct/${ele._id}`}><Image src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" _hover={{ width:"95%" }} /></Link> 
                                 <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px">
                                     <Text fontSize="20px" fontWeight="extrabold">{ele.productname}</Text>
                                     <Text fontSize="18px" color="blue">{ele.productdesc}</Text>

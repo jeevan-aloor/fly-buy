@@ -4,7 +4,13 @@ const allproductschema=mongoose.Schema({
     productimage:String,
     productname:String,
     productdesc:String,
-    productrate:Number
+    productrate:Number,
+    productimage2:String,
+    productimage3:String,
+    productimage4:String,
+    productoffer:String,
+    productstrikerate:Number
+
     
     
 })

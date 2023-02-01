@@ -33,13 +33,18 @@ allproductRouter.get("/singleproduct/:id",async(req,res)=>{
     
 })
 allproductRouter.post("/allproductpost",async(req,res)=>{
-    const {productimage,productname,productdesc,productrate}=req.body
+    const {productimage,productname,productdesc,productrate,productimage2,productimage3,productimage4,productstrikerate,productoffer}=req.body
     try {
         const user=new AllproductModel({
             productimage,
             productname,
             productdesc,
-            productrate
+            productrate,
+            productimage2,
+            productimage3,
+            productimage4,
+            productstrikerate,
+            productoffer
             
 
         })
