@@ -13,7 +13,7 @@ function Navbar() {
         <Link to="/shoes" style={{ marginTop: "30px" }}>Shoes</Link>
         <Link to="/watches" style={{ marginTop: "30px" }}>Watches</Link>
         <Image src="https://cdn-icons-png.flaticon.com/128/666/666201.png" w="30px" h="30px" mt="25px" />
-        <Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" />
+        <Link to="/carts"><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" /></Link>
       </Box>
     </Box>
   )

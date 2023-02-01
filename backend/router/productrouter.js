@@ -5,11 +5,14 @@ const {ClothModel}=require("../conflict/model")
 const productRouter = express.Router();
 
 
-productRouter.get("/",async(req,res)=>{
+productRouter.get("/getcloths",async(req,res)=>{
+    let query=req.query.clothcategory
+  
 
     try {
         let data=await ClothModel.find()
         res.send(data)
+        console.log(data)
         
     } catch (error) {
         console.log(error)
@@ -20,14 +23,14 @@ productRouter.get("/",async(req,res)=>{
 })
 
 productRouter.post("/postdata",async(req,res)=>{
-    const {clothimage,clothname,clothdesc,clothrate,clothsize}=req.body
+    const {clothimage,clothname,clothrate,clothstrikerate,clothcategory}=req.body
     try {
         const user=new ClothModel({
             clothimage,
             clothname,
-            clothdesc,
             clothrate,
-            clothsize
+            clothstrikerate,
+            clothcategory
 
         })
         await user.save()

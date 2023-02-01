@@ -3,9 +3,9 @@ const mongoose=require("mongoose")
 const clothsschema=mongoose.Schema({
     clothimage:String,
     clothname:String,
-    clothdesc:String,
     clothrate:Number,
-    clothsize:String
+    clothstrikerate:Number,
+    clothcategory:String
     
 })
 
