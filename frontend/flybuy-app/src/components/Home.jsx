@@ -23,7 +23,7 @@ function Home() {
     useEffect(() => {
         getdata()
 
-    }, [mongodata])
+    }, [])
     return (
         <Box>
             
@@ -45,12 +45,12 @@ function Home() {
                                     <Text fontSize="18px" color="blue">{ele.productdesc}</Text>
                                     <Flex gap="10px">
                                     <Text fontSize="30px" fontWeight="semibold" color="#0f1111" lineHeight="normal">₹{ele.productrate}</Text>
-                                    <Text fontSize="18px" textDecoration="line-through" color="#565959" mt="10px">₹{ele.productrate}</Text>
+                                    <Text fontSize="18px" textDecoration="line-through" color="#565959" mt="10px">₹{ele.productstrikerate}</Text>
 
                                     </Flex >
                                     <Box display="flex" mt="10px">
                                         <Image src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="50px" h="50px" mr="10px" />
-                                        <Link to="/checkout" style={{width:"200px"}}><Button w="100%" _hover={{ background: "red", color: "white" }}>BUY</Button></Link>
+                                        <Link to={`/checkout/${ele._id}`} style={{width:"200px"}}><Button w="100%" _hover={{ background: "red", color: "white" }}>BUY</Button></Link>
                                     </Box>
                                 </Box>
                             </GridItem>

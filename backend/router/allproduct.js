@@ -32,6 +32,20 @@ allproductRouter.get("/singleproduct/:id",async(req,res)=>{
     }
     
 })
+allproductRouter.get("/checkoutdata/:id",async(req,res)=>{
+    let param=req.params.id
+
+    try {
+        let data=await AllproductModel.find({_id:param})
+        res.send(data)
+        
+    } catch (error) {
+        console.log(error)
+        console.log("error")
+        
+    }
+    
+})
 allproductRouter.post("/allproductpost",async(req,res)=>{
     const {productimage,productname,productdesc,productrate,productimage2,productimage3,productimage4,productstrikerate,productoffer}=req.body
     try {

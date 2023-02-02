@@ -16,7 +16,7 @@ function Routerfile() {
       <Route path='/shoes' element={<Shoes/>}/>
       <Route path='/watches' element={<Watches/>}/>
       <Route path='/carts' element={<Cart/>}/>
-      <Route path='/checkout' element={<Checkout/>}/>
+      <Route path='/checkout/:id' element={<Checkout/>}/>
       <Route path="/singleproduct/:id" element={<Singleproduct/>}/>
     </Routes>
   )
