@@ -30,6 +30,7 @@ function Slider() {
           className="d-block w-100"
           src="https://cdn.shopify.com/s/files/1/0046/3454/2129/files/Couple_1920x667_c26e26da-a37d-4e24-9c8e-ad815e1e4950.jpg?v=1641811299"
           alt="Third slide"
+          style={{height:"500px"}}
         />
 
         
