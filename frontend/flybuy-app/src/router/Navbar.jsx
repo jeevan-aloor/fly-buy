@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Image, Input } from '@chakra-ui/react'
+import { Box, Image, Input,Text } from '@chakra-ui/react'
 
 function Navbar() {
   return (
@@ -13,7 +13,7 @@ function Navbar() {
         <Link to="/shoes" style={{ marginTop: "30px" }}>Shoes</Link>
         <Link to="/watches" style={{ marginTop: "30px" }}>Watches</Link>
         <Image src="https://cdn-icons-png.flaticon.com/128/666/666201.png" w="30px" h="30px" mt="25px" />
-        <Link to="/carts"><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" /></Link>
+        <Link to="/carts"><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" /><span>1</span></Link>
       </Box>
     </Box>
   )

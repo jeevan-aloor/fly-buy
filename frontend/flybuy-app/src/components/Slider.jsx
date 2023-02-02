@@ -5,21 +5,23 @@ function Slider() {
   return (
     <Carousel>
       <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvzfflfMZ8nJZiHUqVu-i88wONm_jaqvmwOA&usqp=CAU"
-          alt="First slide"
-          style={{height:"500px"}}
-        />
-        
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
+      <img
           className="d-block w-100"
           src="https://admin.mochishoes.com/banner/1670318632DESKTOP-BANNER_MOCHI_1600X623PX_MEN.jpg"
           alt="Second slide"
           style={{height:"500px"}}
         />
+       
+        
+      </Carousel.Item>
+      <Carousel.Item>
+      <img
+          className="d-block w-100"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvzfflfMZ8nJZiHUqVu-i88wONm_jaqvmwOA&usqp=CAU"
+          alt="First slide"
+          style={{height:"500px"}}
+        />
+       
 
        
       </Carousel.Item>

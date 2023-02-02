@@ -25,6 +25,7 @@ app.listen(process.env.port,async()=>{
         console.log("connected to db")
         
     } catch (error) {
+        console.log(error)
         console.log("not able to connect to db")
         
     }
