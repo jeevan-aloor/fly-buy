@@ -7,6 +7,8 @@ import Shoes from '../components/Shoes'
 import Cart from '../components/Cart'
 import Checkout from '../components/Checkout'
 import Singleproduct from '../components/Singleproduct'
+// import CheckoutForm from '../components/Payment'
+// import CheckoutForm from '../components/Payment'
 
 function Routerfile() {
   return (
@@ -18,6 +20,7 @@ function Routerfile() {
       <Route path='/carts' element={<Cart/>}/>
       <Route path='/checkout/:id' element={<Checkout/>}/>
       <Route path="/singleproduct/:id" element={<Singleproduct/>}/>
+      {/* <Route path="/payment" element={<CheckoutForm/>}/> */}
     </Routes>
   )
 }
