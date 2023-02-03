@@ -9,6 +9,11 @@ import Navbar from '../router/Navbar'
 function Home() {
 
     const [mongodata, setdata] = useState([])
+    const [pimage,setImage]=useState("")
+    const [pname,setName]=useState("")
+    const [prate,setRate]=useState("")
+    const [pdesc,setDesc]=useState("")
+    
 
     const getdata = async () => {
 
@@ -18,6 +23,26 @@ function Home() {
 
 
     }
+
+    const handleadd=async(img,name,rate)=>{
+        const payload={
+            productimage:img,
+            productname:name,
+            productrate:rate
+
+          
+        }
+        try {
+            let data=await axios.post("http://localhost:8000/cart/addtocart",payload)
+            console.log(data)
+            
+        } catch (error) {
+            console.log(error)
+            console.log("error")
+            
+        }
+        
+      }
 
 
     useEffect(() => {
@@ -38,6 +63,7 @@ function Home() {
                 {
                     mongodata.length > 0 && mongodata.map((ele) => (
                         <>
+                        
                             <GridItem w={{md:'100%',base:"92%"}} h={{md:'600px',base:"550px"}} border="1px solid blue" boxShadow=" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" key={ele._id}  >
                                <Link to={`/singleproduct/${ele._id}`}><Image src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" _hover={{ width:"95%" }} /></Link> 
                                 <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px">
@@ -49,7 +75,8 @@ function Home() {
 
                                     </Flex >
                                     <Box display="flex" mt="10px">
-                                        <Image src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="50px" h="50px" mr="10px" />
+                                      <Image src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="50px" h="50px" mr="10px" 
+                                      onClick={()=>handleadd(ele.productname,ele.productname,ele.productrate)}  />
                                         <Link to={`/checkout/${ele._id}`} style={{width:"200px"}}><Button w="100%" _hover={{ background: "red", color: "white" }}>BUY</Button></Link>
                                     </Box>
                                 </Box>
