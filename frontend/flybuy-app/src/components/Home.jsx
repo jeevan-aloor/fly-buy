@@ -24,11 +24,12 @@ function Home() {
 
     }
 
-    const handleadd=async(img,name,rate)=>{
+    const handleadd=async(img,name,rate,desc)=>{
         const payload={
             productimage:img,
             productname:name,
-            productrate:rate
+            productrate:rate,
+            productdesc:desc
 
           
         }
@@ -62,10 +63,10 @@ function Home() {
             <Grid templateColumns={{md:"repeat(3, 1fr)",sm:"repeat(2,1fr)",base:"repeat(2,1fr)",lg:"repeat(4,1fr)"}} gap={{md:"6px",sm:"4px",base:"2px"}}  w="95%" m="auto" mt="20px" >
                 {
                     mongodata.length > 0 && mongodata.map((ele) => (
-                        <>
+                        <Box  key={ele._id}>
                         
                             <GridItem w={{md:'100%',base:"92%"}} h={{md:'600px',base:"550px"}} border="1px solid blue" boxShadow=" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" key={ele._id}  >
-                               <Link to={`/singleproduct/${ele._id}`}><Image src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" _hover={{ width:"95%" }} /></Link> 
+                               <Link to={`/singleproduct/${ele._id}`} ><Image src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" _hover={{ width:"95%" }} /></Link> 
                                 <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px">
                                     <Text fontSize="20px" fontWeight="extrabold">{ele.productname}</Text>
                                     <Text fontSize="18px" color="blue">{ele.productdesc}</Text>
@@ -76,12 +77,12 @@ function Home() {
                                     </Flex >
                                     <Box display="flex" mt="10px">
                                       <Image src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="50px" h="50px" mr="10px" 
-                                      onClick={()=>handleadd(ele.productname,ele.productname,ele.productrate)}  />
+                                      onClick={()=>handleadd(ele.productimage,ele.productname,ele.productrate,ele.productdesc)}  />
                                         <Link to={`/checkout/${ele._id}`} style={{width:"200px"}}><Button w="100%" _hover={{ background: "red", color: "white" }}>BUY</Button></Link>
                                     </Box>
                                 </Box>
                             </GridItem>
-                        </>
+                        </Box>
                     ))
 
                 }

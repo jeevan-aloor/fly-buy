@@ -29,7 +29,7 @@ function Cloths() {
       <Grid templateColumns='repeat(5, 1fr)' gap={2} h="400px" border="1px solid red"  w="80%" m="auto"mt="80px" alignItems="end" >
         {
           clothdata.length > 0 && clothdata.map((ele) => (
-            <GridItem h="100%" w="100%" border="1px solid red" background="#CFD7DE">
+            <GridItem h="100%" w="100%" border="1px solid red" background="#CFD7DE" key={ele._id}>
               <Image src={ele.clothimage} h="70%" />
               <Text fontSize="20px">{ele.clothname}</Text>
               <Flex m="auto">

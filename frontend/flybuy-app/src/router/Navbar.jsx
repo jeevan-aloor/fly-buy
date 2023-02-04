@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import { Link } from 'react-router-dom'
 import {
   Box, Image, Input, Text, Drawer,
@@ -11,11 +11,30 @@ import {
 } from '@chakra-ui/react'
 import { useMediaQuery, useDisclosure } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
+import axios from 'axios'
 
 function Navbar() {
   const [isLesserThan800] = useMediaQuery('(max-width: 800px)')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
+  const [cartdata, setDate] = useState([])
+
+  const getdata = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/cart/cartdata")
+      let data = res.data
+      setDate(data)
+
+    } catch (error) {
+      console.log(error)
+
+    }
+
+  }
+  useEffect(() => {
+    getdata()
+
+  }, [cartdata])
   return (
     <Box w={{ md: "100%", lg: "100%", base: "100%" }} border="1px solid black" >
 
@@ -43,7 +62,7 @@ function Navbar() {
                   <Link to="/shoes" style={{ marginTop: "30px" }}>Shoes</Link><br />
                   <Link to="/watches" style={{ marginTop: "30px" }}>Watches</Link><br />
                   <Image src="https://cdn-icons-png.flaticon.com/128/666/666201.png" w="30px" h="30px" mt="25px" />
-                  <Link to="/carts"><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" /><span>1</span></Link>
+                  <Link to="/carts"><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" /><span>{cartdata.length}</span></Link>
 
                 </DrawerBody>
 
@@ -59,7 +78,7 @@ function Navbar() {
             <Link to="/shoes" style={{ marginTop: "30px" }}>Shoes</Link>
             <Link to="/watches" style={{ marginTop: "30px" }}>Watches</Link>
             <Image src="https://cdn-icons-png.flaticon.com/128/666/666201.png" w="30px" h="30px" mt="25px" />
-            <Link to="/carts"><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" /><span>1</span></Link></>
+            <Link to="/carts"><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" /><span>{cartdata.length}</span></Link></>
 
         }
 
