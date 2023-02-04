@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Box, Image, Input, Text, Drawer,
@@ -36,11 +36,12 @@ function Navbar() {
 
   }, [cartdata])
   return (
-    <Box w={{ md: "100%", lg: "100%", base: "100%" }} border="1px solid black" >
+    <Box w={{ md: "100%", lg: "100%", base: "100%" }}  >
 
-      <Box border="1px solid red" display="flex" justifyContent="space-evenly" w={{ md: "100%", sm: "100%", base: "100%" }} zIndex="100" background="yellow"  >
-        <Image src="https://i.ibb.co/FWBBMbX/Fly-Buy-logo.png" h={{ md: "100px", sm: "80px", base: "60px" }} w={{ md: "100px", sm: "90px", base: "80px" }} />
-        <Input w={{ md: "300px", sm: "250px", base: "200px" }} mt={{ sm: "20px", md: "30px", base: "10px" }} />
+      <Box display="flex" justifyContent="space-evenly" w={{ md: "100%", sm: "100%", base: "100%" }} zIndex="100" background="#f0cf65"  >
+        {/* <Image src="https://i.ibb.co/FWBBMbX/Fly-Buy-logo.png" h={{ md: "100px", sm: "80px", base: "60px" }} w={{ md: "100px", sm: "90px", base: "80px" }} /> */}
+        <Text fontSize="50px">𝕗𝕝𝕪-𝕓𝕦𝕪</Text>
+        <Input w={{ md: "300px", sm: "250px", base: "200px" }} mt={{ sm: "20px", md: "30px", base: "10px" }}  border="2px solid black"/>
         {
           isLesserThan800 ? <><Button mt={{ sm: "20px", base: "10px", md: "30px" }} background="black" ref={btnRef} colorScheme='teal' onClick={onOpen}>
             <HamburgerIcon />
