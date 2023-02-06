@@ -5,13 +5,14 @@ import axios from 'axios'
 function Cart() {
   const [cartdata, setDate] = useState([])
   const [cartdeletedata, setdeleteDate] = useState([])
-  const [total, setTotal] = useState([])
+  const [total, setTotal] = useState(0)
 
   const getdata = async () => {
     try {
       const res = await axios.get("http://localhost:8000/cart/cartdata")
       let data = res.data
       setDate(data)
+      setTotal(total+data.productrate)
 
     } catch (error) {
       console.log(error)
@@ -38,6 +39,7 @@ function Cart() {
     getdata()
 
   }, [cartdata])
+  let sum=0;
 
 
 
@@ -91,7 +93,9 @@ function Cart() {
             </Heading>
             <Flex>
               <Text>Product total amount</Text>
-              <Text></Text>
+              <Text>
+              {total}
+              </Text>
             </Flex>
 
           </Box>

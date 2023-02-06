@@ -7,12 +7,23 @@ const productRouter = express.Router();
 
 productRouter.get("/getcloths",async(req,res)=>{
     let query=req.query.clothcategory
+    console.log("query",query)
   
 
     try {
-        let data=await ClothModel.find()
-        res.send(data)
-        console.log(data)
+        if(query==undefined){
+            let data=await ClothModel.find()
+            res.send(data)
+            console.log(data) 
+
+        }else{
+            let data=await ClothModel.find({clothcategory:query})
+            res.send(data)
+            console.log(data)
+
+        }
+        
+         
         
     } catch (error) {
         console.log(error)

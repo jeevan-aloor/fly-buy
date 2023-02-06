@@ -73,12 +73,12 @@ function Home() {
             </Box>
             <Slider />
             <Heading mt="40px">TRENDING PRODUCTS</Heading>
-            <Grid templateColumns={{ md: "repeat(3, 1fr)", sm: "repeat(2,1fr)", base: "repeat(2,1fr)", lg: "repeat(4,1fr)" }} gap={{ md: "6px", sm: "4px", base: "2px" }} w="95%" m="auto" mt="20px" background="#d6eadf" >
+            <Grid templateColumns={{ md: "repeat(3, 1fr)", sm: "repeat(2,1fr)", base: "repeat(2,1fr)", lg: "repeat(4,1fr)" }} gap={{ md: "8px", sm: "4px", base: "2px" }} w="95%" m="auto" mt="20px" background="#caf0f8" >
                 {
                     mongodata.length > 0 && mongodata.map((ele) => (
                         <Box key={ele._id}>
 
-                            <GridItem w={{ md: '100%', base: "92%" }} h={{ md: '600px', base: "550px" }} boxShadow=" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" key={ele._id}  >
+                            <GridItem mb="20px" w={{ md: '100%', base: "92%" }} h={{ md: '600px', base: "550px" }} boxShadow=" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" key={ele._id} background="#cbf3f0"  >
                                 <Link to={`/singleproduct/${ele._id}`} ><Image src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" _hover={{ width: "95%" }} /></Link>
                                 <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px">
                                     <Text fontSize="20px" fontWeight="extrabold">{ele.productname}</Text>
