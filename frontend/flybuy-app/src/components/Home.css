@@ -1,0 +1,19 @@
+.anim{
+    cursor: pointer;
+    transition: 650ms;
+
+}
+.anim:hover{
+    transform: scale(0.9);
+    
+}
+.buy{
+    cursor: pointer;
+    transition: 650ms;
+
+}
+
+.buy:hover{
+    transform: scale(1.1);
+
+}

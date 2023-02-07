@@ -13,7 +13,7 @@ function Singleproduct() {
   const id = productid.id
 
   const singleproduct = async (id) => {
-    let res = await axios.get(`http://localhost:8000/singleproduct/${id}`)
+    let res = await axios.get(`https://vast-gold-fox-slip.cyclic.app/singleproduct/${id}`)
     let data = res.data
     setdata(data)
   }
@@ -32,6 +32,7 @@ function Singleproduct() {
 
   useEffect(() => {
     singleproduct(id)
+    
   }, [])
 
   console.log("singledata", singledata)
