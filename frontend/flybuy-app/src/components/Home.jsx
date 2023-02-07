@@ -4,6 +4,7 @@ import { Box, Button, Image, Grid, GridItem, Text, Flex, Heading, Tooltip, useTo
 import Slider from './Slider'
 import axios from 'axios'
 import Navbar from '../router/Navbar'
+import styles from './Home.css'
 
 
 function Home() {
@@ -19,7 +20,7 @@ function Home() {
 
     const getdata = async () => {
 
-        let res = await axios.get("http://localhost:8000")
+        let res = await axios.get("https://vast-gold-fox-slip.cyclic.app")
         let data = res.data
         setdata(data)
 
@@ -36,7 +37,7 @@ function Home() {
 
         }
         try {
-            let data = await axios.post("http://localhost:8000/cart/addtocart", payload)
+            let data = await axios.post("https://vast-gold-fox-slip.cyclic.app/cart/addtocart", payload)
             console.log(data)
             toast({
                 title: "successfully Added to the cart",
@@ -79,7 +80,7 @@ function Home() {
                         <Box key={ele._id}>
 
                             <GridItem mb="20px" w={{ md: '100%', base: "92%" }} h={{ md: '600px', base: "550px" }} boxShadow=" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" key={ele._id} background="#cbf3f0"  >
-                                <Link to={`/singleproduct/${ele._id}`} ><Image src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" _hover={{ width: "95%" }} /></Link>
+                                <Link to={`/singleproduct/${ele._id}`} ><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px"  /></Link>
                                 <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px">
                                     <Text fontSize="20px" fontWeight="extrabold">{ele.productname}</Text>
                                     <Text fontSize="18px" color="blue">{ele.productdesc}</Text>
@@ -93,7 +94,7 @@ function Home() {
                                         <Tooltip label="Add to cart"><Image mt="40px" src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="50px" h="50px" mr="10px"
                                             onClick={() => handleadd(ele.productimage, ele.productname, ele.productrate, ele.productdesc)} />
                                         </Tooltip>
-                                        <Link to={`/checkout/${ele._id}`} style={{ width: "200px" }}><Button mt="40px" w="100%" _hover={{ background: "red", color: "white" }}>BUY</Button></Link>
+                                        <Link to={`/checkout/${ele._id}`} style={{ width: "200px" }}><Button mt="40px" w="100%" _hover={{ background: "red", color: "white" }} className='buy'>BUY</Button></Link>
                                     </Box>
                                 </Box>
                             </GridItem>

@@ -9,7 +9,7 @@ function Cart() {
 
   const getdata = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/cart/cartdata")
+      const res = await axios.get("https://vast-gold-fox-slip.cyclic.app/cart/cartdata")
       let data = res.data
       setDate(data)
       setTotal(total+data.productrate)
@@ -23,7 +23,7 @@ function Cart() {
 
   const handledelete = async (id) => {
     try {
-      setdeleteDate(await axios.delete(`http://localhost:8000/cart/cartdelete/${id}`))
+      setdeleteDate(await axios.delete(`https://vast-gold-fox-slip.cyclic.app/cart/cartdelete/${id}`))
 
 
     } catch (error) {

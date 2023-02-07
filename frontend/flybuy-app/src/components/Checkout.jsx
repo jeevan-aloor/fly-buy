@@ -12,7 +12,7 @@ function Checkout() {
 
 
   const cartproduct = async (id) => {
-    let res = await axios.get(`http://localhost:8000/checkoutdata/${id}`)
+    let res = await axios.get(`https://vast-gold-fox-slip.cyclic.app/checkoutdata/${id}`)
     let data = res.data
     setdata(data)
   }
