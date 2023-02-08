@@ -7,17 +7,79 @@ import {
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton, Button
+  DrawerCloseButton, Button, ModalOverlay, ModalContent, ModalHeader, ModalFooter,
+  ModalBody,
+  ModalCloseButton, Modal, FormControl, FormLabel,useToast
 } from '@chakra-ui/react'
 import { useMediaQuery, useDisclosure } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import axios from 'axios'
 
+const OverlayOne = () => (
+  <ModalOverlay
+    bg='blackAlpha.300'
+    backdropFilter='blur(10px) hue-rotate(90deg)'
+  />
+)
+
 function Navbar() {
   const [isLesserThan800] = useMediaQuery('(max-width: 800px)')
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const toast = useToast()
+  const [overlay, setOverlay] = React.useState(<OverlayOne />)
   const btnRef = React.useRef()
   const [cartdata, setDate] = useState([])
+  const [changels, setls] = useState(false)
+  const [name, setName] = useState("")
+  const [mobilenumber, setMobile] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmpass, setConfirmpass] = useState("")
+
+  const [loginemail, setloginemail] = useState("")
+  const [loginpass, setloginpass] = useState("")
+  const [response, setResponse] = useState("")
+
+
+
+
+ 
+
+
+  const handlesignup = () => {
+    setls(true)
+  }
+  const handlelogin = () => {
+    setls(false)
+  }
+
+  //  alert message for cart page
+  const handlealert=()=>{
+    console.log("jjee")
+    if(response==""){
+      toast({
+        title: 'Please Login',
+        description: "You have to login first! Please Login",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
+
+    }
+    
+
+  }
+
+  // logout function 
+
+  const handlelogout=()=>{
+    setResponse("")
+  }
+ 
+
+
+
+  
 
   const getdata = async () => {
     try {
@@ -31,10 +93,52 @@ function Navbar() {
     }
 
   }
+
+  //  for signup 
+  const adduserdetail = async () => {
+    const payload = {
+      name,
+      mobilenumber,
+      email,
+      password
+
+    }
+    let res = await axios.post("http://localhost:8000/user/adduser", payload)
+    console.log("added")
+    console.log(res)
+
+  }
+
+  // login
+
+
+  const adduserlogin = async () => {
+
+    const payload = {
+      email: loginemail,
+      password: loginpass
+    }
+    console.log("lo", loginemail, loginpass)
+    let res = await axios.post("http://localhost:8000/user/userlogin", payload)
+    console.log(res.data)
+    setResponse(res.data)
+    localStorage.setItem("token", JSON.stringify(res.data))
+    let neha=await axios.post("http://localhost:8000/user/userlogin",{
+      headers: {
+        Authorization: `Bearer ${res.data}`
+      }
+    })
+    console.log(neha)
+    console.log("login")
+    onClose()
+
+
+  }
+
   useEffect(() => {
     getdata()
 
-  }, [cartdata])
+  }, [cartdata, changels,response])
   return (
     <Box w={{ md: "100%", lg: "100%", base: "100%" }}  >
 
@@ -78,10 +182,126 @@ function Navbar() {
             <Link to="/cloth" style={{ marginTop: "30px" }}>Cloths</Link>
             <Link to="/shoes" style={{ marginTop: "30px" }}>Shoes</Link>
             <Link to="/watches" style={{ marginTop: "30px" }}>Watches</Link>
-            <Image src="https://cdn-icons-png.flaticon.com/128/666/666201.png" w="30px" h="30px" mt="25px" />
-            <Link to="/carts"><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" /><span>{cartdata.length}</span></Link></>
+            {
+              response == "not registered" || response == "" ? <>
 
-        }
+
+                <Button
+                  onClick={() => {
+                    setOverlay(<OverlayOne />)
+                    onOpen()
+                  }}
+                  background="none"
+                  mt="18px"
+                  _hover={{ background: "none" }}
+                >
+                  <Image src="https://cdn-icons-png.flaticon.com/128/666/666201.png" w="30px" h="30px" />
+
+                </Button>
+                <Modal isCentered isOpen={isOpen} onClose={onClose}>
+                  {overlay}
+                  {changels ? <ModalContent>
+                    <ModalHeader>Register Here</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      <FormControl isRequired>
+                        <FormLabel>Full Name</FormLabel>
+                        <Input placeholder='Enter Your Full Name' onChange={(e) => setName(e.target.value)} />
+                        <FormLabel>Mobile no.</FormLabel>
+                        <Input placeholder='Enter Your Mobile Number' onChange={(e) => setMobile(e.target.value)} />
+                        <FormLabel>Eamil</FormLabel>
+                        <Input placeholder='Enter Your Email address' onChange={(e) => setEmail(e.target.value)} />
+                        <FormLabel>Password</FormLabel>
+                        <Input placeholder='Enter Your Password' onChange={(e) => setPassword(e.target.value)} />
+                        <FormLabel>Confirm Password</FormLabel>
+                        <Input placeholder='Enter Your Password' onChange={(e) => setConfirmpass(e.target.value)} />
+                        <Text>Already Have Account please  <Button color="blue" h="20px" background="none" _hover={{ background: "none" }} onClick={handlelogin}>Login Here</Button></Text>
+
+                      </FormControl>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button onClick={adduserdetail} >Register</Button>
+                      <Button onClick={onClose}>Close</Button>
+                    </ModalFooter>
+                  </ModalContent> : <ModalContent>
+                    <ModalHeader>Login Here</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      <FormControl isRequired>
+                        <FormLabel>Eamil</FormLabel>
+                        <Input placeholder='First name' onChange={(e) => setloginemail(e.target.value)} />
+                        <FormLabel>Password</FormLabel>
+                        <Input placeholder='First name' onChange={(e) => setloginpass(e.target.value)} />
+                        <Text>If your not Registerd please  <Button color="blue" h="20px" background="none" _hover={{ background: "none" }} onClick={handlesignup}>Register Here</Button></Text>
+
+                      </FormControl>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button onClick={adduserlogin}>Login</Button>
+                      <Button onClick={onClose}>Close</Button>
+                    </ModalFooter>
+                  </ModalContent>}
+
+                </Modal>
+              </>:<>
+              <Button
+                  onClick={() => {
+                    setOverlay(<OverlayOne />)
+                    onOpen()
+                  }}
+                  background="none"
+                  mt="18px"
+                  _hover={{ background: "none" }}
+                >
+                 djdjdd
+
+                </Button>
+                <Modal isCentered isOpen={isOpen} onClose={onClose}>
+                  {overlay}
+                  {changels ? <ModalContent>
+                    <ModalHeader>Register Here</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      <FormControl isRequired>
+                        <FormLabel>Full Name</FormLabel>
+                        <Input placeholder='Enter Your Full Name' onChange={(e) => setName(e.target.value)} />
+                        <FormLabel>Mobile no.</FormLabel>
+                        <Input placeholder='Enter Your Mobile Number' onChange={(e) => setMobile(e.target.value)} />
+                        <FormLabel>Eamil</FormLabel>
+                        <Input placeholder='Enter Your Email address' onChange={(e) => setEmail(e.target.value)} />
+                        <FormLabel>Password</FormLabel>
+                        <Input placeholder='Enter Your Password' onChange={(e) => setPassword(e.target.value)} />
+                        <FormLabel>Confirm Password</FormLabel>
+                        <Input placeholder='Enter Your Password' onChange={(e) => setConfirmpass(e.target.value)} />
+                        <Text>Already Have Account please  <Button color="blue" h="20px" background="none" _hover={{ background: "none" }} onClick={handlelogin}>Login Here</Button></Text>
+
+                      </FormControl>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button onClick={adduserdetail} >Register</Button>
+                      <Button onClick={onClose}>Close</Button>
+                    </ModalFooter>
+                  </ModalContent> : <ModalContent>
+                    <ModalHeader>Want Logout?</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      <Button onClick={handlelogout}>LOGOUT</Button>
+                    </ModalBody>
+                    
+                  </ModalContent>}
+
+                </Modal>
+
+              </>
+}
+
+
+<Link to={response=="" || response=="" ? "" :"/carts"}><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" onClick={handlealert}/><span>{cartdata.length}</span></Link> 
+            
+
+</>
+
+}
 
       </Box>
 
