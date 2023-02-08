@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import {
   Box, Image, Input, Text, Drawer,
   DrawerBody,
@@ -9,7 +9,7 @@ import {
   DrawerContent,
   DrawerCloseButton, Button, ModalOverlay, ModalContent, ModalHeader, ModalFooter,
   ModalBody,
-  ModalCloseButton, Modal, FormControl, FormLabel,useToast
+  ModalCloseButton, Modal, FormControl, FormLabel, useToast
 } from '@chakra-ui/react'
 import { useMediaQuery, useDisclosure } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
@@ -39,11 +39,12 @@ function Navbar() {
   const [loginemail, setloginemail] = useState("")
   const [loginpass, setloginpass] = useState("")
   const [response, setResponse] = useState("")
+  const [move, setMove] = useState(false)
 
 
 
 
- 
+
 
 
   const handlesignup = () => {
@@ -54,9 +55,9 @@ function Navbar() {
   }
 
   //  alert message for cart page
-  const handlealert=()=>{
+  const handlealert = () => {
     console.log("jjee")
-    if(response==""){
+    if (response == "") {
       toast({
         title: 'Please Login',
         description: "You have to login first! Please Login",
@@ -66,20 +67,22 @@ function Navbar() {
       })
 
     }
-    
+
 
   }
 
   // logout function 
 
-  const handlelogout=()=>{
+  const handlelogout = () => {
     setResponse("")
+    setMove(true)
+    onClose()
   }
- 
 
 
 
-  
+
+
 
   const getdata = async () => {
     try {
@@ -123,7 +126,7 @@ function Navbar() {
     console.log(res.data)
     setResponse(res.data)
     localStorage.setItem("token", JSON.stringify(res.data))
-    let neha=await axios.post("http://localhost:8000/user/userlogin",{
+    let neha = await axios.post("http://localhost:8000/user/userlogin", {
       headers: {
         Authorization: `Bearer ${res.data}`
       }
@@ -138,7 +141,12 @@ function Navbar() {
   useEffect(() => {
     getdata()
 
-  }, [cartdata, changels,response])
+  }, [cartdata, changels, response])
+
+  if (move) {
+    return <Navigate to="/" />
+  }
+
   return (
     <Box w={{ md: "100%", lg: "100%", base: "100%" }}  >
 
@@ -243,8 +251,8 @@ function Navbar() {
                   </ModalContent>}
 
                 </Modal>
-              </>:<>
-              <Button
+              </> : <>
+                <Button
                   onClick={() => {
                     setOverlay(<OverlayOne />)
                     onOpen()
@@ -253,7 +261,7 @@ function Navbar() {
                   mt="18px"
                   _hover={{ background: "none" }}
                 >
-                 djdjdd
+                  djdjdd
 
                 </Button>
                 <Modal isCentered isOpen={isOpen} onClose={onClose}>
@@ -287,21 +295,21 @@ function Navbar() {
                     <ModalBody>
                       <Button onClick={handlelogout}>LOGOUT</Button>
                     </ModalBody>
-                    
+
                   </ModalContent>}
 
                 </Modal>
 
               </>
-}
+            }
 
 
-<Link to={response=="" || response=="" ? "" :"/carts"}><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" onClick={handlealert}/><span>{cartdata.length}</span></Link> 
-            
+            <Link to={response == "" || response == "" ? "" : "/carts"}><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" onClick={handlealert} /><span>{cartdata.length}</span></Link>
 
-</>
 
-}
+          </>
+
+        }
 
       </Box>
 
