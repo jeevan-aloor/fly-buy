@@ -3,8 +3,10 @@ const {connection} =require("./conflict/db")
 const {productRouter} =require("./router/productrouter")
 const {allproductRouter} =require("./router/allproduct")
 const {cartproductrouter}=require("./router/cartproduct")
+const {userrouter}=require("./router/userdetails")
 require('dotenv').config()
 const cors=require("cors")
+const { varify } = require('./middleware/verify')
 const stripe = require('stripe')("sk_test_51MXJMUSDTMqP1T3rxJg5nq1O4zNqaZWg5pMM9p9GRyUgDkCd2hYdZlX0vagbHjYJFDK4mEY3s6eJml3Crbju3hsu00rgzRJ4Vh");
 
 
@@ -16,6 +18,9 @@ app.use(cors({
 app.use(express.json());
 app.use("/",allproductRouter)
 app.use("/product",productRouter)
+app.use("/user",userrouter)
+app.use(varify)
+
 app.use("/cart",cartproductrouter)
 
 app.post('/api/payments', async (req, res) => {

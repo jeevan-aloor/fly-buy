@@ -7,13 +7,13 @@ const productRouter = express.Router();
 
 productRouter.get("/getcloths",async(req,res)=>{
     let query=req.query.clothcategory
-    let rate=req.query.clothrate
-    console.log("rate",rate)
+    let clothsss=req.query.rate
+    // console.log("rate",rate)
   
 
     try {
         if(query==undefined){
-            let data=await ClothModel.find().sort({ rate: "asc" })
+            let data=await ClothModel.find().sort({clothname:"asc"})
             res.send(data)
             console.log(data) 
 
