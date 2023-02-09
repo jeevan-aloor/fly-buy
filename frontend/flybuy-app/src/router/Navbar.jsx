@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import {
   Box, Image, Input, Text, Drawer,
   DrawerBody,
@@ -9,7 +9,7 @@ import {
   DrawerContent,
   DrawerCloseButton, Button, ModalOverlay, ModalContent, ModalHeader, ModalFooter,
   ModalBody,
-  ModalCloseButton, Modal, FormControl, FormLabel,useToast
+  ModalCloseButton, Modal, FormControl, FormLabel, useToast
 } from '@chakra-ui/react'
 import { useMediaQuery, useDisclosure } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
@@ -39,11 +39,12 @@ function Navbar() {
   const [loginemail, setloginemail] = useState("")
   const [loginpass, setloginpass] = useState("")
   const [response, setResponse] = useState("")
+  const [move, setMove] = useState(false)
 
 
 
 
- 
+
 
 
   const handlesignup = () => {
@@ -54,9 +55,9 @@ function Navbar() {
   }
 
   //  alert message for cart page
-  const handlealert=()=>{
+  const handlealert = () => {
     console.log("jjee")
-    if(response==""){
+    if (response == "") {
       toast({
         title: 'Please Login',
         description: "You have to login first! Please Login",
@@ -66,20 +67,22 @@ function Navbar() {
       })
 
     }
-    
+
 
   }
 
   // logout function 
 
-  const handlelogout=()=>{
+  const handlelogout = () => {
     setResponse("")
+    setMove(true)
+    onClose()
   }
- 
 
 
 
-  
+
+
 
   const getdata = async () => {
     try {
@@ -106,6 +109,13 @@ function Navbar() {
     let res = await axios.post("http://localhost:8000/user/adduser", payload)
     console.log("added")
     console.log(res)
+    toast({
+      title: 'Sucussfully Register',
+      description: "Please Login Now",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
 
   }
 
@@ -123,7 +133,7 @@ function Navbar() {
     console.log(res.data)
     setResponse(res.data)
     localStorage.setItem("token", JSON.stringify(res.data))
-    let neha=await axios.post("http://localhost:8000/user/userlogin",{
+    let neha = await axios.post("http://localhost:8000/user/userlogin", {
       headers: {
         Authorization: `Bearer ${res.data}`
       }
@@ -138,7 +148,12 @@ function Navbar() {
   useEffect(() => {
     getdata()
 
-  }, [cartdata, changels,response])
+  }, [cartdata, changels, response])
+
+  if (move) {
+    return <Navigate to="/" />
+  }
+
   return (
     <Box w={{ md: "100%", lg: "100%", base: "100%" }}  >
 
@@ -209,7 +224,7 @@ function Navbar() {
                         <Input placeholder='Enter Your Full Name' onChange={(e) => setName(e.target.value)} />
                         <FormLabel>Mobile no.</FormLabel>
                         <Input placeholder='Enter Your Mobile Number' onChange={(e) => setMobile(e.target.value)} />
-                        <FormLabel>Eamil</FormLabel>
+                        <FormLabel>Email</FormLabel>
                         <Input placeholder='Enter Your Email address' onChange={(e) => setEmail(e.target.value)} />
                         <FormLabel>Password</FormLabel>
                         <Input placeholder='Enter Your Password' onChange={(e) => setPassword(e.target.value)} />
@@ -229,9 +244,9 @@ function Navbar() {
                     <ModalBody>
                       <FormControl isRequired>
                         <FormLabel>Eamil</FormLabel>
-                        <Input placeholder='First name' onChange={(e) => setloginemail(e.target.value)} />
+                        <Input placeholder='First name' value={loginemail} onChange={(e) => setloginemail(e.target.value)} />
                         <FormLabel>Password</FormLabel>
-                        <Input placeholder='First name' onChange={(e) => setloginpass(e.target.value)} />
+                        <Input placeholder='First name' value={loginpass} onChange={(e) => setloginpass(e.target.value)} />
                         <Text>If your not Registerd please  <Button color="blue" h="20px" background="none" _hover={{ background: "none" }} onClick={handlesignup}>Register Here</Button></Text>
 
                       </FormControl>
@@ -243,8 +258,8 @@ function Navbar() {
                   </ModalContent>}
 
                 </Modal>
-              </>:<>
-              <Button
+              </> : <>
+                <Button
                   onClick={() => {
                     setOverlay(<OverlayOne />)
                     onOpen()
@@ -253,7 +268,7 @@ function Navbar() {
                   mt="18px"
                   _hover={{ background: "none" }}
                 >
-                 djdjdd
+                  {loginemail}
 
                 </Button>
                 <Modal isCentered isOpen={isOpen} onClose={onClose}>
@@ -287,21 +302,21 @@ function Navbar() {
                     <ModalBody>
                       <Button onClick={handlelogout}>LOGOUT</Button>
                     </ModalBody>
-                    
+
                   </ModalContent>}
 
                 </Modal>
 
               </>
-}
+            }
 
 
-<Link to={response=="" || response=="" ? "" :"/carts"}><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" onClick={handlealert}/><span>{cartdata.length}</span></Link> 
-            
+            <Link to={response == "" || response == "" ? "" : "/carts"}><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" onClick={handlealert} /><span>{cartdata.length}</span></Link>
 
-</>
 
-}
+          </>
+
+        }
 
       </Box>
 
