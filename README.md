@@ -66,9 +66,7 @@ deployed link for demo:-
 
 ## ScreenShots
 
-![home page](https://i.ibb.co/RDGrQq7/Screen-Shot-2023-01-23-at-3-53-06-PM.png)
 
-![product page](https://i.ibb.co/S3vyS3L/Screen-Shot-2023-01-23-at-3-53-47-PM.png)
 
 ## Status
 
