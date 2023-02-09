@@ -16,18 +16,41 @@ function Home() {
     const [pname, setName] = useState("")
     const [prate, setRate] = useState("")
     const [pdesc, setDesc] = useState("")
+    const [pageno,setPage]=useState(1)
     const toast = useToast()
     const statuses = ['success', 'error', 'warning', 'info']
 
 
     const getdata = async () => {
+        try {
+            let res = await axios.get(`http://localhost:8000?page=${pageno}`)
+            let data = res.data
+            setdata(data)
+            console.log(data)
+            
+        } catch (error) {
+            console.log(error)
+            
+        }
 
-        let res = await axios.get("https://vast-gold-fox-slip.cyclic.app")
-        let data = res.data
-        setdata(data)
+       
 
 
     }
+    // Pagination
+    const handleprev=()=>{
+        if(pageno!=1){
+            setPage(pageno-1)
+        }
+    }
+
+    const handlenext=()=>{
+        let maxPage=Math.ceil(mongodata.length/2)
+        if(pageno<maxPage){
+            setPage(pageno+1)
+        }
+    }
+
 
     const handleadd = async (img, name, rate, desc) => {
         const payload = {
@@ -66,7 +89,7 @@ function Home() {
         getdata()
         Aos.init({ duration: 2000 });
 
-    }, [])
+    }, [pageno])
     return (
         <Box>
 
@@ -107,6 +130,10 @@ function Home() {
                 }
 
             </Grid>
+            <Button onClick={handleprev}>PREV</Button>
+          
+            <Button>{pageno}</Button>
+            <Button onClick={handlenext}>NEXT</Button>
 
 
 

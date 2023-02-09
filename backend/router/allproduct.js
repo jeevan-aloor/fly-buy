@@ -4,16 +4,35 @@ const {AllproductModel}=require("../conflict/allproductmodel")
 
 const allproductRouter = express.Router();
 
+let perpage=5
+
+
 
 allproductRouter.get("/",async(req,res)=>{
+    let page=req.query.page
+    let search=req.query.q
+    console.log("search",search)
+    
 
     try {
-        let data=await AllproductModel.find()
+        let data=await AllproductModel.find().limit(perpage).skip(perpage * (page - 1))
+        if(search !=""){
+            
+            data.map((ele)=>{
+                if(ele.productname.includes(search)){
+                    console.log("jee")
+                }
+                
+              
+        }
+        )
+    }
         res.send(data)
         
     } catch (error) {
+        res.status(401).json({msg:"error in taking data"})
         console.log(error)
-        console.log("error")
+        // console.log("error")
         
     }
     
