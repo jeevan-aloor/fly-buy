@@ -5,6 +5,8 @@ import Slider from './Slider'
 import axios from 'axios'
 import Navbar from '../router/Navbar'
 import styles from './Home.css'
+import "aos/dist/aos.css";
+import Aos from "aos";
 
 
 function Home() {
@@ -62,6 +64,7 @@ function Home() {
 
     useEffect(() => {
         getdata()
+        Aos.init({ duration: 2000 });
 
     }, [])
     return (
@@ -79,8 +82,8 @@ function Home() {
                     mongodata.length > 0 && mongodata.map((ele) => (
                         <Box key={ele._id}>
 
-                            <GridItem mb="20px" w={{ md: '100%', base: "92%" }} h={{ md: '600px', base: "550px" }} boxShadow=" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" key={ele._id} background="#cbf3f0"  >
-                                <Link to={`/singleproduct/${ele._id}`} ><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px"  /></Link>
+                            <GridItem mb="20px" w={{ md: '100%', base: "92%" }} h={{ md: '600px', base: "550px" }} boxShadow=" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" key={ele._id} background="#cbf3f0" data-aos="fade-up"  >
+                                <Link to={`/singleproduct/${ele._id}`} ><Tooltip label="Click to see product deatils"><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px"  /></Tooltip></Link>
                                 <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px">
                                     <Text fontSize="20px" fontWeight="extrabold">{ele.productname}</Text>
                                     <Text fontSize="18px" color="blue">{ele.productdesc}</Text>
