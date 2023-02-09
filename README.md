@@ -4,10 +4,10 @@
 ## Table of Content
 
 - About the project
-- Demo
+- Technologies
 - User Features
 - Admin Features
-- Technologies
+- Deployed Link
 - Status 
 - Images 
 - Demo Vedio
@@ -17,16 +17,32 @@
 
 This project is a web application for E-Commerce Called as Fly-buy mostly Tried to make End to end functionalities User side and admin side functions are present , For more information scroll below. Thank You!
 
+## Technologies
+
+- React Js
+- JavaScript
+- React BootStrap
+- Chakra-Ui
+- NPM Packages
+- Node Js
+- CSS
+- Express
+- Mongo DB
+- API
+
+
 ## User Features
 
-
+- View the home page products 
+- Add to Cart
 - Login 
 - Signup 
-- Add to Cart
-- Product details
+- View single products
+- Click to buy products
+- checkout page
 - Searching products
 - Sorting
--  Filtering
+- Filtering
 
 ## Admin Features
 
@@ -36,25 +52,18 @@ This project is a web application for E-Commerce Called as Fly-buy mostly Tried 
 - Sorting
 - Filtering
 - Adding new products
+- Deleteing any products 
+- Update the products
+- Handle the user data
 
-## Demo
-
-deployed link for demo:- https://wondermart.netlify.app/
 
 
-## Technologies
+## Deployed Link
 
-- React Js
-- React Hooks
-- Redux
-- Redux-thunk
-- Redux-Persist
-- JavaScript
-- React BootStrap
-- Chakra-Ui
-- NPM Packages
-- API
-- CSS
+deployed link for demo:- 
+
+
+
 ## ScreenShots
 
 ![home page](https://i.ibb.co/RDGrQq7/Screen-Shot-2023-01-23-at-3-53-06-PM.png)
