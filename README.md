@@ -69,10 +69,16 @@ deployed link for demo:-
 
 ## API End points
 
+ ### Users End points
+
 - "/" --> Get All Trending products
 - "/singleproduct/:id" --> Get Single product based with ID
 - "/checkoutdata/:id" --> Get checkout pages with buying product
 - "product/getcloths" --> This API for getting  Men and Women  cloths
+- "user/adduser" --> For user Register
+- "user/userlogin"  --> For User Login 
+  
+  ### Admin End ponits
  
 
 
