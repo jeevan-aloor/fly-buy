@@ -67,6 +67,14 @@ deployed link for demo:-
 
 ## ScreenShots
 
+## API End points
+
+- "/" --> Get All Trending products
+- "/singleproduct/:id" --> Get Single product based with ID
+- "/checkoutdata/:id" --> Get checkout pages with buying product
+- "product/getcloths" --> This API for getting  Men and Women  cloths
+ 
+
 
 
 ## Status
