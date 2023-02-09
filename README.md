@@ -11,6 +11,7 @@
 - Status 
 - Images 
 - Demo Vedio
+- API End points
 
 
 ## About the project
