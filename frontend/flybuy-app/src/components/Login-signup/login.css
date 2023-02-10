@@ -1,0 +1,38 @@
+.img-container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+  }
+  
+  .img-container img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .zoom-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .zoom-target {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStA7FtgkNacrEbE5wXWZ04hyl8JBiW5KIu1IM-Zoz_34EYAc5yru-v9zJ-WiO-oc6WITY&usqp=CAU);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 200%;
+    transition: background-size 0.5s ease;
+  }
+  
+  .img-container:hover .zoom-target {
+    background-size: 400%;
+  }
+  

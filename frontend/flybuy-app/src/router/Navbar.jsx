@@ -22,7 +22,8 @@ const OverlayOne = () => (
   />
 )
 
-function Navbar() {
+function Navbar(props) {
+  const {ser}=props
   const [isLesserThan800] = useMediaQuery('(max-width: 800px)')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
@@ -40,6 +41,7 @@ function Navbar() {
   const [loginpass, setloginpass] = useState("")
   const [response, setResponse] = useState("")
   const [move, setMove] = useState(false)
+  
 
 
 
@@ -77,6 +79,11 @@ function Navbar() {
     setResponse("")
     setMove(true)
     onClose()
+  }
+
+  const handleSearch=(e)=>{
+    ser(e.target.value)
+
   }
 
 
@@ -133,12 +140,7 @@ function Navbar() {
     console.log(res.data)
     setResponse(res.data)
     localStorage.setItem("token", JSON.stringify(res.data))
-    let neha = await axios.post("http://localhost:8000/user/userlogin", {
-      headers: {
-        Authorization: `Bearer ${res.data}`
-      }
-    })
-    console.log(neha)
+    
     console.log("login")
     onClose()
 
@@ -159,8 +161,8 @@ function Navbar() {
 
       <Box display="flex" justifyContent="space-evenly" w={{ md: "100%", sm: "100%", base: "100%" }} zIndex="100" background="#f0cf65"  >
         {/* <Image src="https://i.ibb.co/FWBBMbX/Fly-Buy-logo.png" h={{ md: "100px", sm: "80px", base: "60px" }} w={{ md: "100px", sm: "90px", base: "80px" }} /> */}
-        <Text fontSize="50px">𝕗𝕝𝕪-𝕓𝕦𝕪</Text>
-        <Input w={{ md: "300px", sm: "250px", base: "200px" }} mt={{ sm: "20px", md: "30px", base: "10px" }} border="2px solid black" />
+        <Link to="/"><Text fontSize={{md:"50px",sm:"25px",base:"25px"}}>𝕗𝕝𝕪-𝕓𝕦𝕪</Text></Link>
+        <Input onChange={handleSearch}  w={{ md: "300px", sm: "250px", base: "200px" }} mt={{ sm: "20px", md: "30px", base: "10px" }} border="2px solid black" h={{md:"40px",sm:"30px",base:"30px"}}  />
         {
           isLesserThan800 ? <><Button mt={{ sm: "20px", base: "10px", md: "30px" }} background="black" ref={btnRef} colorScheme='teal' onClick={onOpen}>
             <HamburgerIcon />
