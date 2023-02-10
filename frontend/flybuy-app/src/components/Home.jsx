@@ -7,6 +7,7 @@ import Navbar from '../router/Navbar'
 import styles from './Home.css'
 import "aos/dist/aos.css";
 import Aos from "aos";
+import Footer from './Footer'
 
 
 function Home() {
@@ -17,13 +18,14 @@ function Home() {
     const [prate, setRate] = useState("")
     const [pdesc, setDesc] = useState("")
     const [pageno,setPage]=useState(1)
+    const [searchtext,setSearchText]=useState("")
     const toast = useToast()
     const statuses = ['success', 'error', 'warning', 'info']
 
 
     const getdata = async () => {
         try {
-            let res = await axios.get(`http://localhost:8000?page=${pageno}`)
+            let res = await axios.get(`http://localhost:8000?page=${pageno}&&q=${searchtext}`)
             let data = res.data
             setdata(data)
             console.log(data)
@@ -89,9 +91,13 @@ function Home() {
         getdata()
         Aos.init({ duration: 2000 });
 
-    }, [pageno])
+    }, [pageno,searchtext])
+    console.log("searchtext",searchtext)
     return (
         <Box>
+            <Box >
+            <Navbar ser={setSearchText} />
+            </Box>
 
 
             <Box h="50px" background="red" pt="10px" >
@@ -100,12 +106,12 @@ function Home() {
             </Box>
             <Slider />
             <Heading mt="40px">TRENDING PRODUCTS</Heading>
-            <Grid templateColumns={{ md: "repeat(3, 1fr)", sm: "repeat(2,1fr)", base: "repeat(2,1fr)", lg: "repeat(4,1fr)" }} gap={{ md: "8px", sm: "4px", base: "2px" }} w="95%" m="auto" mt="20px" background="#caf0f8" >
+            <Grid templateColumns={{ md: "repeat(3, 1fr)", sm: "repeat(2,1fr)", base: "repeat(1,1fr)", lg: "repeat(4,1fr)" }} gap={{ md: "8px", sm: "4px", base: "2px" }} w="95%" m="auto" mt="20px" background="#caf0f8" >
                 {
                     mongodata.length > 0 && mongodata.map((ele) => (
                         <Box key={ele._id}>
 
-                            <GridItem mb="20px" w={{ md: '100%', base: "92%" }} h={{ md: '600px', base: "550px" }} boxShadow=" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" key={ele._id} background="#cbf3f0" data-aos="fade-up"  >
+                            <GridItem mb="20px" w={{ md: '100%', base: "90%" }} h={{ md: '600px', base: "550px" }} boxShadow=" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" key={ele._id} background="#cbf3f0" data-aos="fade-up"  >
                                 <Link to={`/singleproduct/${ele._id}`} ><Tooltip label="Click to see product deatils"><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px"  /></Tooltip></Link>
                                 <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px">
                                     <Text fontSize="20px" fontWeight="extrabold">{ele.productname}</Text>
@@ -134,6 +140,10 @@ function Home() {
           
             <Button>{pageno}</Button>
             <Button onClick={handlenext}>NEXT</Button>
+
+            <Box>
+                <Footer/>
+            </Box>
 
 
 

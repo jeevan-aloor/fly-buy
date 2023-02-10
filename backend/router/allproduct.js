@@ -11,23 +11,37 @@ let perpage=5
 allproductRouter.get("/",async(req,res)=>{
     let page=req.query.page
     let search=req.query.q
-    console.log("search",search)
+  
     
 
     try {
-        let data=await AllproductModel.find().limit(perpage).skip(perpage * (page - 1))
-        if(search !=""){
+        if(!search){
+            let data=await AllproductModel.find().limit(perpage).skip(perpage * (page - 1))
+            res.send(data)
+
+        }else{
+            let data=await AllproductModel.find({ $or: [
+                { productdesc: { $regex: search, $options: 'i' } }
+                
+              ]}).limit(perpage).skip(perpage * (page - 1))
+              res.send(data)
+
+        }
+        
+
+        
+    //     if(search !=""){
             
-            data.map((ele)=>{
-                if(ele.productname.includes(search)){
-                    console.log("jee")
-                }
+    //         data.map((ele)=>{
+    //             if(ele.productname.includes(search)){
+    //                 console.log("jee")
+    //             }
                 
               
-        }
-        )
-    }
-        res.send(data)
+    //     }
+    //     )
+    // }
+        
         
     } catch (error) {
         res.status(401).json({msg:"error in taking data"})
