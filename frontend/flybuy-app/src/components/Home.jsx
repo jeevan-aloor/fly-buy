@@ -17,8 +17,8 @@ function Home() {
     const [pname, setName] = useState("")
     const [prate, setRate] = useState("")
     const [pdesc, setDesc] = useState("")
-    const [pageno,setPage]=useState(1)
-    const [searchtext,setSearchText]=useState("")
+    const [pageno, setPage] = useState(1)
+    const [searchtext, setSearchText] = useState("")
     const toast = useToast()
     const statuses = ['success', 'error', 'warning', 'info']
 
@@ -29,27 +29,27 @@ function Home() {
             let data = res.data
             setdata(data)
             console.log(data)
-            
+
         } catch (error) {
             console.log(error)
-            
+
         }
 
-       
+
 
 
     }
     // Pagination
-    const handleprev=()=>{
-        if(pageno!=1){
-            setPage(pageno-1)
+    const handleprev = () => {
+        if (pageno != 1) {
+            setPage(pageno - 1)
         }
     }
 
-    const handlenext=()=>{
-        let maxPage=Math.ceil(mongodata.length/2)
-        if(pageno<maxPage){
-            setPage(pageno+1)
+    const handlenext = () => {
+        let maxPage = Math.ceil(mongodata.length / 2)
+        if (pageno < maxPage) {
+            setPage(pageno + 1)
         }
     }
 
@@ -85,23 +85,42 @@ function Home() {
 
 
     }
+    const handletext = (e) => {
+        setSearchText(e.target.value)
+
+
+    }
 
 
     useEffect(() => {
         getdata()
         Aos.init({ duration: 2000 });
 
-    }, [pageno,searchtext])
-    console.log("searchtext",searchtext)
+    }, [pageno, searchtext])
+    console.log("searchtext", searchtext)
     return (
         <Box>
             <Box >
-            <Navbar ser={setSearchText} />
+                <Navbar val={searchtext} ser={setSearchText} />
             </Box>
 
 
             <Box h="50px" background="red" pt="10px" >
-                <marquee style={{ color: "white", fontWeight: "bold", fontSize: "20px" }} >Get up to 5000rs products you get 20% cashback hurry up!</marquee>
+                <Box  >
+                    {
+                        searchtext && <Box w="300px" h="200px" border="1px solid black" ml="300px" overflowX="scroll">
+                            {
+
+                                mongodata.map((ele) => (
+                                    <Text onClick={() => setSearchText(ele.productdesc)}>{ele.productdesc}</Text>
+                                ))
+                            }
+                        </Box>
+
+                    }
+
+                    <marquee style={{ color: "white", fontWeight: "bold", fontSize: "20px" }} >Get up to 5000rs products you get 20% cashback hurry up!</marquee>
+                </Box>
 
             </Box>
             <Slider />
@@ -112,7 +131,7 @@ function Home() {
                         <Box key={ele._id}>
 
                             <GridItem mb="20px" w={{ md: '100%', base: "90%" }} h={{ md: '600px', base: "550px" }} boxShadow=" rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" key={ele._id} background="#cbf3f0" data-aos="fade-up"  >
-                                <Link to={`/singleproduct/${ele._id}`} ><Tooltip label="Click to see product deatils"><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px"  /></Tooltip></Link>
+                                <Link to={`/singleproduct/${ele._id}`} ><Tooltip label="Click to see product deatils"><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" /></Tooltip></Link>
                                 <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px">
                                     <Text fontSize="20px" fontWeight="extrabold">{ele.productname}</Text>
                                     <Text fontSize="18px" color="blue">{ele.productdesc}</Text>
@@ -137,12 +156,12 @@ function Home() {
 
             </Grid>
             <Button onClick={handleprev}>PREV</Button>
-          
+
             <Button>{pageno}</Button>
             <Button onClick={handlenext}>NEXT</Button>
 
             <Box>
-                <Footer/>
+                <Footer />
             </Box>
 
 
