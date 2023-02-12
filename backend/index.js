@@ -21,7 +21,7 @@ app.use("/",allproductRouter)
 app.use("/product",productRouter)
 app.use("/user",userrouter)
 app.use("/shoes",shoeRouter)
-app.use(varify)
+// app.use(varify)
 
 app.use("/cart",cartproductrouter)
 

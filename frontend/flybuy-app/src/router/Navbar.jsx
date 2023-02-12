@@ -93,7 +93,7 @@ function Navbar(props) {
 
   const getdata = async () => {
     try {
-      const res = await axios.get("https://vast-gold-fox-slip.cyclic.app/cart/cartdata")
+      const res = await axios.get("http://localhost:8000/cart/cartdata")
       let data = res.data
       setDate(data)
 
@@ -133,12 +133,20 @@ function Navbar(props) {
 
     const payload = {
       email: loginemail,
-      password: loginpass
+      password: loginpass,
     }
     console.log("lo", loginemail, loginpass)
     let res = await axios.post("http://localhost:8000/user/userlogin", payload)
     console.log(res.data)
     setResponse(res.data)
+    let token=res.data
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    };
+    let addHeader=await axios.post("http://localhost:8000/user/userlogin",config)
     localStorage.setItem("token", JSON.stringify(res.data))
     
     console.log("login")

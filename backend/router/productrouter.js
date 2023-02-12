@@ -9,11 +9,12 @@ productRouter.get("/getcloths",async(req,res)=>{
     let query=req.query.clothcategory
     let clothsss=req.query.rate
     // console.log("rate",rate)
+    let filterforrate=req.query.filter
   
 
     try {
         if(query==undefined){
-            let data=await ClothModel.find().sort({clothname:"asc"})
+            let data=await ClothModel.find().sort({clothrate:"asc"})
             res.send(data)
             console.log(data) 
 

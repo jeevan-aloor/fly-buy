@@ -13,6 +13,9 @@ function Cloths() {
   const [clothdata, setdata] = useState([])
   const [category, setCategory] = useState(initialCategory || [])
 
+  const initialFilter = searchparams.getAll("filter")
+  const [filter, setFilter] = useState([])
+
   const handlecheck = (e) => {
 
     const newcategory = [...category]
@@ -36,20 +39,44 @@ function Cloths() {
     setCategory(newcategory)
 
   }
+  
   console.log("category", category)
+
+ const handleFilter=(e)=>{
+  const newFilter= [...filter]
+  if (newFilter.includes(e.target.value)) {
+    newFilter.splice(newFilter.indexOf(e.target.value), 1)
+  } else {
+    let name = e.target.value
+
+    if (name === "asc" && newFilter[0] === "desc") {
+
+      newFilter[0] = e.target.value
+
+    } else if (name === "desc" && newFilter[0] === "asc") {
+      newFilter[0] = e.target.value
+    } else {
+      newFilter.push(e.target.value)
+    }
+
+  }
+  setFilter(newFilter)
+
+
+  }
 
 
 
   const getloths = async (category) => {
     if (category == "") {
-      let res = await axios.get(`https://vast-gold-fox-slip.cyclic.app/product/getcloths`)
+      let res = await axios.get(`http://localhost:8000/product/getcloths`)
       let data = res.data
       setdata(data)
 
 
     }
     else {
-      let res = await axios.get(`https://vast-gold-fox-slip.cyclic.app/product/getcloths?clothcategory=${category}`)
+      let res = await axios.get(`http://localhost:8000/product/getcloths?clothcategory=${category}`)
       let data = res.data
       setdata(data)
     }
@@ -83,6 +110,13 @@ function Cloths() {
           <label>Men</label><br />
           <input type="checkbox" value="Women" checked={category.includes("Women")} onChange={handlecheck} />
           <label>Women</label>
+          <Text fontSize="17px" borderBottom="1px solid red" w="100px">Filter</Text>
+          <input type="checkbox" value="asc" checked={filter.includes("asc")} onChange={handleFilter} />
+          <label>Low to high</label><br/>
+          <input type="checkbox" value="desc" checked={filter.includes("desc")} onChange={handleFilter} />
+          <label>High to low</label>
+          
+
         </Box>
         <Grid templateColumns='repeat(4, 1fr)' gap={4} h="500px"  w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif" >
           {
