@@ -23,14 +23,14 @@ const OverlayOne = () => (
 )
 
 function Navbar(props) {
-  const {ser}=props
+  const { ser, val } = props
   const [isLesserThan800] = useMediaQuery('(max-width: 800px)')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
   const btnRef = React.useRef()
   const [cartdata, setDate] = useState([])
-  const [changels, setls] = useState(false)
+  const [changes, setls] = useState(false)
   const [name, setName] = useState("")
   const [mobilenumber, setMobile] = useState("")
   const [email, setEmail] = useState("")
@@ -41,7 +41,7 @@ function Navbar(props) {
   const [loginpass, setloginpass] = useState("")
   const [response, setResponse] = useState("")
   const [move, setMove] = useState(false)
-  
+
 
 
 
@@ -55,11 +55,13 @@ function Navbar(props) {
   const handlelogin = () => {
     setls(false)
   }
+  let useremail=JSON.parse(localStorage.getItem("userEmail"))
+  
 
   //  alert message for cart page
   const handlealert = () => {
     console.log("jjee")
-    if (response == "") {
+    if (!useremail) {
       toast({
         title: 'Please Login',
         description: "You have to login first! Please Login",
@@ -76,12 +78,13 @@ function Navbar(props) {
   // logout function 
 
   const handlelogout = () => {
-    setResponse("")
-    setMove(true)
+    // setResponse("")
+    // setMove(true)
+    localStorage.removeItem("userEmail")
     onClose()
   }
 
-  const handleSearch=(e)=>{
+  const handleSearch = (e) => {
     ser(e.target.value)
 
   }
@@ -93,7 +96,7 @@ function Navbar(props) {
 
   const getdata = async () => {
     try {
-      const res = await axios.get("https://vast-gold-fox-slip.cyclic.app/cart/cartdata")
+      const res = await axios.get("https://calm-teal-beanie.cyclic.app/cart/cartdata")
       let data = res.data
       setDate(data)
 
@@ -113,7 +116,7 @@ function Navbar(props) {
       password
 
     }
-    let res = await axios.post("http://localhost:8000/user/adduser", payload)
+    let res = await axios.post("https://calm-teal-beanie.cyclic.app/user/adduser", payload)
     console.log("added")
     console.log(res)
     toast({
@@ -133,16 +136,34 @@ function Navbar(props) {
 
     const payload = {
       email: loginemail,
-      password: loginpass
+      password: loginpass,
     }
-    console.log("lo", loginemail, loginpass)
-    let res = await axios.post("http://localhost:8000/user/userlogin", payload)
-    console.log(res.data)
-    setResponse(res.data)
-    localStorage.setItem("token", JSON.stringify(res.data))
-    
-    console.log("login")
-    onClose()
+    try {
+      console.log("lo", loginemail, loginpass)
+      let res = await axios.post("https://calm-teal-beanie.cyclic.app/user/userlogin", payload)
+      console.log(res.data)
+      setResponse(res.data)
+      let token = res.data
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': {token}
+        }
+      };
+      console.log(payload.email)
+      localStorage.setItem("userEmail",JSON.stringify(payload.email))
+      let addHeader = await axios.post("https://calm-teal-beanie.cyclic.app/user/userlogin", config)
+      localStorage.setItem("token", JSON.stringify(res.data))
+  
+      console.log("login")
+      onClose()
+      
+    } catch (error) {
+      console.log(error)
+      
+      
+    }
+  
 
 
   }
@@ -150,7 +171,7 @@ function Navbar(props) {
   useEffect(() => {
     getdata()
 
-  }, [cartdata, changels, response])
+  }, [cartdata, changes, response])
 
   if (move) {
     return <Navigate to="/" />
@@ -161,8 +182,8 @@ function Navbar(props) {
 
       <Box display="flex" justifyContent="space-evenly" w={{ md: "100%", sm: "100%", base: "100%" }} zIndex="100" background="#f0cf65"  >
         {/* <Image src="https://i.ibb.co/FWBBMbX/Fly-Buy-logo.png" h={{ md: "100px", sm: "80px", base: "60px" }} w={{ md: "100px", sm: "90px", base: "80px" }} /> */}
-        <Link to="/"><Text fontSize={{md:"50px",sm:"25px",base:"25px"}}>𝕗𝕝𝕪-𝕓𝕦𝕪</Text></Link>
-        <Input onChange={handleSearch}  w={{ md: "300px", sm: "250px", base: "200px" }} mt={{ sm: "20px", md: "30px", base: "10px" }} border="2px solid black" h={{md:"40px",sm:"30px",base:"30px"}}  />
+        <Link to="/"><Text fontSize={{ md: "50px", sm: "25px", base: "25px" }}>𝕗𝕝𝕪-𝕓𝕦𝕪</Text></Link>
+        <Input onChange={handleSearch} value={val} w={{ md: "300px", sm: "250px", base: "200px" }} mt={{ sm: "20px", md: "30px", base: "10px" }} border="2px solid black" h={{ md: "40px", sm: "30px", base: "30px" }} />
         {
           isLesserThan800 ? <><Button mt={{ sm: "20px", base: "10px", md: "30px" }} background="black" ref={btnRef} colorScheme='teal' onClick={onOpen}>
             <HamburgerIcon />
@@ -200,7 +221,8 @@ function Navbar(props) {
             <Link to="/shoes" style={{ marginTop: "30px" }}>Shoes</Link>
             <Link to="/watches" style={{ marginTop: "30px" }}>Watches</Link>
             {
-              response == "not registered" || response == "" ? <>
+              // response == "not registered" || response == "" ? 
+              !useremail ? <>
 
 
                 <Button
@@ -217,7 +239,7 @@ function Navbar(props) {
                 </Button>
                 <Modal isCentered isOpen={isOpen} onClose={onClose}>
                   {overlay}
-                  {changels ? <ModalContent>
+                  {changes ? <ModalContent>
                     <ModalHeader>Register Here</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
@@ -270,12 +292,13 @@ function Navbar(props) {
                   mt="18px"
                   _hover={{ background: "none" }}
                 >
-                  {loginemail}
+                  {JSON.parse(localStorage.getItem("userEmail"))}
+                 
 
                 </Button>
                 <Modal isCentered isOpen={isOpen} onClose={onClose}>
                   {overlay}
-                  {changels ? <ModalContent>
+                  {changes ? <ModalContent>
                     <ModalHeader>Register Here</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
@@ -313,7 +336,7 @@ function Navbar(props) {
             }
 
 
-            <Link to={response == "" || response == "" ? "" : "/carts"}><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" onClick={handlealert} /><span>{cartdata.length}</span></Link>
+            <Link to={!useremail ? "" : "/carts"}><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" onClick={handlealert} /><span>{cartdata.length}</span></Link>
 
 
           </>

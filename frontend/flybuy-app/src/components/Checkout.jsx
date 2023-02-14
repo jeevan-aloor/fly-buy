@@ -1,7 +1,8 @@
-import { Box, Flex, Input, Text, Image } from '@chakra-ui/react'
+import { Box, Flex, Input, Text, Image, Heading } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import Navbar from '../router/Navbar'
 
 function Checkout() {
   const [singledata, setdata] = useState([])
@@ -12,7 +13,7 @@ function Checkout() {
 
 
   const cartproduct = async (id) => {
-    let res = await axios.get(`https://vast-gold-fox-slip.cyclic.app/checkoutdata/${id}`)
+    let res = await axios.get(`http://localhost:8000/checkoutdata/${id}`)
     let data = res.data
     setdata(data)
   }
@@ -22,8 +23,14 @@ function Checkout() {
   }, [])
 
   return (
-    <Flex gap="50px">
-      <Box w="600px" h="1000px" border="1px solid red" ml="30px" textAlign="left"  >
+    <Box background="#24272C" >
+      <Navbar/>
+      <Flex color="#FFFFFF" gap="10px" pt="20px">
+        <Box w="80%" borderBottom="3px solid #FFFFFF" h="25px" ml="25px"></Box>
+        <Heading color="#FFFFFF">Checkout</Heading>
+      </Flex>
+    <Flex gap="50px" mt="50px" color="#FFFFFF">
+      <Box  w="600px" h="1000px" border="1px solid red" ml="30px" textAlign="left" pl="70px"  >
         <Text ml="40px">Enter Your Name</Text>
         <Input w="400px" ml="40px" mr="40px" mb="20px" />
         <Text ml="40px">Enter 10-digit Mobile number</Text>
@@ -35,7 +42,7 @@ function Checkout() {
         <Input w="400px" ml="40px" mr="40px" mb="20px" />
         <Text ml="40px">Address (Area and street)</Text>
 
-        <Input w="450px" h="100px" pt="0px" ml="40px" mb="20px" />
+        <Input w="400px" h="100px" pt="0px" ml="40px" mb="20px" />
         <Text ml="40px">City/District/Town</Text>
         <Input w="400px" ml="40px" mr="40px" mb="20px" />
         <Text ml="40px">State</Text>
@@ -48,7 +55,7 @@ function Checkout() {
 
       </Box>
       <Box w="400px" border="1px solid red" h="800px"></Box>
-      <Box w="300px" border="1px solid red" h="400px" pl="10px" >
+      <Box w="300px" h="400px" pl="10px" boxShadow= "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" background="#0A261F" mr="20px" >
         <Box w="100%" h="40px" border="1px solid red">
           <Text>Product Summary</Text>
         </Box>
@@ -81,6 +88,7 @@ function Checkout() {
         }
       </Box>
     </Flex>
+    </Box>
   )
 }
 

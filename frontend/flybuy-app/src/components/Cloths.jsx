@@ -3,15 +3,24 @@ import React, { useState, useEffect } from 'react'
 import Carousel from './carousal'
 import axios from 'axios'
 import { useSearchParams } from 'react-router-dom'
+import Navbar from '../router/Navbar'
 
 
 function Cloths() {
   const [searchparams, setSearchparams] = useSearchParams()
   const initialCategory = searchparams.getAll("category")
+  const initsort=searchparams.getAll("sorting")
   console.log("initialCategory", initialCategory)
+  console.log("initsort", initsort)
 
   const [clothdata, setdata] = useState([])
   const [category, setCategory] = useState(initialCategory || [])
+
+ 
+ 
+ 
+  const [sort, setSort] = useState(initsort || "")
+  // console.log(sort)
 
   const handlecheck = (e) => {
 
@@ -36,21 +45,34 @@ function Cloths() {
     setCategory(newcategory)
 
   }
+  
   console.log("category", category)
 
 
+  //  for sorting
+const handleSort=(e)=>{
+  setSort(e.target.value)
 
-  const getloths = async (category) => {
+}
+
+
+
+
+
+  const getloths = async (category,sort) => {
     if (category == "") {
-      let res = await axios.get(`https://vast-gold-fox-slip.cyclic.app/product/getcloths`)
+      console.log("sorttt",sort)
+      let res = await axios.get(`http://localhost:8000/product/getcloths?sorting=${sort}`)
       let data = res.data
+      console.log("1",data)
       setdata(data)
 
 
     }
     else {
-      let res = await axios.get(`https://vast-gold-fox-slip.cyclic.app/product/getcloths?clothcategory=${category}`)
+      let res = await axios.get(`https://calm-teal-beanie.cyclic.app/product/getcloths?clothcategory=${category}&& sorting=${sort}`)
       let data = res.data
+      console.log("2",data)
       setdata(data)
     }
 
@@ -58,19 +80,21 @@ function Cloths() {
   }
 
   useEffect(() => {
-    getloths(category)
+    getloths(category,sort)
     let params = {}
     params.category = category
+    sort && (params.sorting=sort)
     setSearchparams(params)
 
 
 
 
-  }, [category, searchparams])
+  }, [category, searchparams,sort])
 
 
   return (
     <Box>
+      <Navbar />
       <Heading>CLOTHS SECTION</Heading>
       <Box m="auto" mt="20px" border="1px solid red" w="80%" borderRadius="20px" >
 
@@ -83,6 +107,13 @@ function Cloths() {
           <label>Men</label><br />
           <input type="checkbox" value="Women" checked={category.includes("Women")} onChange={handlecheck} />
           <label>Women</label>
+          <Text fontSize="17px" borderBottom="1px solid red" w="100px">Sorting</Text>
+          <input type="radio" value="asc"  name="sortby" onChange={handleSort} checked={sort=="asc"}/>
+          <label>Low to High</label><br/>
+          <input type="radio" value="desc"  name="sorthigh" onChange={handleSort} checked={sort=="desc"}/>
+          <label>High to Low</label>
+          
+
         </Box>
         <Grid templateColumns='repeat(4, 1fr)' gap={4} h="500px"  w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif" >
           {

@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbar from '../router/Navbar'
 
 function Shoes() {
   return (
-    <div>Shoes</div>
+    <div>
+      <Navbar />
+    </div>
   )
 }
 

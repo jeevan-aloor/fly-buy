@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Image, Text, Heading } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Navbar from '../router/Navbar'
 
 function Cart() {
   const [cartdata, setDate] = useState([])
@@ -9,10 +10,10 @@ function Cart() {
 
   const getdata = async () => {
     try {
-      const res = await axios.get("https://vast-gold-fox-slip.cyclic.app/cart/cartdata")
+      const res = await axios.get("https://calm-teal-beanie.cyclic.app/cart/cartdata")
       let data = res.data
       setDate(data)
-      setTotal(total+data.productrate)
+      setTotal(total + data.productrate)
 
     } catch (error) {
       console.log(error)
@@ -20,10 +21,11 @@ function Cart() {
     }
 
   }
+  // console.log(cartdata)
 
   const handledelete = async (id) => {
     try {
-      setdeleteDate(await axios.delete(`https://vast-gold-fox-slip.cyclic.app/cart/cartdelete/${id}`))
+      setdeleteDate(await axios.delete(`http://localhost:8000/cart/cartdelete/${id}`))
 
 
     } catch (error) {
@@ -38,13 +40,14 @@ function Cart() {
   useEffect(() => {
     getdata()
 
-  }, [cartdata])
-  let sum=0;
+  }, [cartdata,cartdeletedata])
+  let sum = 0;
 
 
 
   return (
     <Box>
+      <Navbar />
       <Text>My cart</Text>
       {
 
@@ -94,7 +97,7 @@ function Cart() {
             <Flex>
               <Text>Product total amount</Text>
               <Text>
-              {total}
+                {total}
               </Text>
             </Flex>
 

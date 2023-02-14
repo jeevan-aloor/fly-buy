@@ -2,7 +2,7 @@ var jwt=require("jsonwebtoken")
 
 const varify=(req,res,next)=>{
     const token=req.headers.authorization
-    // console.log(token)
+    console.log(token)
     if(token){
         const decoded=jwt.verify(token,"masai")
         if(decoded){
