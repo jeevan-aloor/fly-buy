@@ -3,18 +3,24 @@ import React, { useState, useEffect } from 'react'
 import Carousel from './carousal'
 import axios from 'axios'
 import { useSearchParams } from 'react-router-dom'
+import Navbar from '../router/Navbar'
 
 
 function Cloths() {
   const [searchparams, setSearchparams] = useSearchParams()
   const initialCategory = searchparams.getAll("category")
+  const initsort=searchparams.getAll("sorting")
   console.log("initialCategory", initialCategory)
+  console.log("initsort", initsort)
 
   const [clothdata, setdata] = useState([])
   const [category, setCategory] = useState(initialCategory || [])
 
-  const initialFilter = searchparams.getAll("filter")
-  const [filter, setFilter] = useState([])
+ 
+ 
+ 
+  const [sort, setSort] = useState(initsort || "")
+  // console.log(sort)
 
   const handlecheck = (e) => {
 
@@ -42,42 +48,31 @@ function Cloths() {
   
   console.log("category", category)
 
- const handleFilter=(e)=>{
-  const newFilter= [...filter]
-  if (newFilter.includes(e.target.value)) {
-    newFilter.splice(newFilter.indexOf(e.target.value), 1)
-  } else {
-    let name = e.target.value
 
-    if (name === "asc" && newFilter[0] === "desc") {
+  //  for sorting
+const handleSort=(e)=>{
+  setSort(e.target.value)
 
-      newFilter[0] = e.target.value
-
-    } else if (name === "desc" && newFilter[0] === "asc") {
-      newFilter[0] = e.target.value
-    } else {
-      newFilter.push(e.target.value)
-    }
-
-  }
-  setFilter(newFilter)
-
-
-  }
+}
 
 
 
-  const getloths = async (category) => {
+
+
+  const getloths = async (category,sort) => {
     if (category == "") {
-      let res = await axios.get(`http://localhost:8000/product/getcloths`)
+      console.log("sorttt",sort)
+      let res = await axios.get(`http://localhost:8000/product/getcloths?sorting=${sort}`)
       let data = res.data
+      console.log("1",data)
       setdata(data)
 
 
     }
     else {
-      let res = await axios.get(`http://localhost:8000/product/getcloths?clothcategory=${category}`)
+      let res = await axios.get(`https://calm-teal-beanie.cyclic.app/product/getcloths?clothcategory=${category}&& sorting=${sort}`)
       let data = res.data
+      console.log("2",data)
       setdata(data)
     }
 
@@ -85,19 +80,21 @@ function Cloths() {
   }
 
   useEffect(() => {
-    getloths(category)
+    getloths(category,sort)
     let params = {}
     params.category = category
+    sort && (params.sorting=sort)
     setSearchparams(params)
 
 
 
 
-  }, [category, searchparams])
+  }, [category, searchparams,sort])
 
 
   return (
     <Box>
+      <Navbar />
       <Heading>CLOTHS SECTION</Heading>
       <Box m="auto" mt="20px" border="1px solid red" w="80%" borderRadius="20px" >
 
@@ -110,11 +107,11 @@ function Cloths() {
           <label>Men</label><br />
           <input type="checkbox" value="Women" checked={category.includes("Women")} onChange={handlecheck} />
           <label>Women</label>
-          <Text fontSize="17px" borderBottom="1px solid red" w="100px">Filter</Text>
-          <input type="checkbox" value="asc" checked={filter.includes("asc")} onChange={handleFilter} />
-          <label>Low to high</label><br/>
-          <input type="checkbox" value="desc" checked={filter.includes("desc")} onChange={handleFilter} />
-          <label>High to low</label>
+          <Text fontSize="17px" borderBottom="1px solid red" w="100px">Sorting</Text>
+          <input type="radio" value="asc"  name="sortby" onChange={handleSort} checked={sort=="asc"}/>
+          <label>Low to High</label><br/>
+          <input type="radio" value="desc"  name="sorthigh" onChange={handleSort} checked={sort=="desc"}/>
+          <label>High to Low</label>
           
 
         </Box>

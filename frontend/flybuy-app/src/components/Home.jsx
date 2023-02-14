@@ -8,6 +8,9 @@ import styles from './Home.css'
 import "aos/dist/aos.css";
 import Aos from "aos";
 import Footer from './Footer'
+// require('dotenv').config()
+// require("dotenv").config();
+
 
 
 function Home() {
@@ -25,7 +28,7 @@ function Home() {
 
     const getdata = async () => {
         try {
-            let res = await axios.get(`http://localhost:8000?page=${pageno}&&q=${searchtext}`)
+            let res = await axios.get(`https://calm-teal-beanie.cyclic.app?page=${pageno}&&q=${searchtext}`)
             let data = res.data
             setdata(data)
             console.log(data)
@@ -64,7 +67,7 @@ function Home() {
 
         }
         try {
-            let data = await axios.post("http://localhost:8000/cart/addtocart", payload)
+            let data = await axios.post("https://calm-teal-beanie.cyclic.app/cart/addtocart", payload)
             console.log(data)
             toast({
                 title: "successfully Added to the cart",
@@ -102,6 +105,7 @@ function Home() {
         <Box>
             <Box >
                 <Navbar val={searchtext} ser={setSearchText} />
+                
             </Box>
 
 
