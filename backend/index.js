@@ -8,6 +8,7 @@ const {shoeRouter}=require("./router/shoerouter")
 // require('dotenv').config()
 const cors=require("cors")
 const { varify } = require('./middleware/verify')
+const { watchRouter } = require('./router/watchrouter')
 const stripe = require('stripe')("sk_test_51MXJMUSDTMqP1T3rxJg5nq1O4zNqaZWg5pMM9p9GRyUgDkCd2hYdZlX0vagbHjYJFDK4mEY3s6eJml3Crbju3hsu00rgzRJ4Vh");
 
 
@@ -21,6 +22,7 @@ app.use("/",allproductRouter)
 app.use("/product",productRouter)
 app.use("/user",userrouter)
 app.use("/shoes",shoeRouter)
+app.use("/watch",watchRouter)
 app.use(varify)
 
 app.use("/cart",cartproductrouter)
