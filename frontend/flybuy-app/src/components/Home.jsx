@@ -105,13 +105,14 @@ function Home() {
     console.log("searchtext", searchtext)
     return (
         <Box>
-            <Box >
+            {/* position="fixed" border="1px solid red" w="100%" zIndex="100" */}
+            <Box position="fixed" border="1px solid red" w="100%" zIndex="100" >
                 <Navbar val={searchtext} ser={setSearchText} />
 
             </Box>
 
 
-            <Box h="50px" background="red" pt="10px" >
+            <Box h="50px" background="red" pt="10px"  >
                 <Box  >
                     {
                         searchtext && <Box w="300px" h="200px" border="1px solid black" ml="300px" overflowX="scroll">
@@ -124,13 +125,15 @@ function Home() {
                         </Box>
 
                     }
+                    
 
-                    <marquee style={{ color: "white", fontWeight: "bold", fontSize: "20px" }} >Get up to 5000rs products you get 20% cashback hurry up!</marquee>
+                    <marquee style={{ color: "white", fontWeight: "bold", fontSize: "20px"  }} >Get up to 5000rs products you get 20% cashback hurry up!</marquee>
+                    
                 </Box>
 
-            </Box>
+            </Box >
             {
-                searchtext === "" && <Slider />
+                searchtext === "" && <Box mt="30px"><Slider /></Box>
             }
 
             <Heading mt="40px">TRENDING PRODUCTS</Heading>
