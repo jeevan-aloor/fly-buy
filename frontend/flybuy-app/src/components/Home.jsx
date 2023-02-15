@@ -22,6 +22,7 @@ function Home() {
     const [pdesc, setDesc] = useState("")
     const [pageno, setPage] = useState(1)
     const [searchtext, setSearchText] = useState("")
+    const [addtocart, setCart] = useState(true)
     const toast = useToast()
     const statuses = ['success', 'error', 'warning', 'info']
 
@@ -74,6 +75,7 @@ function Home() {
                 status: "success",
                 isClosable: true,
             })
+            setCart(false)
 
         } catch (error) {
             console.log(error)
@@ -105,7 +107,7 @@ function Home() {
         <Box>
             <Box >
                 <Navbar val={searchtext} ser={setSearchText} />
-                
+
             </Box>
 
 
@@ -128,17 +130,17 @@ function Home() {
 
             </Box>
             {
-                searchtext==="" && <Slider />
+                searchtext === "" && <Slider />
             }
-            
+
             <Heading mt="40px">TRENDING PRODUCTS</Heading>
-            <Grid templateColumns={{ md: "repeat(3, 1fr)", sm: "repeat(2,1fr)", base: "repeat(1,1fr)", lg: "repeat(2,1fr)" }} gap={{ md: "8px", sm: "4px", base: "2px" }} w={{lg:"50%"}} m="auto" mt="20px"  >
+            <Grid templateColumns={{ md: "repeat(3, 1fr)", sm: "repeat(2,1fr)", base: "repeat(1,1fr)", lg: "repeat(2,1fr)" }} gap={{ md: "8px", sm: "4px", base: "2px" }} w={{ lg: "50%" }} m="auto" mt="20px"  >
                 {
                     mongodata.length > 0 && mongodata.map((ele) => (
                         <Box key={ele._id}>
 
-                            <GridItem mb="20px" w={{ md: '100%', base: "90%" }} h={{ md: '600px', base: "550px" }}  key={ele._id}   className='shape' data-aos="fade-right">
-                                <Link to={`/singleproduct/${ele._id}`}  ><Tooltip label="Click to see product deatils"><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" border="5px solid black"  /></Tooltip></Link>
+                            <GridItem mb="20px" w={{ md: '100%', base: "90%" }} h={{ md: '600px', base: "550px" }} key={ele._id} className='shape' data-aos="fade-right">
+                                <Link to={`/singleproduct/${ele._id}`}  ><Tooltip label="Click to see product deatils"><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" border="5px solid black" /></Tooltip></Link>
                                 <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px" >
                                     <Text fontSize="20px" fontWeight="extrabold">{ele.productname}</Text>
                                     <Text fontSize="18px" color="blue">{ele.productdesc}</Text>
@@ -149,8 +151,11 @@ function Home() {
 
                                     </Flex >
                                     <Box display="flex" mt="10px">
-                                        <Tooltip label="Add to cart"><Image mt="40px" src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="50px" h="50px" mr="10px"
-                                            onClick={() => handleadd(ele.productimage, ele.productname, ele.productrate, ele.productdesc)} />
+                                        <Tooltip label="Add to cart">
+                                            <Image mt="40px" src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="50px" h="50px" mr="10px"
+                                                onClick={() => handleadd(ele.productimage, ele.productname, ele.productrate, ele.productdesc)} />
+                                            {/* { addtocart ?<Button onClick={() => handleadd(ele.productimage, ele.productname, ele.productrate, ele.productdesc)}>Add to Cart</Button>:<Button>Go to Cart</Button>
+                                            } */}
                                         </Tooltip>
                                         <Link to={`/checkout/${ele._id}`} style={{ width: "200px" }}><Button mt="40px" w="100%" _hover={{ background: "red", color: "white" }} className='buy'>BUY</Button></Link>
                                     </Box>

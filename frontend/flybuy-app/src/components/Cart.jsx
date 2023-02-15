@@ -40,7 +40,7 @@ function Cart() {
   useEffect(() => {
     getdata()
 
-  }, [cartdata,cartdeletedata])
+  }, [cartdata, cartdeletedata])
   let sum = 0;
 
 
