@@ -25,7 +25,7 @@ function Cart() {
 
   const handledelete = async (id) => {
     try {
-      setdeleteDate(await axios.delete(`http://localhost:8000/cart/cartdelete/${id}`))
+      setdeleteDate(await axios.delete(`https://calm-teal-beanie.cyclic.app/cart/cartdelete/${id}`))
 
 
     } catch (error) {

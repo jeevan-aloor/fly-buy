@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import { Box, Flex, Grid, GridItem, Image, Text, Button, Tooltip } from '@chakra-ui/react'
+import Navbar from '../router/Navbar'
 
 function Singleproduct() {
   const [singledata, setdata] = useState([])
@@ -13,7 +14,7 @@ function Singleproduct() {
   const id = productid.id
 
   const singleproduct = async (id) => {
-    let res = await axios.get(`http://localhost:8000/singleproduct/${id}`)
+    let res = await axios.get(`https://calm-teal-beanie.cyclic.app/singleproduct/${id}`)
     let data = res.data
     setdata(data)
   }
@@ -32,30 +33,34 @@ function Singleproduct() {
 
   useEffect(() => {
     singleproduct(id)
-    
+
   }, [])
 
   console.log("singledata", singledata)
   return (
+    <Box>
+      <Navbar/>
+    
     <Box mt="20px">
+      
       <Flex w="90%" h="600px" gap="10px" m="auto">
         {
           singledata.map((ele) => (
             <>
-              <Grid w="10%" border="1px solid red" templateColumns='repeat(1, 100%)' >
-                <GridItem border="1px solid red">
+              <Grid w="10%"  templateColumns='repeat(1, 100%)' gap="10px" >
+                <GridItem >
                   <Image src={ele.productimage2} h="100%" />
                 </GridItem>
-                <GridItem border="1px solid red">
+                <GridItem >
                   <Image src={ele.productimage3} h="100%" /></GridItem>
-                <GridItem border="1px solid red">
+                <GridItem >
                   <Image src={ele.productimage4} h="100%" />
                 </GridItem>
               </Grid>
-              <Box border="1px solid red" w="30%">
+              <Box  w="30%">
                 <Image src={ele.productimage} w="100%" h="100%" />
               </Box>
-              <Box border="1px solid red" w="50%" textAlign="left" pl="10px">
+              <Box  w="50%" textAlign="left" pl="10px">
                 <Text fontSize="20px">{ele.productname}</Text>
                 <Text fontSize="30px">{ele.productdesc}</Text>
                 <Text fontSize="15px" color="#CE9F79">Product-code :{ele._id}</Text>
@@ -119,6 +124,7 @@ function Singleproduct() {
         }
       </Flex>
 
+    </Box>
     </Box>
   )
 }
