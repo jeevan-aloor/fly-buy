@@ -9,16 +9,16 @@ import Navbar from '../router/Navbar'
 function Cloths() {
   const [searchparams, setSearchparams] = useSearchParams()
   const initialCategory = searchparams.getAll("category")
-  const initsort=searchparams.getAll("sorting")
+  const initsort = searchparams.getAll("sorting")
   console.log("initialCategory", initialCategory)
   console.log("initsort", initsort)
 
   const [clothdata, setdata] = useState([])
   const [category, setCategory] = useState(initialCategory || [])
 
- 
- 
- 
+
+
+
   const [sort, setSort] = useState(initsort || "")
   // console.log(sort)
 
@@ -45,26 +45,26 @@ function Cloths() {
     setCategory(newcategory)
 
   }
-  
+
   console.log("category", category)
 
 
   //  for sorting
-const handleSort=(e)=>{
-  setSort(e.target.value)
+  const handleSort = (e) => {
+    setSort(e.target.value)
 
-}
-
-
+  }
 
 
 
-  const getloths = async (category,sort) => {
+
+
+  const getloths = async (category, sort) => {
     if (category == "") {
-      console.log("sorttt",sort)
-      let res = await axios.get(`http://localhost:8000/product/getcloths?sorting=${sort}`)
+      console.log("sorttt", sort)
+      let res = await axios.get(`https://calm-teal-beanie.cyclic.app/product/getcloths?sorting=${sort}`)
       let data = res.data
-      console.log("1",data)
+      console.log("1", data)
       setdata(data)
 
 
@@ -72,7 +72,7 @@ const handleSort=(e)=>{
     else {
       let res = await axios.get(`https://calm-teal-beanie.cyclic.app/product/getcloths?clothcategory=${category}&& sorting=${sort}`)
       let data = res.data
-      console.log("2",data)
+      console.log("2", data)
       setdata(data)
     }
 
@@ -80,16 +80,16 @@ const handleSort=(e)=>{
   }
 
   useEffect(() => {
-    getloths(category,sort)
+    getloths(category, sort)
     let params = {}
     params.category = category
-    sort && (params.sorting=sort)
+    sort && (params.sorting = sort)
     setSearchparams(params)
 
 
 
 
-  }, [category, searchparams,sort])
+  }, [category, searchparams, sort])
 
 
   return (
@@ -108,17 +108,17 @@ const handleSort=(e)=>{
           <input type="checkbox" value="Women" checked={category.includes("Women")} onChange={handlecheck} />
           <label>Women</label>
           <Text fontSize="17px" borderBottom="1px solid red" w="100px">Sorting</Text>
-          <input type="radio" value="asc"  name="sortby" onChange={handleSort} checked={sort=="asc"}/>
-          <label>Low to High</label><br/>
-          <input type="radio" value="desc"  name="sorthigh" onChange={handleSort} checked={sort=="desc"}/>
+          <input type="radio" value="asc" name="sortby" onChange={handleSort} checked={sort == "asc"} />
+          <label>Low to High</label><br />
+          <input type="radio" value="desc" name="sorthigh" onChange={handleSort} checked={sort == "desc"} />
           <label>High to Low</label>
-          
+
 
         </Box>
-        <Grid templateColumns='repeat(4, 1fr)' gap={4} h="500px"  w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif" >
+        <Grid templateColumns='repeat(4, 1fr)' gap={4} h="500px" w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif" >
           {
             clothdata.length > 0 && clothdata.map((ele) => (
-              <GridItem h="100%" w="100%"   key={ele._id} fontFamily="Times New Roman,serif">
+              <GridItem h="100%" w="100%" key={ele._id} fontFamily="Times New Roman,serif">
                 <Image src={ele.clothimage} h="60%" />
                 <Text fontSize="22px" textAlign="left" fontFamily="Times New Roman,serif">{ele.clothname}</Text>
                 <Flex m="auto">

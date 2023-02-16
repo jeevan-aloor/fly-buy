@@ -106,7 +106,7 @@ function Home() {
     return (
         <Box>
             {/* position="fixed" border="1px solid red" w="100%" zIndex="100" */}
-            <Box position="fixed" border="1px solid red" w="100%" zIndex="100" >
+            <Box position="fixed"  w="100%" zIndex="100" >
                 <Navbar val={searchtext} ser={setSearchText} />
 
             </Box>
@@ -133,7 +133,7 @@ function Home() {
 
             </Box >
             {
-                searchtext === "" && <Box mt="30px"><Slider /></Box>
+                searchtext === "" && <Box mt="25px"><Slider /></Box>
             }
 
             <Heading mt="40px">TRENDING PRODUCTS</Heading>
