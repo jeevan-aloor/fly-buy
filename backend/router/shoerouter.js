@@ -8,7 +8,7 @@ shoeRouter.get("/getshoes",async(req,res)=>{
     try {
         const data=await ShoeModel.find()
         res.send(data)
-        console.log("get shoes")
+        
         
     } catch (error) {
         res.status(401).json({msg:"something wrong"})

@@ -13,7 +13,7 @@ function Cart() {
       const res = await axios.get("https://calm-teal-beanie.cyclic.app/cart/cartdata")
       let data = res.data
       setDate(data)
-      setTotal(total + data.productrate)
+      
 
     } catch (error) {
       console.log(error)
@@ -21,7 +21,7 @@ function Cart() {
     }
 
   }
-  // console.log(cartdata)
+
 
   const handledelete = async (id) => {
     try {
@@ -97,7 +97,10 @@ function Cart() {
             <Flex>
               <Text>Product total amount</Text>
               <Text>
-                {total}
+               {/* {
+                cartdata.length>0 && cartdata.map((ele)=>setTotal((prev)=>prev+ele.productrate))
+
+               } */}
               </Text>
             </Flex>
 
