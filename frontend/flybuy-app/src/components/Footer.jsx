@@ -3,32 +3,32 @@ import { Box, Divider, Flex, Image, Text } from '@chakra-ui/react'
 
 function Footer() {
   return (
-    <Box h="600px" border="1px solid red" background="#000000">
+    <Box h="540px"  background="#000000" pt="20px" mt="30px">
       <Box color="#FFFFFF" >
-        <Text textAlign="left" pl="30px">Fly-buy Site Links</Text>
-        <Flex w="70%" h="200px" mb="30px" pl="30px">
-          <Box w="30%" border="1px solid red" textAlign="left">
+        <Text textAlign="left" pl="30px" fontWeight="bold">Fly-buy Site Links</Text>
+        <Flex w="70%" h="160px" mb="30px" pl="30px">
+          <Box w="30%" textAlign="left" lineHeight="40px">
             <Text>Contacy us</Text>
-            <Text>Contacy us</Text>
-            <Text>Contacy us</Text>
-            <Text>Contacy us</Text>
+            <Text>About us</Text>
+            <Text>Directions</Text>
+            <Text>Blog</Text>
           </Box>
-          <Box w="30%" border="1px solid red" textAlign="left">
-            <Text>Contacy us</Text>
-            <Text>Contacy us</Text>
-            <Text>Contacy us</Text>
-            <Text>Contacy us</Text>
+          <Box w="30%" textAlign="left" lineHeight="40px">
+            <Text>Promotions</Text>
+            <Text>Partners</Text>
+            <Text>Careers</Text>
+            <Text>FAQs</Text>
           </Box>
-          <Box w="30%" border="1px solid red" textAlign="left">
-            <Text>Contacy us</Text>
-            <Text>Contacy us</Text>
-            <Text>Contacy us</Text>
-            <Text>Contacy us</Text>
+          <Box w="30%" textAlign="left" lineHeight="40px">
+            <Text>All product</Text>
+            <Text>Shoes</Text>
+            <Text>Cloths</Text>
+            <Text>Watches</Text>
           </Box>
 
         </Flex>
       </Box>
-      <Divider />
+      {/* <Divider /> */}
       <Box h="300px" border="1px solid red" filter="blur(0.6px)" background="#FFFFFF" mt="20px" pl="100px"  >
         <Text fontSize="30px">Our partners</Text>
         <Flex gap="100px" mt="20px">
@@ -58,6 +58,7 @@ function Footer() {
 
 
       </Box>
+      
     </Box>
   )
 }

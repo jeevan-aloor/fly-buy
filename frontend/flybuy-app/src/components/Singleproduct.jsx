@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
-import { Box, Flex, Grid, GridItem, Image, Text, Button, Tooltip } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem, Image, Text, Button, Tooltip, Heading } from '@chakra-ui/react'
 import Navbar from '../router/Navbar'
+import Footer from './Footer'
 
 function Singleproduct() {
   const [singledata, setdata] = useState([])
@@ -40,8 +41,10 @@ function Singleproduct() {
   return (
     <Box>
       <Navbar/>
+
     
     <Box mt="20px">
+      <Heading mb="20px"> Product Details</Heading>
       
       <Flex w="90%" h="600px" gap="10px" m="auto">
         {
@@ -94,7 +97,7 @@ function Singleproduct() {
                     <Button onClick={handleadd} background="#07294C" color="#FFFFFF">+</Button>
                   </Box>
                   <Box>
-                    <Link to="/carts"><Button ml="150px" w="200px">BUY NOW</Button></Link>
+                    <Link to={`/checkout/${ele._id}`}><Button ml="150px" w="200px">BUY NOW</Button></Link>
                   </Box>
                 </Flex>
 
@@ -125,6 +128,7 @@ function Singleproduct() {
       </Flex>
 
     </Box>
+    <Footer/>
     </Box>
   )
 }
