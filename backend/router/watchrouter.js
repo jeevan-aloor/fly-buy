@@ -4,18 +4,31 @@ const {WatchModel}=require('../conflict/watchmodel')
 const watchRouter=express.Router()
 
 
-watchRouter.get("/getwatch",async(req,res)=>{
+watchRouter.get("/getwatchmen",async(req,res)=>{
     try {
-        const data=await WatchModel.find()
+        const data=await WatchModel.find({watchcategory:"Men"})
         res.send(data)
-        console.log("get shoes")
+        
         
     } catch (error) {
         res.status(401).json({msg:"something wrong"})
         console.log("error")
         
     }
-})                                                      
+})  
+
+watchRouter.get("/getwatchwomen",async(req,res)=>{
+    try {
+        const data=await WatchModel.find({watchcategory:"Women"})
+        res.send(data)
+        
+        
+    } catch (error) {
+        res.status(401).json({msg:"something wrong"})
+        console.log("error")
+        
+    }
+}) 
 
 
 

@@ -104,9 +104,9 @@ function Home() {
     }, [pageno, searchtext])
     console.log("searchtext", searchtext)
     return (
-        <Box>
+        <Box >
             {/* position="fixed" border="1px solid red" w="100%" zIndex="100" */}
-            <Box position="fixed"  w="100%" zIndex="100" >
+            <Box position="fixed" w="100%" zIndex="100" >
                 <Navbar val={searchtext} ser={setSearchText} />
 
             </Box>
@@ -115,20 +115,23 @@ function Home() {
             <Box h="50px" background="red" pt="10px"  >
                 <Box  >
                     {
-                        searchtext && <Box w="300px" h="200px" border="1px solid black" ml="300px" overflowX="scroll">
+                        searchtext && <Box w="300px" h="80px" border="1px solid black" ml="300px" overflowY="scroll" mt="70px" >
                             {
 
                                 mongodata.map((ele) => (
-                                    <Text onClick={() => setSearchText(ele.productdesc)}>{ele.productdesc}</Text>
+                                    <Text onClick={() => setSearchText(ele.productdesc)} w="95%" m="auto" boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px">{ele.productdesc}</Text>
                                 ))
                             }
                         </Box>
 
                     }
-                    
 
-                    <marquee style={{ color: "white", fontWeight: "bold", fontSize: "20px"  }} >Get up to 5000rs products you get 20% cashback hurry up!</marquee>
-                    
+
+                    <marquee style={{ color: "white", fontWeight: "bold", fontSize: "20px" }} >Get FLAT 10% Off on orders above ₹2499 |
+                        Additional 15% on prepaid orders |
+                        Easy EMi's Available
+                    </marquee>
+
                 </Box>
 
             </Box >
@@ -153,14 +156,14 @@ function Home() {
                                         <Text fontSize="20px" mt="20px">(20% OFF)</Text>
 
                                     </Flex >
-                                    <Box display="flex" mt="10px">
+                                    <Box display="flex" mt="0px">
                                         <Tooltip label="Add to cart">
                                             <Image mt="40px" src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="50px" h="50px" mr="10px"
                                                 onClick={() => handleadd(ele.productimage, ele.productname, ele.productrate, ele.productdesc)} />
                                             {/* { addtocart ?<Button onClick={() => handleadd(ele.productimage, ele.productname, ele.productrate, ele.productdesc)}>Add to Cart</Button>:<Button>Go to Cart</Button>
                                             } */}
                                         </Tooltip>
-                                        <Link to={`/checkout/${ele._id}`} style={{ width: "200px" }}><Button mt="40px" w="100%" _hover={{ background: "red", color: "white" }} className='buy'>BUY</Button></Link>
+                                        <Link to={`/checkout/${ele._id}`} style={{ width: "200px" }}><Button color="white" background="black" mt="40px" w="100%" _hover={{ background: "blackAlpha.800", color: "white" }}  >BUY</Button></Link>
                                     </Box>
                                 </Box>
                             </GridItem>
@@ -170,10 +173,10 @@ function Home() {
                 }
 
             </Grid>
-            <Button onClick={handleprev}>PREV</Button>
+            <Button onClick={handleprev} _hover={{ background: "blackAlpha.400" }} background="blackAlpha.400" mr="10px">PREV</Button>
 
-            <Button>{pageno}</Button>
-            <Button onClick={handlenext}>NEXT</Button>
+            {/* <Button>{pageno}</Button> */}
+            <Button onClick={handlenext} _hover={{ background: "blackAlpha.400" }} background="blackAlpha.400">NEXT</Button>
 
             <Box>
                 <Footer />
