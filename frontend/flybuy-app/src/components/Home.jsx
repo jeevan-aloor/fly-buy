@@ -100,6 +100,7 @@ function Home() {
     useEffect(() => {
         getdata()
         Aos.init({ duration: 2000 });
+        document.title="Fly-Buy"
 
     }, [pageno, searchtext])
     console.log("searchtext", searchtext)

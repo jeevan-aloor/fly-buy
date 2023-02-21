@@ -9,10 +9,10 @@ import {
   DrawerContent,
   DrawerCloseButton, Button, ModalOverlay, ModalContent, ModalHeader, ModalFooter,
   ModalBody,
-  ModalCloseButton, Modal, FormControl, FormLabel, useToast
+  ModalCloseButton, Modal, FormControl, FormLabel, useToast, InputGroup, InputRightElement
 } from '@chakra-ui/react'
 import { useMediaQuery, useDisclosure } from '@chakra-ui/react'
-import { HamburgerIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, ViewIcon } from '@chakra-ui/icons'
 import axios from 'axios'
 
 const OverlayOne = () => (
@@ -36,6 +36,9 @@ function Navbar(props) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmpass, setConfirmpass] = useState("")
+  const [show, setShow] = React.useState(false)
+  const [showpass, setShowpass] = React.useState(false)
+  const [showpasslogin, setShowpasslogin] = React.useState(false)
 
   const [loginemail, setloginemail] = useState("")
   const [loginpass, setloginpass] = useState("")
@@ -46,7 +49,9 @@ function Navbar(props) {
 
 
 
-
+  const handleClick = () => setShow(!show)
+  const handleClickpass = () => setShowpass(!showpass)
+  const handleClickpasslogin = () => setShowpasslogin(!showpasslogin)
 
 
   const handlesignup = () => {
@@ -55,8 +60,8 @@ function Navbar(props) {
   const handlelogin = () => {
     setls(false)
   }
-  let useremail=JSON.parse(localStorage.getItem("userEmail"))
-  
+  let useremail = JSON.parse(localStorage.getItem("userEmail"))
+
 
   //  alert message for cart page
   const handlealert = () => {
@@ -109,23 +114,36 @@ function Navbar(props) {
 
   //  for signup 
   const adduserdetail = async () => {
-    const payload = {
-      name,
-      mobilenumber,
-      email,
-      password
+    if (password === confirmpass) {
+      const payload = {
+        name,
+        mobilenumber,
+        email,
+        password
+
+      }
+      let res = await axios.post("https://calm-teal-beanie.cyclic.app/user/adduser", payload)
+      console.log("added")
+      console.log(res)
+      toast({
+        title: 'Sucussfully Register',
+        description: "Please Login Now",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
+
+    } else {
+      toast({
+        title: 'Password Not matching',
+        description: "Please put correct password",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
 
     }
-    let res = await axios.post("https://calm-teal-beanie.cyclic.app/user/adduser", payload)
-    console.log("added")
-    console.log(res)
-    toast({
-      title: 'Sucussfully Register',
-      description: "Please Login Now",
-      status: 'success',
-      duration: 9000,
-      isClosable: true,
-    })
+
 
   }
 
@@ -147,23 +165,23 @@ function Navbar(props) {
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': {token}
+          'Authorization': { token }
         }
       };
       console.log(payload.email)
-      localStorage.setItem("userEmail",JSON.stringify(payload.email))
+      localStorage.setItem("userEmail", JSON.stringify(payload.email))
       let addHeader = await axios.post("https://calm-teal-beanie.cyclic.app/user/userlogin", config)
       localStorage.setItem("token", JSON.stringify(res.data))
-  
+
       console.log("login")
       onClose()
-      
+
     } catch (error) {
       console.log(error)
-      
-      
+
+
     }
-  
+
 
 
   }
@@ -245,15 +263,41 @@ function Navbar(props) {
                     <ModalBody>
                       <FormControl isRequired>
                         <FormLabel>Full Name</FormLabel>
-                        <Input placeholder='Enter Your Full Name' onChange={(e) => setName(e.target.value)} />
+                        <Input type='text' placeholder='Enter Your Full Name' onChange={(e) => setName(e.target.value)} />
                         <FormLabel>Mobile no.</FormLabel>
-                        <Input placeholder='Enter Your Mobile Number' onChange={(e) => setMobile(e.target.value)} />
+                        <Input type="number" placeholder='Enter Your Mobile Number' onChange={(e) => setMobile(e.target.value)} />
                         <FormLabel>Email</FormLabel>
-                        <Input placeholder='Enter Your Email address' onChange={(e) => setEmail(e.target.value)} />
+                        <Input type="email" placeholder='Enter Your Email address' onChange={(e) => setEmail(e.target.value)} />
                         <FormLabel>Password</FormLabel>
-                        <Input placeholder='Enter Your Password' onChange={(e) => setPassword(e.target.value)} />
+                        <InputGroup size='md'>
+                          <Input
+                            pr='4.5rem'
+                            type={showpass ? 'text' : 'password'}
+                            placeholder='Enter password'
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
+                          <InputRightElement width='4.5rem'>
+                            <Button h='1.75rem' size='sm' onClick={handleClickpass}>
+                              {showpass ? 'Hide' : 'Show'}
+                            </Button>
+                          </InputRightElement>
+                        </InputGroup>
+
                         <FormLabel>Confirm Password</FormLabel>
-                        <Input placeholder='Enter Your Password' onChange={(e) => setConfirmpass(e.target.value)} />
+                        <InputGroup size='md'>
+                          <Input
+                            pr='4.5rem'
+                            type={show ? 'text' : 'password'}
+                            placeholder='Enter password'
+                            onChange={(e) => setConfirmpass(e.target.value)}
+                          />
+                          <InputRightElement width='4.5rem'>
+                            <Button h='1.75rem' size='sm' onClick={handleClick}>
+                              {show ? 'Hide' : 'Show'}
+                            </Button>
+                          </InputRightElement>
+                        </InputGroup>
+
                         <Text>Already Have Account please  <Button color="blue" h="20px" background="none" _hover={{ background: "none" }} onClick={handlelogin}>Login Here</Button></Text>
 
                       </FormControl>
@@ -270,7 +314,22 @@ function Navbar(props) {
                         <FormLabel>Eamil</FormLabel>
                         <Input placeholder='First name' value={loginemail} onChange={(e) => setloginemail(e.target.value)} />
                         <FormLabel>Password</FormLabel>
-                        <Input placeholder='First name' value={loginpass} onChange={(e) => setloginpass(e.target.value)} />
+                        <InputGroup size='md'>
+                          <Input
+                            pr='4.5rem'
+                            type={showpasslogin ? 'text' : 'password'}
+                            placeholder='Enter password'
+                      
+                            value={loginpass} 
+                            onChange={(e) => setloginpass(e.target.value)}
+                          />
+                          <InputRightElement width='4.5rem'>
+                            <Button h='1.75rem' size='sm' onClick={handleClickpasslogin}>
+                              {showpass ? 'Hide' : 'Show'}
+                            </Button>
+                          </InputRightElement>
+                        </InputGroup>
+                        
                         <Text>If your not Registerd please  <Button color="blue" h="20px" background="none" _hover={{ background: "none" }} onClick={handlesignup}>Register Here</Button></Text>
 
                       </FormControl>
@@ -293,7 +352,7 @@ function Navbar(props) {
                   _hover={{ background: "none" }}
                 >
                   {JSON.parse(localStorage.getItem("userEmail"))}
-                 
+
 
                 </Button>
                 <Modal isCentered isOpen={isOpen} onClose={onClose}>
@@ -310,7 +369,8 @@ function Navbar(props) {
                         <FormLabel>Eamil</FormLabel>
                         <Input placeholder='Enter Your Email address' onChange={(e) => setEmail(e.target.value)} />
                         <FormLabel>Password</FormLabel>
-                        <Input placeholder='Enter Your Password' onChange={(e) => setPassword(e.target.value)} />
+
+                        <Input placeholder='Enter Your Password' onChange={(e) => setPassword(e.target.value)} ><ViewIcon /></Input>
                         <FormLabel>Confirm Password</FormLabel>
                         <Input placeholder='Enter Your Password' onChange={(e) => setConfirmpass(e.target.value)} />
                         <Text>Already Have Account please  <Button color="blue" h="20px" background="none" _hover={{ background: "none" }} onClick={handlelogin}>Login Here</Button></Text>

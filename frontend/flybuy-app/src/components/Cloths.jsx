@@ -4,6 +4,7 @@ import Carousel from './carousal'
 import axios from 'axios'
 import { useSearchParams } from 'react-router-dom'
 import Navbar from '../router/Navbar'
+import Footer from './Footer'
 
 
 function Cloths() {
@@ -19,7 +20,7 @@ function Cloths() {
 
 
 
-  const [sort, setSort] = useState(initsort || "")
+  const [sort, setSort] = useState(initsort[0] || "")
   // console.log(sort)
 
   const handlecheck = (e) => {
@@ -51,7 +52,18 @@ function Cloths() {
 
   //  for sorting
   const handleSort = (e) => {
-    setSort(e.target.value)
+    if(sort=="asc" && e.target.value=="asc"){
+      setSort("")
+
+    }else if(sort=="desc" && e.target.value=="desc"){
+      setSort("")
+
+    }
+    else{
+
+      setSort(e.target.value)
+    }
+    console.log(sort)
 
   }
 
@@ -62,10 +74,20 @@ function Cloths() {
   const getloths = async (category, sort) => {
     if (category == "") {
       console.log("sorttt", sort)
-      let res = await axios.get(`https://calm-teal-beanie.cyclic.app/product/getcloths?sorting=${sort}`)
+      if(sort==""){
+        let res = await axios.get(`https://calm-teal-beanie.cyclic.app/product/getcloths`)
       let data = res.data
       console.log("1", data)
       setdata(data)
+
+      }else{
+        let res = await axios.get(`https://calm-teal-beanie.cyclic.app/product/getcloths?sorting=${sort}`)
+        let data = res.data
+        console.log("1", data)
+        setdata(data)
+        console.log("sort",sort)
+      }
+      
 
 
     }
@@ -94,6 +116,7 @@ function Cloths() {
 
   return (
     <Box>
+      <Box>
       <Navbar />
       <Heading>CLOTHS SECTION</Heading>
       <Box m="auto" mt="20px" border="1px solid red" w="80%" borderRadius="20px" >
@@ -137,6 +160,9 @@ function Cloths() {
 
         </Grid>
       </Flex>
+      </Box>
+      
+      
 
 
 
