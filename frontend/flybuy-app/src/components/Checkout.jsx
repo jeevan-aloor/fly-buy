@@ -8,32 +8,60 @@ function Checkout() {
   const [singledata, setdata] = useState([])
   const [shippingrate, setshiipingrate] = useState(20)
   const [ponitmove, setPoint] = useState(0)
+  const [name, setName] = useState("")
+  const [mobileno, setMobileno] = useState("")
+  const [pincode, setPincode] = useState("")
+  const [address, setAddress] = useState("")
+  const [state, setState] = useState("")
+  const [addressdata, setAddressdata] = useState([])
   const productid = useParams()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = React.useRef()
-  console.log(productid)
+ 
   const id = productid.id
 
 
-  const cartproduct = async (id) => {
-    let res = await axios.get(`http://localhost:8000/checkoutdata/${id}`)
+  const getAddress = async () => {
+    let res = await axios.get("http://localhost:8000/getaddress")
     let data = res.data
-    setdata(data)
+    console.log(data)
+    setAddressdata(data)
   }
 
   //  shipping detail
 
-  const handleadddetail = () => {
-    setPoint((prev) => prev + 50)
+  // const handleadddetail = () => {
+  //   setPoint((prev) => prev + 50)
 
+
+  // }
+  
+  //  addding address  
+
+  const addAddress=async()=>{
+    const payload={
+      name,
+      mobileno,
+      pincode,
+      address,
+      state
+
+    }
+    try {
+      await axios.post("http://localhost:8000/address/addaddress",payload)
+      console.log("address added")
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
 
   }
-  console.log(ponitmove)
 
 
 
   useEffect(() => {
-    cartproduct(id)
+    getAddress()
 
   }, [ponitmove])
 
@@ -59,30 +87,30 @@ function Checkout() {
       </Box>
       {/* backgroundImage="https://images.pexels.com/photos/8971727/pexels-photo-8971727.jpeg?auto=compress&cs=tinysrgb&w=600" */}
       <Flex gap="50px" mt="50px" color="#FFFFFF" fontFamily="emoji">
-        <Box w="600px" h="1000px" ml="30px" textAlign="left" pl="70px" fontFamily="cursive" background="#f1faee"    >
+        <Box w="600px" h="1000px" ml="30px" textAlign="left" pl="70px" fontFamily="cursive" background="#274046">
           <Box  >
             <Text textAlign={"center"} fontSize="30px" color="#00a6fb" mb="20px" textDecoration={"dotted"} fontFamily="cursive">Please fill out information</Text>
             <Text ml="40px" color="#fe7f2d" fontSize="20px" >Enter Your Name</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
+            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e)=>setName(e.target.value)}/>
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Enter 10-digit Mobile number</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" placeholder='Enter phone number' background="#fdc5f5" />
+            <Input w="400px" ml="40px" mr="40px" mb="20px" placeholder='Enter phone number' background="#fdc5f5" onChange={(e)=>setMobileno(e.target.value)}/>
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Pincode</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
+            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e)=>setPincode(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Locality</Text>
 
             <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
-            <Text ml="40px" fontSize="20px" color="#fe7f2d">Address (Area and street)</Text>
+            <Text ml="40px" fontSize="20px" color="#fe7f2d" >Address (Area and street)</Text>
 
-            <Input w="400px" h="100px" pt="0px" ml="40px" mb="20px" background="#fdc5f5" />
+            <Input w="400px" h="100px" pt="0px" ml="40px" mb="20px" background="#fdc5f5" onChange={(e)=>setAddress(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">City/District/Town</Text>
             <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">State</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" placeholder='jdjdd' background="#fdc5f5" />
+            <Input w="400px" ml="40px" mr="40px" mb="20px" placeholder='jdjdd' background="#fdc5f5" onChange={(e)=>setState(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Landmark (Optional)</Text>
             <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
             <Text ml="40px" fontSize="20px" color="blue">Alternate phone number (Optional)</Text>
             <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
-            <Button w="400px" ml="40px" background="black" onClick={handleadddetail}>Use this address</Button>
+            <Button w="400px" ml="40px" background="black" onClick={addAddress}>Use this address</Button>
 
           </Box>
         </Box>
