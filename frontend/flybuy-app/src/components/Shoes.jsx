@@ -7,8 +7,10 @@ import styles from './Home.css'
 function Shoes() {
 
   const [shoeData, setData] = useState([])
+  const [load,setLoad]=useState(false)
 
   const getshoes = async () => {
+    setLoad(true)
     try {
       let res = await axios.get("http://localhost:8000/shoes/getshoes")
       setData(res.data)
@@ -18,10 +20,12 @@ function Shoes() {
       console.log("Error in getting watch data")
 
     }
+    setLoad(false)
 
 
 
   }
+  // <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" />
 
   useEffect(() => {
     getshoes()
@@ -84,7 +88,8 @@ function Shoes() {
         <Image src="https://cdn.shopify.com/s/files/1/0549/2926/0637/files/all-new-img2.jpg?v=1634126475"/>
         </Box>
       </Flex>
-      <Grid templateColumns="repeat(5,1fr)" m="auto" w="90%" h="300px" mt="30px" gap="20px" >
+      {
+        load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns="repeat(5,1fr)" m="auto" w="90%" h="300px" mt="30px" gap="20px" >
         {
           shoeData.length>0 && shoeData.map((ele)=>(
             <GridItem border="1px solid red">
@@ -98,6 +103,7 @@ function Shoes() {
 
         }
       </Grid>
+}
       
       
     </Box>

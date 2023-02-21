@@ -31,7 +31,9 @@ function Footer() {
       {/* <Divider /> */}
       <Box h="300px" border="1px solid red" filter="blur(0.6px)" background="#FFFFFF" mt="20px" pl="100px"  >
         <Text fontSize="30px">Our partners</Text>
+        <marquee>
         <Flex gap="100px" mt="20px">
+          
           <Image src="https://cdn3.iconfinder.com/data/icons/picons-social/57/67-amazon-64.png" w="70px" h="70px" />
           <Image src="https://cdn1.iconfinder.com/data/icons/social-media-glossy/512/63-nike_social-64.png" w="70px" h="70px" />
           <Image src="https://cdn0.iconfinder.com/data/icons/logos-21/40/Gucci-64.png" w="70px" h="70px" />
@@ -52,6 +54,7 @@ function Footer() {
 
 
         </Flex>
+        </marquee>
 
 
 

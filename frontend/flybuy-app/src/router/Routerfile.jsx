@@ -10,6 +10,7 @@ import Singleproduct from '../components/Singleproduct'
 import Login from '../components/Login-signup/Login'
 import Womenwatch from '../components/Womenwatch'
 import Menwatch from '../components/Menwatch'
+import Admin from '../components/Admin'
 // import CheckoutForm from '../components/Payment'
 // import CheckoutForm from '../components/Payment'
 
@@ -26,6 +27,7 @@ function Routerfile() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/womenwatch" element={<Womenwatch/>}/>
       <Route path="/menswatch" element={<Menwatch/>}/>
+      <Route path="/admin" element={<Admin/>}/>
       {/* <Route path="/payment" element={<CheckoutForm/>}/> */}
     </Routes>
   )

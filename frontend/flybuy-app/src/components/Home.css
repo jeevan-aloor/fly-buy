@@ -32,3 +32,8 @@
     transform: scale(1.1);
 
 }
+.table{
+    width:70%;
+    margin:auto;
+    border:1px solid red
+}
