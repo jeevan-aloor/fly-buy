@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../router/Navbar'
 import axios from 'axios'
-import { Box, Flex, Image, Text } from '@chakra-ui/react'
+import { Box, Flex, Image, Text,Heading, Grid, GridItem } from '@chakra-ui/react'
+import styles from './Home.css'
 
 function Shoes() {
 
@@ -34,16 +35,71 @@ function Shoes() {
 
       </Box>
       <Flex w="75%" m="auto" h="500px" mt="20px" gap="20px">
-        <Box border="1px solid red" w="45%">
+        <Box  w="45%">
           <Image src="https://cdn.shopify.com/s/files/1/0549/2926/0637/files/bouncy-img_720x.jpg?v=1634148214" w="100%" h="100%" />
         </Box>
-        <Box border="1px solid red" w="45%" pt="150px" pl="20px" textAlign="left">
+        <Box  w="45%" pt="150px" pl="20px" textAlign="left">
           <Image src="https://cdn.shopify.com/s/files/1/0549/2926/0637/files/rebound_44f8c81e-6696-4bbb-89a6-7a8b4eda9b0d.jpg?v=1634471175" />
           <Text textAlign="left" fontSize="16px" lineHeight="28px">We’re on a mission to make the world’s best fitting performance sneakers using a fit formula that promotes balance,comfort, and support.</Text>
           <button style={{ background: "red", color: "#FFFFFF", width: "200px", height: "50px", border: "1px solid red", fontWeight: "bold", marginTop: "40px" }}>EXPLORE NOW</button>
         </Box>
 
       </Flex>
+      <Heading fontSize="25px" fontWeight="extrabold" mt="20px" mb="20px" borderBottom="1px solid cyan" w="250px" m="auto">DEALS TO DIE FOR!</Heading>
+      <Grid templateColumns="repeat(4,1fr)" w="80%" m="auto"  h="380px" gap="20px" p="20px" >
+        <GridItem>
+          <Image src="https://cdn.shopify.com/s/files/1/0549/2926/0637/files/3.png?v=1672410872" h="80%" w="100%" className='shoehover' />
+          <Text mt="20px">GYM & TRAINING</Text>
+          <Text fontSize="20px" fontWeight="extrabold">UPTO 23% OFF</Text>
+
+        </GridItem>
+        <GridItem>
+          <Image src="https://cdn.shopify.com/s/files/1/0549/2926/0637/files/sandals-001.jpg?v=1637154699" h="80%" w="100%" className='shoehover'/>
+          <Text mt="20px">SANDALS & SLIDERS
+</Text>
+          <Text fontSize="20px" fontWeight="extrabold">UPTO 50% OFF</Text>
+
+        </GridItem>
+        <GridItem>
+          <Image src="https://cdn.shopify.com/s/files/1/0549/2926/0637/files/training.jpg?v=1634216842" h="80%" w="100%" className='shoehover'/>
+          <Text mt="20px">TRAINING SHOES
+</Text>
+          <Text fontSize="20px" fontWeight="extrabold">UPTO 60% OFF</Text>
+
+        </GridItem>
+        <GridItem>
+          <Image src="https://cdn.shopify.com/s/files/1/0549/2926/0637/files/running-shoe.jpg?v=1634216842" h="80%" w="100%" className='shoehover'/>
+          <Text mt="20px">RUNNING SHOES
+</Text>
+          <Text fontSize="20px" fontWeight="extrabold">UPTO 70% OFF</Text>
+
+        </GridItem>
+
+      </Grid>
+      <Flex w="80%"  h="670px" m="auto" gap="40px" >
+        <Box border="1px solid red" w="45%">
+          <Image src="https://cdn.shopify.com/s/files/1/0549/2926/0637/files/all-new-img1.jpg?v=1634126475"/>
+        </Box>
+        <Box border="1px solid red" w="45%">
+        <Image src="https://cdn.shopify.com/s/files/1/0549/2926/0637/files/all-new-img2.jpg?v=1634126475"/>
+        </Box>
+      </Flex>
+      <Grid templateColumns="repeat(5,1fr)" m="auto" w="90%" h="300px" mt="30px" gap="20px" >
+        {
+          shoeData.length>0 && shoeData.map((ele)=>(
+            <GridItem border="1px solid red">
+              <Image src={ele.shoeimage} h="70%" w="100%"/>
+              <Text>{ele.shoename}</Text>
+              <Text fontSize="25px">{ele.shoerate} <strike style={{fontSize:"15px"}}> {ele.shoestrikerate}</strike></Text>
+              
+
+            </GridItem>
+          ))
+
+        }
+      </Grid>
+      
+      
     </Box>
   )
 }

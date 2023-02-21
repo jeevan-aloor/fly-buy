@@ -3,7 +3,7 @@ import { Box, Divider, Flex, Image, Text } from '@chakra-ui/react'
 
 function Footer() {
   return (
-    <Box h="540px"  background="#000000" pt="20px" mt="30px">
+    <Box h="540px"  background="#000000" pt="20px" mt="100px">
       <Box color="#FFFFFF" >
         <Text textAlign="left" pl="30px" fontWeight="bold">Fly-buy Site Links</Text>
         <Flex w="70%" h="160px" mb="30px" pl="30px">

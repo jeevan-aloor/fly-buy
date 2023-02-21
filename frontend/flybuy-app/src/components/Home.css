@@ -22,3 +22,13 @@
 .shape{
    resize: both;
 }
+
+.shoehover{
+    cursor: pointer;
+    transition: 650ms;
+
+}
+.shoehover:hover{
+    transform: scale(1.1);
+
+}

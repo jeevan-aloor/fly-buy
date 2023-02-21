@@ -7,6 +7,7 @@ function Cart() {
   const [cartdata, setDate] = useState([])
   const [cartdeletedata, setdeleteDate] = useState([])
   const [total, setTotal] = useState(0)
+  const [amount, setAmount] = useState(0)
 
   const getdata = async () => {
     try {
@@ -41,7 +42,7 @@ function Cart() {
     getdata()
 
   }, [cartdata, cartdeletedata])
-  let sum = 0;
+ 
 
 
 
@@ -65,7 +66,7 @@ function Cart() {
 
 
 
-                <Flex w="100%" gap="20px" m="auto"  >
+                <Flex w="100%" gap="20px" m="auto" key={ele._id} >
 
 
 
@@ -74,7 +75,7 @@ function Cart() {
                   </Box>
                   <Box w="70%" border="1px solid red" h="150px" textAlign="left" pl="20px" pt="20px">
                     <Text>{ele.productdesc}</Text>
-                    <Text>₹{ele.productrate}</Text>
+                    <Text> ₹{ele.productrate}</Text>
                     <Button mt="10px" ml="200px" onClick={() => handledelete(ele._id)} background="blue.200" _hover={{ background: "red.200" }}>Remove from cart</Button>
 
                   </Box>
