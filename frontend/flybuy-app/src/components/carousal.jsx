@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons'
+import { Box, Image } from '@chakra-ui/react';
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,11 +28,11 @@ const Carousel = () => {
   };
 
   return (
-    <div className="carousel" style={{ height: "500px" }}>
-      <img src={images[currentIndex]} alt="slide" style={{ width: "100%", height: "100%", borderRadius: "20px" }} />
-      <button onClick={previousSlide} style={{ padding: "8px", borderRadius: "50%", border: "1px solid red", height: "40px", marginTop: "10px", marginRight: "10px" }}><ArrowLeftIcon /></button>
-      <button onClick={nextSlide} style={{ padding: "8px", borderRadius: "50%", border: "1px solid red", height: "40px", marginTop: "10px" }}><ArrowRightIcon /></button>
-    </div>
+    <Box className="carousel" h={{ lg: "500px", base: "300px" }}  >
+      <Image src={images[currentIndex]} alt="slide" w="100%" h="100%" borderRadius="20px" />
+      <button onClick={previousSlide} style={{ padding: "8px", borderRadius: "20%", border: "1px solid #bdc3c7", height: "40px", marginTop: "10px", marginRight: "10px", background: "#bdc3c7" }}><ArrowLeftIcon /></button>
+      <button onClick={nextSlide} style={{ padding: "8px", height: "40px", marginTop: "10px", background: "#bdc3c7", borderRadius: "20%" }}><ArrowRightIcon /></button>
+    </Box>
   );
 };
 

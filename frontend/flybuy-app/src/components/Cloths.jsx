@@ -1,4 +1,4 @@
-import { Box, Heading, Grid, GridItem, Image, Text, Flex, Button, Input } from '@chakra-ui/react'
+import { Box, Heading, Grid, GridItem, Image, Text, Flex, Button, Input, Skeleton, Stack } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
 import Carousel from './carousal'
 import axios from 'axios'
@@ -16,7 +16,7 @@ function Cloths() {
 
   const [clothdata, setdata] = useState([])
   const [category, setCategory] = useState(initialCategory || [])
-  const [load,setLoad]=useState(false)
+  const [load, setLoad] = useState(false)
 
 
 
@@ -53,14 +53,14 @@ function Cloths() {
 
   //  for sorting
   const handleSort = (e) => {
-    if(sort=="asc" && e.target.value=="asc"){
+    if (sort == "asc" && e.target.value == "asc") {
       setSort("")
 
-    }else if(sort=="desc" && e.target.value=="desc"){
+    } else if (sort == "desc" && e.target.value == "desc") {
       setSort("")
 
     }
-    else{
+    else {
 
       setSort(e.target.value)
     }
@@ -76,20 +76,20 @@ function Cloths() {
     setLoad(true)
     if (category == "") {
       console.log("sorttt", sort)
-      if(sort==""){
+      if (sort == "") {
         let res = await axios.get(`https://calm-teal-beanie.cyclic.app/product/getcloths`)
-      let data = res.data
-      console.log("1", data)
-      setdata(data)
+        let data = res.data
+        console.log("1", data)
+        setdata(data)
 
-      }else{
+      } else {
         let res = await axios.get(`https://calm-teal-beanie.cyclic.app/product/getcloths?sorting=${sort}`)
         let data = res.data
         console.log("1", data)
         setdata(data)
-        console.log("sort",sort)
+        console.log("sort", sort)
       }
-      
+
 
 
     }
@@ -116,67 +116,69 @@ function Cloths() {
 
   }, [category, searchparams, sort])
 
-{/* <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> */}
+  {/* <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> */ }
   return (
-    <Box>
-      <Box>
-      <Navbar />
-      <Heading>CLOTHS SECTION</Heading>
-      <Box m="auto" mt="20px" border="1px solid red" w="80%" borderRadius="20px" >
+    <Box >
+      <Box >
+        <Navbar />
+        <Heading>CLOTHS SECTION</Heading>
+        <Box m="auto" mt="20px" w="80%" borderRadius="20px" >
 
-        <Carousel />
-      </Box>
-      <Flex w="100%" gap="10px">
-        <Box w="20%" border="1px solid red" mt="80px" h="200px" textAlign="left" pl="30px">
-          <Text fontSize="17px" borderBottom="1px solid red" w="100px">CATEGORY</Text>
-          <input type="checkbox" value="Men" checked={category.includes("Men")} onChange={handlecheck} />
-          <label>Men</label><br />
-          <input type="checkbox" value="Women" checked={category.includes("Women")} onChange={handlecheck} />
-          <label>Women</label>
-          <Text fontSize="17px" borderBottom="1px solid red" w="100px">Sorting</Text>
-          <input type="radio" value="asc" name="sortby" onChange={handleSort} checked={sort == "asc"} />
-          <label>Low to High</label><br />
-          <input type="radio" value="desc" name="sorthigh" onChange={handleSort} checked={sort == "desc"} />
-          <label>High to Low</label>
-
-
+          <Carousel />
         </Box>
-        {
-          load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" />:<Grid templateColumns='repeat(4, 1fr)' gap={4} h="500px" w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif" >
-        
-        
+        <Flex w="100%" gap="10px" flexDirection={{ base: "column", md: "column", md: "column", lg: "row" }} mt="100px">
+          <Box w={{ lg: "20%", base: "40%", sm: "40%", md: "40%" }} border="1px solid red" mt="80px" h="200px" textAlign="left" pl="30px">
+            <Text fontSize="17px" borderBottom="1px solid red" w="100px">CATEGORY</Text>
+            <input type="checkbox" value="Men" checked={category.includes("Men")} onChange={handlecheck} />
+            <label>Men</label><br />
+            <input type="checkbox" value="Women" checked={category.includes("Women")} onChange={handlecheck} />
+            <label>Women</label>
+            <Text fontSize="17px" borderBottom="1px solid red" w="100px">Sorting</Text>
+            <input type="radio" value="asc" name="sortby" onChange={handleSort} checked={sort == "asc"} />
+            <label>Low to High</label><br />
+            <input type="radio" value="desc" name="sorthigh" onChange={handleSort} checked={sort == "desc"} />
+            <label>High to Low</label>
+
+
+          </Box>
           {
-            clothdata.length > 0 && clothdata.map((ele) => (
-              <GridItem h="100%" w="100%" key={ele._id} fontFamily="Times New Roman,serif">
-                <Image src={ele.clothimage} h="60%" />
-                <Text fontSize="22px" textAlign="left" fontFamily="Times New Roman,serif">{ele.clothname}</Text>
-                <Flex m="auto">
-                  <Text fontSize="30px">₹{ele.clothrate}</Text>
-                  <Text fontSize="16px" mt="18px" textDecoration="line-through">₹{ele.clothstrikerate}</Text>
-                </Flex>
-                <Text textAlign="left" ml="20px" color="red" >{ele.clothcategory}</Text>
-                <Box display="flex">
-                  <Image src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="40px" h="40px" mr="10px" />
-                  <Button w="70%" _hover={{ background: "red", color: "white" }}>BUY</Button>
-                </Box>
+            load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns={{ lg: 'repeat(4, 1fr)', base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }} border="1px solid red" gap={4} h="600px" w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif">
 
-              </GridItem>
-            ))
+
+              {
+                clothdata.length > 0 && clothdata.map((ele) => (
+                  <GridItem h="100%" w={{ md: "100%", base: "80%", sm: "80%", lg: "100%" }} key={ele._id} fontFamily="Times New Roman,serif" >
+                    <Image src={ele.clothimage} h="60%" />
+                    <Text fontSize="22px" textAlign="left" fontFamily="Times New Roman,serif">{ele.clothname}</Text>
+                    <Flex m="auto">
+                      <Text fontSize="30px">₹{ele.clothrate}</Text>
+                      <Text fontSize="16px" mt="18px" textDecoration="line-through">₹{ele.clothstrikerate}</Text>
+                    </Flex>
+                    <Text textAlign="left" ml="20px" color="red" >{ele.clothcategory}</Text>
+                    <Box display="flex">
+                      <Image src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="40px" h="40px" mr="10px" />
+                      <Button w="70%" _hover={{ background: "red", color: "white" }}>BUY</Button>
+                    </Box>
+
+                  </GridItem>
+
+
+                ))
+              }
+
+            </Grid>
           }
-
-        </Grid>
-}
-      </Flex>
+        </Flex>
       </Box>
-      
-      
-      
+
+
+
 
 
 
 
     </Box>
-    
+
   )
 }
 
