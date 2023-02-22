@@ -25,9 +25,11 @@ function Home() {
     const [addtocart, setCart] = useState(true)
     const toast = useToast()
     const statuses = ['success', 'error', 'warning', 'info']
+    const [load, setLoad] = useState(false)
 
 
     const getdata = async () => {
+        setLoad(true)
         try {
             let res = await axios.get(`https://calm-teal-beanie.cyclic.app?page=${pageno}&&q=${searchtext}`)
             let data = res.data
@@ -38,6 +40,7 @@ function Home() {
             console.log(error)
 
         }
+        setLoad(false)
 
 
 
@@ -100,7 +103,7 @@ function Home() {
     useEffect(() => {
         getdata()
         Aos.init({ duration: 2000 });
-        document.title="Fly-Buy"
+        document.title = "Fly-Buy"
 
     }, [pageno, searchtext])
     console.log("searchtext", searchtext)
@@ -113,13 +116,14 @@ function Home() {
             </Box>
 
 
+
             <Box h="50px" background="red" pt="10px"  >
                 <Box  >
                     {
                         searchtext && <Box w="300px" h="80px" border="1px solid black" ml="300px" overflowY="scroll" mt="70px" >
                             {
 
-                                mongodata.map((ele) => (
+                                mongodata.length > 0 && mongodata.map((ele) => (
                                     <Text onClick={() => setSearchText(ele.productdesc)} w="95%" m="auto" boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px">{ele.productdesc}</Text>
                                 ))
                             }
@@ -139,41 +143,42 @@ function Home() {
             {
                 searchtext === "" && <Box mt="25px"><Slider /></Box>
             }
-
             <Heading mt="40px">TRENDING PRODUCTS</Heading>
-            <Grid templateColumns={{ md: "repeat(3, 1fr)", sm: "repeat(2,1fr)", base: "repeat(1,1fr)", lg: "repeat(2,1fr)" }} gap={{ md: "8px", sm: "4px", base: "2px" }} w={{ lg: "50%" }} m="auto" mt="20px"  >
-                {
-                    mongodata.length > 0 && mongodata.map((ele) => (
-                        <Box key={ele._id}>
+            {
+                load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns={{ md: "repeat(3, 1fr)", sm: "repeat(2,1fr)", base: "repeat(1,1fr)", lg: "repeat(2,1fr)" }} gap={{ md: "8px", sm: "4px", base: "2px" }} w={{ lg: "50%" }} m="auto" mt="20px"  >
+                    {
+                        mongodata.length > 0 && mongodata.map((ele) => (
+                            <Box key={ele._id}>
 
-                            <GridItem mb="20px" w={{ md: '100%', base: "90%" }} h={{ md: '600px', base: "550px" }} key={ele._id} className='shape' data-aos="fade-right">
-                                <Link to={`/singleproduct/${ele._id}`}  ><Tooltip label="Click to see product deatils"><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" border="5px solid black" /></Tooltip></Link>
-                                <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px" >
-                                    <Text fontSize="20px" fontWeight="extrabold">{ele.productname}</Text>
-                                    <Text fontSize="18px" color="blue">{ele.productdesc}</Text>
-                                    <Flex gap="10px">
-                                        <Text fontSize="30px" fontWeight="semibold" color="#0f1111" lineHeight="normal" mt="20px">₹{ele.productrate}</Text>
-                                        <Text fontSize="18px" textDecoration="line-through" color="#565959" mt="30px">₹{ele.productstrikerate}</Text>
-                                        <Text fontSize="20px" mt="20px">(20% OFF)</Text>
+                                <GridItem mb="20px" w={{ md: '100%', base: "90%" }} h={{ md: '600px', base: "550px" }} key={ele._id} className='shape' data-aos="fade-right">
+                                    <Link to={`/singleproduct/${ele._id}`}  ><Tooltip label="Click to see product deatils"><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" border="5px solid black" /></Tooltip></Link>
+                                    <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px" >
+                                        <Text fontSize="20px" fontWeight="extrabold">{ele.productname}</Text>
+                                        <Text fontSize="18px" color="blue">{ele.productdesc}</Text>
+                                        <Flex gap="10px">
+                                            <Text fontSize="30px" fontWeight="semibold" color="#0f1111" lineHeight="normal" mt="20px">₹{ele.productrate}</Text>
+                                            <Text fontSize="18px" textDecoration="line-through" color="#565959" mt="30px">₹{ele.productstrikerate}</Text>
+                                            <Text fontSize="20px" mt="20px">(20% OFF)</Text>
 
-                                    </Flex >
-                                    <Box display="flex" mt="0px">
-                                        <Tooltip label="Add to cart">
-                                            <Image mt="40px" src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="50px" h="50px" mr="10px"
-                                                onClick={() => handleadd(ele.productimage, ele.productname, ele.productrate, ele.productdesc)} />
-                                            {/* { addtocart ?<Button onClick={() => handleadd(ele.productimage, ele.productname, ele.productrate, ele.productdesc)}>Add to Cart</Button>:<Button>Go to Cart</Button>
+                                        </Flex >
+                                        <Box display="flex" mt="0px">
+                                            <Tooltip label="Add to cart">
+                                                <Image mt="40px" src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="50px" h="50px" mr="10px"
+                                                    onClick={() => handleadd(ele.productimage, ele.productname, ele.productrate, ele.productdesc)} />
+                                                {/* { addtocart ?<Button onClick={() => handleadd(ele.productimage, ele.productname, ele.productrate, ele.productdesc)}>Add to Cart</Button>:<Button>Go to Cart</Button>
                                             } */}
-                                        </Tooltip>
-                                        <Link to={`/checkout/${ele._id}`} style={{ width: "200px" }}><Button color="white" background="black" mt="40px" w="100%" _hover={{ background: "blackAlpha.800", color: "white" }}  >BUY</Button></Link>
+                                            </Tooltip>
+                                            <Link to={`/checkout/${ele._id}`} style={{ width: "200px" }}><Button color="white" background="black" mt="40px" w="100%" _hover={{ background: "blackAlpha.800", color: "white" }}  >BUY</Button></Link>
+                                        </Box>
                                     </Box>
-                                </Box>
-                            </GridItem>
-                        </Box>
-                    ))
+                                </GridItem>
+                            </Box>
+                        ))
 
-                }
+                    }
 
-            </Grid>
+                </Grid>
+            }
             <Button onClick={handleprev} _hover={{ background: "blackAlpha.400" }} background="blackAlpha.400" mr="10px">PREV</Button>
 
             {/* <Button>{pageno}</Button> */}

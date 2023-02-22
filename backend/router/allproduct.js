@@ -108,6 +108,22 @@ allproductRouter.post("/allproductpost",async(req,res)=>{
 
 })
 
+allproductRouter.delete("/singleproductdelete/:id",async(req,res)=>{
+    const ID=req.params.id
+    try {
+        await AllproductModel.findByIdAndDelete({ _id: ID });
+        res.send("deleted successfully");
+      } catch (error) {
+        console.log(error);
+        console.log("error", "deleting");
+      }
+});
+
+
+
+
+
+
 
 
 module.exports={

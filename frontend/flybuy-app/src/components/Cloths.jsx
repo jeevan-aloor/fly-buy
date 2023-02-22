@@ -16,6 +16,7 @@ function Cloths() {
 
   const [clothdata, setdata] = useState([])
   const [category, setCategory] = useState(initialCategory || [])
+  const [load,setLoad]=useState(false)
 
 
 
@@ -72,6 +73,7 @@ function Cloths() {
 
 
   const getloths = async (category, sort) => {
+    setLoad(true)
     if (category == "") {
       console.log("sorttt", sort)
       if(sort==""){
@@ -97,6 +99,7 @@ function Cloths() {
       console.log("2", data)
       setdata(data)
     }
+    setLoad(false)
 
 
   }
@@ -113,7 +116,7 @@ function Cloths() {
 
   }, [category, searchparams, sort])
 
-
+{/* <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> */}
   return (
     <Box>
       <Box>
@@ -138,7 +141,10 @@ function Cloths() {
 
 
         </Box>
-        <Grid templateColumns='repeat(4, 1fr)' gap={4} h="500px" w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif" >
+        {
+          load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" />:<Grid templateColumns='repeat(4, 1fr)' gap={4} h="500px" w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif" >
+        
+        
           {
             clothdata.length > 0 && clothdata.map((ele) => (
               <GridItem h="100%" w="100%" key={ele._id} fontFamily="Times New Roman,serif">
@@ -159,8 +165,10 @@ function Cloths() {
           }
 
         </Grid>
+}
       </Flex>
       </Box>
+      
       
       
 
@@ -168,6 +176,7 @@ function Cloths() {
 
 
     </Box>
+    
   )
 }
 

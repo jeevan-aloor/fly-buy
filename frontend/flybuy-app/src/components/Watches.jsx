@@ -1,9 +1,10 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
 import Navbar from '../router/Navbar'
 import { Link } from 'react-router-dom'
 
 function Watches() {
+  
   return (
     <Box >
       <Box position="fixed" w="100%" zIndex={100} >

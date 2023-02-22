@@ -6,8 +6,10 @@ import Footer from './Footer'
 
 function Menwatch() {
   const [mensWatchData, setData] = useState([])
+  const [load,setLoad]=useState(false)
 
   const getMensWatch = async () => {
+    setLoad(true)
     try {
       let res = await axios.get("http://localhost:8000/watch/getwatchmen")
       setData(res.data)
@@ -16,6 +18,7 @@ function Menwatch() {
       console.log("Error in getting watch data")
 
     }
+    setLoad(false)
 
 
 
@@ -54,8 +57,9 @@ function Menwatch() {
       </Grid>
       </Box>
       <Heading mt="30px">Top watches</Heading>
-      <Grid templateColumns="repeat(5, 1fr)" w="90%" m="auto" gap="30px" mt="30px">
-        {
+      {
+        load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns="repeat(5, 1fr)" w="90%" m="auto" gap="30px" mt="30px">
+         {
 
          mensWatchData.length>0 && mensWatchData.map((ele)=>(
           <GridItem textAlign="left" boxShadow="rgb(60,60,60) "> 
@@ -67,6 +71,7 @@ function Menwatch() {
          )) 
         }
       </Grid>
+}
      
       <Footer/>
 

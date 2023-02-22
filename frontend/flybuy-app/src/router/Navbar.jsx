@@ -86,6 +86,8 @@ function Navbar(props) {
     // setResponse("")
     // setMove(true)
     localStorage.removeItem("userEmail")
+    setloginemail("")
+    setloginpass("")
     onClose()
   }
 
@@ -397,6 +399,9 @@ function Navbar(props) {
 
 
             <Link to={!useremail ? "" : "/carts"}><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" onClick={handlealert} /><span>{cartdata.length}</span></Link>
+            {
+              useremail==="jeevanaloor500@gmail.com" && <Box mt="30px"><Link to="/admin">IM ADMIN</Link></Box>
+            }
 
 
           </>

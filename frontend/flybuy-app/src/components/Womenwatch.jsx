@@ -6,8 +6,10 @@ import Footer from './Footer'
 
 function Womenwatch() {
   const [womensWatchData, setData] = useState([])
+  const [load, setLoad] = useState(false)
 
   const getWomensWatch = async () => {
+    setLoad(true)
     try {
       let res = await axios.get("http://localhost:8000/watch/getwatchwomen")
       setData(res.data)
@@ -17,10 +19,12 @@ function Womenwatch() {
       console.log("Error in getting womens watch data")
 
     }
+    setLoad(false)
 
 
 
   }
+  // <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> 
 
   useEffect(() => {
     getWomensWatch()
@@ -59,24 +63,25 @@ function Womenwatch() {
           <Image src="https://i.pinimg.com/236x/20/c7/b9/20c7b9fbaaac4f8c9f362e49bbf7c6e9.jpg" borderRadius="0 100% 100% 0 / 50%" m="auto" w="70%" h="100%" mr="215px" />
         </Box>
       </Flex>
+      {
+        load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns="repeat(5,1fr)" m="auto" mt="30px" w="95%" gap="20px" >
+          {
+            womensWatchData.length > 0 && womensWatchData.map((ele) => (
+              <GridItem color="white" textAlign="left" >
+                <Image src={ele.watchimage} borderRadius="20px" />
+                <Text fontWeight="bold" mt="10px">{ele.watchname}</Text>
+                <Text fontWeight="bold">{ele.watchrate}</Text>
 
-      <Grid templateColumns="repeat(5,1fr)" m="auto" mt="30px" w="95%" gap="20px" >
-        {
-          womensWatchData.length > 0 && womensWatchData.map((ele) => (
-            <GridItem color="white" textAlign="left" >
-              <Image src={ele.watchimage} borderRadius="20px" />
-              <Text fontWeight="bold" mt="10px">{ele.watchname}</Text>
-              <Text fontWeight="bold">{ele.watchrate}</Text>
 
+              </GridItem>
+            ))
 
-            </GridItem>
-          ))
+          }
 
-        }
+        </Grid>
+      }
 
-      </Grid>
-
-      <Footer/>
+      <Footer />
 
     </Box>
   )
