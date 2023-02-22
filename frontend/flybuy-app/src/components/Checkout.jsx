@@ -1,4 +1,4 @@
-import { Box, Flex, Input, Text, Image, Heading, RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack, Button, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, AlertDialog, AlertDialogOverlay, AlertDialogContent, useDisclosure, AlertDialogHeader, AlertDialogCloseButton, AlertDialogBody, AlertDialogFooter, Divider, FormLabel, Select } from '@chakra-ui/react'
+import { Box, Flex, Input, Text, Image, Heading, RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack, Button, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, AlertDialog, AlertDialogOverlay, AlertDialogContent, useDisclosure, AlertDialogHeader, AlertDialogCloseButton, AlertDialogBody, AlertDialogFooter, Divider, FormLabel, Select, Grid, GridItem } from '@chakra-ui/react'
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
@@ -14,17 +14,18 @@ function Checkout() {
   const [address, setAddress] = useState("")
   const [state, setState] = useState("")
   const [addressdata, setAddressdata] = useState([])
+  const [showdelete, setShowDelete] = useState(false)
   const productid = useParams()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = React.useRef()
- 
+
   const id = productid.id
 
 
   const getAddress = async () => {
-    let res = await axios.get("http://localhost:8000/getaddress")
+    let res = await axios.get("http://localhost:8000/address/getaddress")
     let data = res.data
-    console.log(data)
+    console.log("data", data)
     setAddressdata(data)
   }
 
@@ -35,11 +36,11 @@ function Checkout() {
 
 
   // }
-  
+
   //  addding address  
 
-  const addAddress=async()=>{
-    const payload={
+  const addAddress = async () => {
+    const payload = {
       name,
       mobileno,
       pincode,
@@ -48,13 +49,29 @@ function Checkout() {
 
     }
     try {
-      await axios.post("http://localhost:8000/address/addaddress",payload)
+      await axios.post("http://localhost:8000/address/addaddress", payload)
       console.log("address added")
-      
+
     } catch (error) {
       console.log(error)
-      
+
     }
+
+  }
+
+  const deleteAddress = async (id) => {
+    console.log("id", id)
+    setShowDelete(!showdelete)
+    console.log("show", showdelete)
+    try {
+      await axios.delete(`http://localhost:8000/address/addressdelete/${id}`)
+      console.log("address delete")
+
+    } catch (error) {
+      console.log(error)
+
+    }
+
 
   }
 
@@ -63,7 +80,7 @@ function Checkout() {
   useEffect(() => {
     getAddress()
 
-  }, [ponitmove])
+  }, [ponitmove, showdelete])
 
   return (
     <Box background="#24272C" >
@@ -72,6 +89,25 @@ function Checkout() {
         <Box w="80%" borderBottom="3px solid #FFFFFF" h="25px" ml="25px"></Box>
         <Heading color="#FFFFFF">Checkout</Heading>
       </Flex>
+      <Grid templateColumns="repeat(3,1fr)" w="80%" m="auto" color="white">
+        {
+          addressdata.length > 0 && addressdata.map((ele) => (
+            <GridItem border="1px solid red" textAlign={"left"} pl="30px" key={ele._id}>
+              <Text >{ele.name}</Text>
+              <Text>{ele.mobileno}</Text>
+              <Text>{ele.address}</Text>
+              <Text>{ele.state}</Text>
+              <Text>{ele.pincode}</Text>
+              <Button background="black" border="1px solid #FFFFFF">Use This address</Button>
+              <Button background="black" border="1px solid #FFFFFF" onClick={() => deleteAddress(ele._id)}>Delete this address</Button>
+
+            </GridItem>
+
+
+
+          ))
+        }
+      </Grid>
       <Box w="80%" m="auto">
         <RangeSlider
           aria-label={['min', 'max']}
@@ -91,21 +127,21 @@ function Checkout() {
           <Box  >
             <Text textAlign={"center"} fontSize="30px" color="#00a6fb" mb="20px" textDecoration={"dotted"} fontFamily="cursive">Please fill out information</Text>
             <Text ml="40px" color="#fe7f2d" fontSize="20px" >Enter Your Name</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e)=>setName(e.target.value)}/>
+            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e) => setName(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Enter 10-digit Mobile number</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" placeholder='Enter phone number' background="#fdc5f5" onChange={(e)=>setMobileno(e.target.value)}/>
+            <Input w="400px" ml="40px" mr="40px" mb="20px" placeholder='Enter phone number' background="#fdc5f5" onChange={(e) => setMobileno(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Pincode</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e)=>setPincode(e.target.value)} />
+            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e) => setPincode(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Locality</Text>
 
             <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
             <Text ml="40px" fontSize="20px" color="#fe7f2d" >Address (Area and street)</Text>
 
-            <Input w="400px" h="100px" pt="0px" ml="40px" mb="20px" background="#fdc5f5" onChange={(e)=>setAddress(e.target.value)} />
+            <Input w="400px" h="100px" pt="0px" ml="40px" mb="20px" background="#fdc5f5" onChange={(e) => setAddress(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">City/District/Town</Text>
             <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">State</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" placeholder='jdjdd' background="#fdc5f5" onChange={(e)=>setState(e.target.value)} />
+            <Input w="400px" ml="40px" mr="40px" mb="20px" placeholder='jdjdd' background="#fdc5f5" onChange={(e) => setState(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Landmark (Optional)</Text>
             <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
             <Text ml="40px" fontSize="20px" color="blue">Alternate phone number (Optional)</Text>
