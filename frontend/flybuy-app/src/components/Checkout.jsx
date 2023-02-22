@@ -1,8 +1,9 @@
-import { Box, Flex, Input, Text, Image, Heading, RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack, Button, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, AlertDialog, AlertDialogOverlay, AlertDialogContent, useDisclosure, AlertDialogHeader, AlertDialogCloseButton, AlertDialogBody, AlertDialogFooter, Divider, FormLabel, Select, Grid, GridItem } from '@chakra-ui/react'
+import { Box, Flex, Input, Text, Image, Heading, RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack, Button, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, AlertDialog, AlertDialogOverlay, AlertDialogContent, useDisclosure, AlertDialogHeader, AlertDialogCloseButton, AlertDialogBody, AlertDialogFooter, Divider, FormLabel, Select, Grid, GridItem, useToast } from '@chakra-ui/react'
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 import Navbar from '../router/Navbar'
+
 
 function Checkout() {
   const [singledata, setdata] = useState([])
@@ -18,8 +19,16 @@ function Checkout() {
   const productid = useParams()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = React.useRef()
+  const toast = useToast()
 
   const id = productid.id
+
+
+  const getData = async (id) => {
+    let res = await axios.get(`http://localhost:8000/singleproduct/${id}`)
+    let data = res.data
+    setdata(data)
+  }
 
 
   const getAddress = async () => {
@@ -48,14 +57,31 @@ function Checkout() {
       state
 
     }
-    try {
+    if (name !== "" && mobileno !== "" && pincode !== "" && address !== "" && state !== "") {
+
       await axios.post("http://localhost:8000/address/addaddress", payload)
       console.log("address added")
+      toast({
+        title: "Please select payment option",
+        status: "success",
+        isClosable: true,
+      })
 
-    } catch (error) {
-      console.log(error)
+
+
+    } else {
+
+      toast({
+        title: "Please put correct values",
+        status: "error",
+        isClosable: true,
+      })
+
+
 
     }
+
+
 
   }
 
@@ -78,6 +104,7 @@ function Checkout() {
 
 
   useEffect(() => {
+    getData(id)
     getAddress()
 
   }, [ponitmove, showdelete])
@@ -89,10 +116,10 @@ function Checkout() {
         <Box w="80%" borderBottom="3px solid #FFFFFF" h="25px" ml="25px"></Box>
         <Heading color="#FFFFFF">Checkout</Heading>
       </Flex>
-      <Grid templateColumns="repeat(3,1fr)" w="80%" m="auto" color="white">
+      <Grid templateColumns={{ lg: "repeat(3,1fr)", base: "repeat(1,1fr)" }} w="90%" m="auto" color="white" gap="30px">
         {
           addressdata.length > 0 && addressdata.map((ele) => (
-            <GridItem border="1px solid red" textAlign={"left"} pl="30px" key={ele._id}>
+            <GridItem border="1px solid red" textAlign={"left"} pl="30px" key={ele._id} mb="20px" pb="10px">
               <Text >{ele.name}</Text>
               <Text>{ele.mobileno}</Text>
               <Text>{ele.address}</Text>
@@ -122,36 +149,36 @@ function Checkout() {
         </RangeSlider>
       </Box>
       {/* backgroundImage="https://images.pexels.com/photos/8971727/pexels-photo-8971727.jpeg?auto=compress&cs=tinysrgb&w=600" */}
-      <Flex gap="50px" mt="50px" color="#FFFFFF" fontFamily="emoji">
-        <Box w="600px" h="1000px" ml="30px" textAlign="left" pl="70px" fontFamily="cursive" background="#274046">
-          <Box  >
+      <Flex gap="50px" mt="50px" color="#FFFFFF" fontFamily="emoji" flexDirection={{ base: "column", lg: "row" }}>
+        <Box w={{ lg: "600px", base: "100px",md:"700px" }} h={{ lg: "1000px", base: "1200px", md: "1100px" }} ml="30px" textAlign="left" pl="70px" fontFamily="cursive" background="#274046">
+          <Box color="black">
             <Text textAlign={"center"} fontSize="30px" color="#00a6fb" mb="20px" textDecoration={"dotted"} fontFamily="cursive">Please fill out information</Text>
             <Text ml="40px" color="#fe7f2d" fontSize="20px" >Enter Your Name</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e) => setName(e.target.value)} />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px" }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e) => setName(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Enter 10-digit Mobile number</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" placeholder='Enter phone number' background="#fdc5f5" onChange={(e) => setMobileno(e.target.value)} />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" placeholder='Enter phone number' background="#fdc5f5" onChange={(e) => setMobileno(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Pincode</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e) => setPincode(e.target.value)} />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e) => setPincode(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Locality</Text>
 
-            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
             <Text ml="40px" fontSize="20px" color="#fe7f2d" >Address (Area and street)</Text>
 
-            <Input w="400px" h="100px" pt="0px" ml="40px" mb="20px" background="#fdc5f5" onChange={(e) => setAddress(e.target.value)} />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} h="100px" pt="0px" ml="40px" mb="20px" background="#fdc5f5" onChange={(e) => setAddress(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">City/District/Town</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">State</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" placeholder='jdjdd' background="#fdc5f5" onChange={(e) => setState(e.target.value)} />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" placeholder='jdjdd' background="#fdc5f5" onChange={(e) => setState(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Landmark (Optional)</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
             <Text ml="40px" fontSize="20px" color="blue">Alternate phone number (Optional)</Text>
-            <Input w="400px" ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
-            <Button w="400px" ml="40px" background="black" onClick={addAddress}>Use this address</Button>
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
+            <Button w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" background="black" color="white" onClick={addAddress}>Use this address</Button>
 
           </Box>
         </Box>
         {/* border="1px solid red" */}
-        <Box w="400px" h="800px" border="1px solid red" >
+        <Box w={{ lg: "400px", base: "100%", sm: "100%", md: "100%"  }} h={{ lg: "800px", base: "500px", sm: "400px", md: "400px" }} border="1px solid red" >
           <Text fontSize="20px">Select a payment methode</Text>
           <Box mb="30px">
 
@@ -246,11 +273,11 @@ function Checkout() {
                         </AlertDialogBody>
                         <AlertDialogFooter>
                           <Button ref={cancelRef} onClick={onClose}>
-                            No
+                            cancel
                           </Button>
-                          <Button colorScheme='red' ml={3}>
-                            Yes
-                          </Button>
+                          <Link to="/payment"><Button colorScheme='red' ml={3} >
+                            proceed
+                          </Button></Link>
                         </AlertDialogFooter>
                       </AlertDialogContent>
                     </AlertDialog>
@@ -318,13 +345,13 @@ function Checkout() {
           </Box>
 
         </Box>
-        <Box w="300px" h="400px" pl="10px" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" background="#0A261F" mr="20px" fontFamily="serif" >
+        <Box w={{ lg: "300px", base: "90%", md: "90%" }} h="400px" pl="10px" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" background="#0A261F" mr="20px" fontFamily="serif" m={{base:"auto",md:"auto"}}  >
           <Box w="100%" h="40px" mt="5px" mb="15px">
             <Text fontSize="25px">Product Summary</Text>
           </Box>
           {
             singledata.length > 0 && singledata.map((ele) => (
-              <> <Flex fontFamily="serif" >
+              <Box key={ele._id}> <Flex fontFamily="serif" >
                 <Image src={ele.productimage} w="50px" h="50px" />
                 <Text fontFamily="serif" fontSize="18px" >{ele.productdesc}</Text>
               </Flex>
@@ -346,7 +373,7 @@ function Checkout() {
                   <Text fontSize="25px" fontWeight="extrabold">Total</Text>
                   <Text fontSize="20px" fontWeight="bold">₹{ele.productrate + shippingrate}</Text>
                 </Flex>
-              </>
+              </Box>
             ))
           }
         </Box>
