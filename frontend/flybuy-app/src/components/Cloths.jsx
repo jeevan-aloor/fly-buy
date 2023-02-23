@@ -120,7 +120,13 @@ function Cloths() {
   return (
     <Box >
       <Box >
+        {/* position="fixed" w="100%" zIndex="100" mb="100px" */}
+        <Box >
         <Navbar />
+        </Box>
+        <Box mt="10px">
+        <Image src="https://images.bestsellerclothing.in/live/image/catalog/brandstore/only/banner/felix_only_webbanner_20230214.png?width=1920&height=760&mode=fill&fill=blur&format=auto" w="100%" m="auto" h="400px"/>
+        </Box>
         <Heading>CLOTHS SECTION</Heading>
         <Box m="auto" mt="20px" w="80%" borderRadius="20px" >
 

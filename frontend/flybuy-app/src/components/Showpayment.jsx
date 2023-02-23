@@ -1,5 +1,6 @@
-import { Box, Image, HStack, PinInput, PinInputField, Text, Divider, Button } from '@chakra-ui/react'
+import { Box, Image, HStack, PinInput, PinInputField, Text, Divider, Button, Heading } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 function Showpayment() {
     const [payment, setPayment] = useState("")
@@ -42,6 +43,7 @@ function Showpayment() {
                     payment === "done" && <Image src="https://assets.materialup.com/uploads/15c676ac-e724-469c-bad8-077924949947/attachment.png" w="50%" h="100vh" m="auto" />
                 }
             </Box>
+            <Link to="/"><Heading>GO TO HOME PAGE</Heading></Link>
 
         </Box>
     )

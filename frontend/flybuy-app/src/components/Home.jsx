@@ -108,7 +108,8 @@ function Home() {
     }, [pageno, searchtext])
     console.log("searchtext", searchtext)
     return (
-        <Box >
+        <Box  >
+
             {/* position="fixed" border="1px solid red" w="100%" zIndex="100" */}
             <Box position="fixed" w="100%" zIndex="100" >
                 <Navbar val={searchtext} ser={setSearchText} />
@@ -120,7 +121,7 @@ function Home() {
             <Box h="50px" background="red" pt="10px"  >
                 <Box  >
                     {
-                        searchtext && <Box w="300px" h="80px" border="1px solid black" ml="300px" overflowY="scroll" mt="70px" >
+                        searchtext && <Box w="300px" h="80px" border="1px solid black" ml="300px" overflowY="scroll" mt="70px"  >
                             {
 
                                 mongodata.length > 0 && mongodata.map((ele) => (
@@ -141,11 +142,31 @@ function Home() {
 
             </Box >
             {
-                searchtext === "" && <Box mt="25px"><Slider /></Box>
+                searchtext === "" && <> <Box mt="25px"><Slider /></Box> <Box w="95%" h={{ lg: "400px", md: "300px", sm: "200px", base: "200px" }} m="auto" mt="20px"><Image src="https://sslimages.shoppersstop.com/sys-master/root/h8b/hd7/29385726754846/the-new-cool-web--2023-20-feburay--hp-main-carouslee.gif" borderRadius="20px" w="100%" h="100%" /></Box><Box w="95%" m="auto" h="100px" mt="10px">
+                    <Image src="https://sslimages.shoppersstop.com/sys-master/root/hb5/h60/27269490540574/web_hp_icon-strips_main_20220322.jpg" w="100%" h="100%" />
+                </Box><Text fontSize="42px" color="#000000" fontWeight={{ lg: "400", base: "200", md: "300" }} textAlign="left" ml="20px" mt="20px">Top Categories</Text><Grid templateColumns="repeat(3,1fr)" w="80%" m="auto" h="300px" gap="30px" templateRows="repeat(2,1fr)">
+                        <GridItem>
+                            <Image src="https://sslimages.shoppersstop.com/sys-master/root/h9d/h87/29438845583390/titan-raga--3x3-Widgets_barefootonthefgreass.jpg" h="90%" />
+
+                        </GridItem>
+                        <GridItem>
+                            <Image src="https://sslimages.shoppersstop.com/sys-master/root/hb5/h3e/29337061883934/Park-Avenue--3x3-Widgetsruywoixjncbkjsalala.jpg" h="90%" />
+
+                        </GridItem>
+                        <GridItem>
+                            <Image src="https://sslimages.shoppersstop.com/sys-master/root/h36/he8/29438865571870/Only---Vero-Moda--3x3-Widgets--0333web--mbyn.jpg" h="90%" />
+
+                        </GridItem>
+
+
+
+                    </Grid>
+
+                </>
             }
-            <Heading mt="40px">TRENDING PRODUCTS</Heading>
+            <Heading mt="40px" color={searchtext ? "white" : "black"} >TRENDING PRODUCTS</Heading>
             {
-                load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns={{ md: "repeat(3, 1fr)", sm: "repeat(2,1fr)", base: "repeat(1,1fr)", lg: "repeat(2,1fr)" }} gap={{ md: "8px", sm: "4px", base: "2px" }} w={{ lg: "50%" }} m="auto" mt="20px"  >
+                load ? <Image src="https://prodstatic.shoppersstop.com/_ui/responsive/common/assets/images/newLoader.gif" h="170px" w="180px" m="auto" mb="20px" /> : <Grid templateColumns={{ md: "repeat(3, 1fr)", sm: "repeat(2,1fr)", base: "repeat(1,1fr)", lg: "repeat(2,1fr)" }} gap={{ md: "8px", sm: "4px", base: "2px" }} w={{ lg: "50%" }} m="auto" mt="20px"   >
                     {
                         mongodata.length > 0 && mongodata.map((ele) => (
                             <Box key={ele._id}>
@@ -184,9 +205,14 @@ function Home() {
             {/* <Button>{pageno}</Button> */}
             <Button onClick={handlenext} _hover={{ background: "blackAlpha.400" }} background="blackAlpha.400">NEXT</Button>
 
+
+
             <Box>
+
                 <Footer />
             </Box>
+
+
 
 
 

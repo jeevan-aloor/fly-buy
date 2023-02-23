@@ -16,6 +16,7 @@ function Checkout() {
   const [state, setState] = useState("")
   const [addressdata, setAddressdata] = useState([])
   const [showdelete, setShowDelete] = useState(false)
+  const [showpayment, setPayment] = useState(false)
   const productid = useParams()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = React.useRef()
@@ -66,6 +67,7 @@ function Checkout() {
         status: "success",
         isClosable: true,
       })
+      setPayment(true)
 
 
 
@@ -82,6 +84,26 @@ function Checkout() {
     }
 
 
+
+  }
+
+  const handleUseThisaddress = () => {
+    
+    if (!showpayment) {
+      toast({
+        title: "This Address Added succussfully",
+        status: "success",
+        isClosable: true,
+      })
+
+    } else {
+      toast({
+        title: "Already added this address",
+        status: "success",
+        isClosable: true,
+      })
+    }
+    setPayment(true)
 
   }
 
@@ -125,7 +147,7 @@ function Checkout() {
               <Text>{ele.address}</Text>
               <Text>{ele.state}</Text>
               <Text>{ele.pincode}</Text>
-              <Button background="black" border="1px solid #FFFFFF">Use This address</Button>
+              <Button background="black" border="1px solid #FFFFFF" onClick={handleUseThisaddress}>Use This address</Button>
               <Button background="black" border="1px solid #FFFFFF" onClick={() => deleteAddress(ele._id)}>Delete this address</Button>
 
             </GridItem>
@@ -150,35 +172,35 @@ function Checkout() {
       </Box>
       {/* backgroundImage="https://images.pexels.com/photos/8971727/pexels-photo-8971727.jpeg?auto=compress&cs=tinysrgb&w=600" */}
       <Flex gap="50px" mt="50px" color="#FFFFFF" fontFamily="emoji" flexDirection={{ base: "column", lg: "row" }}>
-        <Box w={{ lg: "600px", base: "100px",md:"700px" }} h={{ lg: "1000px", base: "1200px", md: "1100px" }} ml="30px" textAlign="left" pl="70px" fontFamily="cursive" background="#274046">
+        <Box w={{ lg: "600px", base: "100px", md: "700px" }} h={{ lg: "1000px", base: "1200px", md: "1100px" }} ml="30px" textAlign="left" pl="70px" fontFamily="cursive" background="#274046">
           <Box color="black">
             <Text textAlign={"center"} fontSize="30px" color="#00a6fb" mb="20px" textDecoration={"dotted"} fontFamily="cursive">Please fill out information</Text>
             <Text ml="40px" color="#fe7f2d" fontSize="20px" >Enter Your Name</Text>
             <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px" }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e) => setName(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Enter 10-digit Mobile number</Text>
-            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" placeholder='Enter phone number' background="#fdc5f5" onChange={(e) => setMobileno(e.target.value)} />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px" }} ml="40px" mr="40px" mb="20px" placeholder='Enter phone number' background="#fdc5f5" onChange={(e) => setMobileno(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Pincode</Text>
-            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e) => setPincode(e.target.value)} />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px" }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" onChange={(e) => setPincode(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Locality</Text>
 
-            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px" }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
             <Text ml="40px" fontSize="20px" color="#fe7f2d" >Address (Area and street)</Text>
 
-            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} h="100px" pt="0px" ml="40px" mb="20px" background="#fdc5f5" onChange={(e) => setAddress(e.target.value)} />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px" }} h="100px" pt="0px" ml="40px" mb="20px" background="#fdc5f5" onChange={(e) => setAddress(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">City/District/Town</Text>
-            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px" }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">State</Text>
-            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" placeholder='jdjdd' background="#fdc5f5" onChange={(e) => setState(e.target.value)} />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px" }} ml="40px" mr="40px" mb="20px" placeholder='jdjdd' background="#fdc5f5" onChange={(e) => setState(e.target.value)} />
             <Text ml="40px" fontSize="20px" color="#fe7f2d">Landmark (Optional)</Text>
-            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px" }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
             <Text ml="40px" fontSize="20px" color="blue">Alternate phone number (Optional)</Text>
-            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
-            <Button w={{ lg: "400px", base: "150px", sm: "450px", md: "500px"  }} ml="40px" background="black" color="white" onClick={addAddress}>Use this address</Button>
+            <Input w={{ lg: "400px", base: "150px", sm: "450px", md: "500px" }} ml="40px" mr="40px" mb="20px" background="#fdc5f5" />
+            <Button w={{ lg: "400px", base: "150px", sm: "450px", md: "500px" }} ml="40px" background="black" color="white" onClick={addAddress}>Use this address</Button>
 
           </Box>
         </Box>
         {/* border="1px solid red" */}
-        <Box w={{ lg: "400px", base: "100%", sm: "100%", md: "100%"  }} h={{ lg: "800px", base: "500px", sm: "400px", md: "400px" }} border="1px solid red" >
+        {showpayment && <Box w={{ lg: "400px", base: "100%", sm: "100%", md: "100%" }} h={{ lg: "800px", base: "500px", sm: "400px", md: "400px" }} border="1px solid red" >
           <Text fontSize="20px">Select a payment methode</Text>
           <Box mb="30px">
 
@@ -345,7 +367,8 @@ function Checkout() {
           </Box>
 
         </Box>
-        <Box w={{ lg: "300px", base: "90%", md: "90%" }} h="400px" pl="10px" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" background="#0A261F" mr="20px" fontFamily="serif" m={{base:"auto",md:"auto"}}  >
+        }
+        <Box w={{ lg: "300px", base: "90%", md: "90%" }} h="400px" pl="10px" boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" background="#0A261F" mr="20px" fontFamily="serif" m={{ base: "auto", md: "auto", lg: "0px" }}  >
           <Box w="100%" h="40px" mt="5px" mb="15px">
             <Text fontSize="25px">Product Summary</Text>
           </Box>
