@@ -88,7 +88,23 @@ function Checkout() {
   }
 
   const handleUseThisaddress = () => {
+    
+    if (!showpayment) {
+      toast({
+        title: "This Address Added succussfully",
+        status: "success",
+        isClosable: true,
+      })
+
+    } else {
+      toast({
+        title: "Already added this address",
+        status: "success",
+        isClosable: true,
+      })
+    }
     setPayment(true)
+
   }
 
   const deleteAddress = async (id) => {

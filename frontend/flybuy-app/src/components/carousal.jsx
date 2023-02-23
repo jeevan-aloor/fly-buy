@@ -5,7 +5,7 @@ import { Box, Image } from '@chakra-ui/react';
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [
-    "https://img.freepik.com/free-psd/fashion-store-banner-template_23-2148675200.jpg?w=2000",
+    "https://images.bestsellerclothing.in/live/image/catalog/brandstore/only/banner/only_webbanner_ss23_20230209.png?width=1920&height=760&mode=fill&fill=blur&format=auto",
     "https://i.ytimg.com/vi/sOgus6g21q0/maxresdefault.jpg",
     "https://img.freepik.com/premium-vector/colorful-sale-background-with-memphis-style_125540-4.jpg?w=1380",
     "https://img.freepik.com/free-psd/fashion-concept-horizontal-banner_23-2148582739.jpg?w=900&t=st=1675158453~exp=1675159053~hmac=f227eaebd7c17bc10907c327ac71eba478c1acb93118c5b4946d8c8dcf158e70",
