@@ -172,7 +172,7 @@ function Home() {
                             <Box key={ele._id}>
 
                                 <GridItem mb="20px" w={{ md: '100%', base: "90%" }} h={{ md: '600px', base: "550px" }} key={ele._id} className='shape' data-aos="fade-right">
-                                    <Link to={`/singleproduct/${ele._id}`}  ><Tooltip label="Click to see product deatils"><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" border="5px solid black" /></Tooltip></Link>
+                                    <Link to={`/singleproduct/${ele._id}`}  ><Tooltip label="Click to see product deatils"><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" boxshadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px" /></Tooltip></Link>
                                     <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px" >
                                         <Text fontSize="20px" fontWeight="extrabold">{ele.productname}</Text>
                                         <Text fontSize="18px" color="blue">{ele.productdesc}</Text>

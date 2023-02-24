@@ -3,6 +3,7 @@ import Navbar from '../router/Navbar'
 import axios from 'axios'
 import { Box, Flex, Image, Text,Heading, Grid, GridItem } from '@chakra-ui/react'
 import styles from './Home.css'
+import Footer from './Footer'
 
 function Shoes() {
 
@@ -89,13 +90,14 @@ function Shoes() {
         </Box>
       </Flex>
       {
-        load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns="repeat(5,1fr)" m="auto" w="90%" h="300px" mt="30px" gap="20px" >
+        load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns="repeat(5,1fr)" m="auto" w="90%"  mt="30px" gap="20px" >
         {
           shoeData.length>0 && shoeData.map((ele)=>(
-            <GridItem border="1px solid red">
+            <GridItem  textAlign="left" boxShadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px">
               <Image src={ele.shoeimage} h="70%" w="100%"/>
-              <Text>{ele.shoename}</Text>
-              <Text fontSize="25px">{ele.shoerate} <strike style={{fontSize:"15px"}}> {ele.shoestrikerate}</strike></Text>
+              <Text fontSize="20px" fontWeight="normal" ml="10px" mt="10px">{ele.shoename}</Text>
+              <Text fontSize="25px" fontWeight="semibold" ml="10px">₹{ele.shoerate} <strike style={{fontSize:"15px"}}> ₹{ele.shoestrikerate}</strike></Text>
+              <Text fontSize="20px" fontWeight="15px" ml="10px" color="darkgreen" >{ele.shoecategory}</Text>
               
 
             </GridItem>
@@ -104,6 +106,9 @@ function Shoes() {
         }
       </Grid>
 }
+<Box>
+  <Footer/>
+</Box>
       
       
     </Box>

@@ -122,10 +122,10 @@ function Cloths() {
       <Box >
         {/* position="fixed" w="100%" zIndex="100" mb="100px" */}
         <Box >
-        <Navbar />
+          <Navbar />
         </Box>
         <Box mt="10px">
-        <Image src="https://images.bestsellerclothing.in/live/image/catalog/brandstore/only/banner/felix_only_webbanner_20230214.png?width=1920&height=760&mode=fill&fill=blur&format=auto" w="100%" m="auto" h="400px"/>
+          <Image src="https://images.bestsellerclothing.in/live/image/catalog/brandstore/only/banner/felix_only_webbanner_20230214.png?width=1920&height=760&mode=fill&fill=blur&format=auto" w="100%" m="auto" h="400px" />
         </Box>
         <Heading>CLOTHS SECTION</Heading>
         <Box m="auto" mt="20px" w="80%" borderRadius="20px" >
@@ -133,7 +133,7 @@ function Cloths() {
           <Carousel />
         </Box>
         <Flex w="100%" gap="10px" flexDirection={{ base: "column", md: "column", md: "column", lg: "row" }} mt="100px">
-          <Box w={{ lg: "20%", base: "40%", sm: "40%", md: "40%" }} border="1px solid red" mt="80px" h="200px" textAlign="left" pl="30px">
+          <Box w={{ lg: "20%", base: "40%", sm: "40%", md: "40%" }} border="1px solid red" mt="80px" h="200px" textAlign="left" pl="30px" >
             <Text fontSize="17px" borderBottom="1px solid red" w="100px">CATEGORY</Text>
             <input type="checkbox" value="Men" checked={category.includes("Men")} onChange={handlecheck} />
             <label>Men</label><br />
@@ -148,7 +148,7 @@ function Cloths() {
 
           </Box>
           {
-            load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns={{ lg: 'repeat(4, 1fr)', base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }} border="1px solid red" gap={4} h="600px" w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif">
+            load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns={{ lg: 'repeat(4, 1fr)', base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }} border="1px solid red" gap={4} w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif">
 
 
               {
@@ -181,7 +181,7 @@ function Cloths() {
 
 
 
-
+      <Footer />
 
     </Box>
 

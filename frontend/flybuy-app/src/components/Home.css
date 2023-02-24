@@ -37,3 +37,11 @@
     margin:auto;
     border:1px solid red
 }
+.cartimage{
+    cursor: pointer;
+    transition: 650ms;
+
+}
+.cartimage:hover{
+    transform: scale(1.1);
+}
