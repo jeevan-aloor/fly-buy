@@ -88,6 +88,7 @@ function Navbar(props) {
     localStorage.removeItem("userEmail")
     setloginemail("")
     setloginpass("")
+    setEmail("")
     onClose()
   }
 
@@ -124,16 +125,30 @@ function Navbar(props) {
         password
 
       }
-      let res = await axios.post("https://calm-teal-beanie.cyclic.app/user/adduser", payload)
-      console.log("added")
-      console.log(res)
-      toast({
-        title: 'Sucussfully Register',
-        description: "Please Login Now",
-        status: 'success',
-        duration: 9000,
-        isClosable: true,
-      })
+      if (name && mobilenumber && email) {
+        let res = await axios.post("https://calm-teal-beanie.cyclic.app/user/adduser", payload)
+        console.log("added")
+        console.log(res)
+        toast({
+          title: 'Sucussfully Register',
+          description: "Please Login Now",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        })
+        setls(true)
+
+      } else {
+        toast({
+          title: 'Fill required details',
+          description: "please fill those information",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+
+      }
+
 
     } else {
       toast({
@@ -160,23 +175,51 @@ function Navbar(props) {
     }
     try {
       console.log("lo", loginemail, loginpass)
-      let res = await axios.post("https://calm-teal-beanie.cyclic.app/user/userlogin", payload)
-      console.log(res.data)
+      let res = await axios.post("http://localhost:8000/user/userlogin", payload)
+      console.log("res", res.data)
       setResponse(res.data)
-      let token = res.data
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': { token }
-        }
-      };
-      console.log(payload.email)
-      localStorage.setItem("userEmail", JSON.stringify(payload.email))
-      let addHeader = await axios.post("https://calm-teal-beanie.cyclic.app/user/userlogin", config)
-      localStorage.setItem("token", JSON.stringify(res.data))
+      console.log("response", response)
 
-      console.log("login")
-      onClose()
+      // const config = {
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Authorization': { token }
+      //   }
+      // };
+      // console.log(payload.email)
+
+      // let addHeader = await axios.post("https://calm-teal-beanie.cyclic.app/user/userlogin", config)
+
+
+
+      if (res.data === "not registered") {
+        toast({
+          title: 'Your not Registerd!',
+          description: "Please Register",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+
+      } else if (res.data == "wrong password") {
+        toast({
+          title: 'Your password wrong!',
+          description: "Please put correct password",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+
+      }
+      else {
+        let token = res.data
+        localStorage.setItem("userEmail", JSON.stringify(payload.email))
+        localStorage.setItem("token", JSON.stringify(res.data))
+        onClose()
+
+      }
+
+
 
     } catch (error) {
       console.log(error)
@@ -321,8 +364,8 @@ function Navbar(props) {
                             pr='4.5rem'
                             type={showpasslogin ? 'text' : 'password'}
                             placeholder='Enter password'
-                      
-                            value={loginpass} 
+
+                            value={loginpass}
                             onChange={(e) => setloginpass(e.target.value)}
                           />
                           <InputRightElement width='4.5rem'>
@@ -331,7 +374,7 @@ function Navbar(props) {
                             </Button>
                           </InputRightElement>
                         </InputGroup>
-                        
+
                         <Text>If your not Registerd please  <Button color="blue" h="20px" background="none" _hover={{ background: "none" }} onClick={handlesignup}>Register Here</Button></Text>
 
                       </FormControl>
@@ -400,7 +443,7 @@ function Navbar(props) {
 
             <Link to={!useremail ? "" : "/carts"}><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" onClick={handlealert} /><span>{cartdata.length}</span></Link>
             {
-              useremail==="jeevanaloor500@gmail.com" && <Box mt="30px"><Link to="/admin">IM ADMIN</Link></Box>
+              useremail === "jeevanaloor500@gmail.com" && <Box mt="30px"><Link to="/admin">IM ADMIN</Link></Box>
             }
 
 

@@ -132,10 +132,10 @@ function Cloths() {
 
           <Carousel />
         </Box>
-        <Flex w="100%" gap="10px" flexDirection={{ base: "column", md: "column", md: "column", lg: "row" }} mt="100px">
-          <Box w={{ lg: "20%", base: "40%", sm: "40%", md: "40%" }} border="1px solid red" mt="80px" h="200px" textAlign="left" pl="30px" >
+        <Flex w="100%" gap="10px" flexDirection={{ base: "column", md: "column", md: "column", lg: "row" }} mt="100px" >
+          <Box w={{ lg: "20%", base: "40%", sm: "40%", md: "40%" }} mt="80px" h="200px" textAlign="left" pl="30px" boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
             <Text fontSize="17px" borderBottom="1px solid red" w="100px">CATEGORY</Text>
-            <input type="checkbox" value="Men" checked={category.includes("Men")} onChange={handlecheck} />
+            <input type="checkbox" value="Men" checked={category.includes("Men")} onChange={handlecheck} mr="50px" />
             <label>Men</label><br />
             <input type="checkbox" value="Women" checked={category.includes("Women")} onChange={handlecheck} />
             <label>Women</label>
@@ -148,13 +148,13 @@ function Cloths() {
 
           </Box>
           {
-            load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns={{ lg: 'repeat(4, 1fr)', base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }} border="1px solid red" gap={4} w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif">
+            load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns={{ lg: 'repeat(4, 1fr)', base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }} gap={{ lg: "20px", base: "10px", md: "15px" }} w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif" background="rgb(203 213 225)" pl="10px" >
 
 
               {
                 clothdata.length > 0 && clothdata.map((ele) => (
-                  <GridItem h="100%" w={{ md: "100%", base: "80%", sm: "80%", lg: "100%" }} key={ele._id} fontFamily="Times New Roman,serif" >
-                    <Image src={ele.clothimage} h="60%" />
+                  <GridItem h="90%" w={{ md: "100%", base: "80%", sm: "80%", lg: "100%" }} key={ele._id} fontFamily="Times New Roman,serif" boxShadow=" rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px">
+                    <Image w="100%" src={ele.clothimage} h="60%" />
                     <Text fontSize="22px" textAlign="left" fontFamily="Times New Roman,serif">{ele.clothname}</Text>
                     <Flex m="auto">
                       <Text fontSize="30px">₹{ele.clothrate}</Text>
