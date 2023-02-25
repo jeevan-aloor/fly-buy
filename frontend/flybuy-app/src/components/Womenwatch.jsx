@@ -31,12 +31,12 @@ function Womenwatch() {
 
   }, [])
   return (
-    <Box background="#2d3142">
+    <Box background="rgb(248 250 252)">
       <Box>
         <Navbar />
 
       </Box>
-      <Heading color="#FFFFFF">Welcome for girls watch </Heading>
+      <Heading mt="20px"> WOMENS WATCH SECTION   </Heading>
       <Flex w="80%" m="auto" mt="20px" gap="30px" h="300px"  >
         <Box w="30%"  >
           <Image src="https://i.pinimg.com/236x/dd/06/28/dd06286baf3d902f4b9b922da365f5ac.jpg" w="100%" h="100%" borderRadius="10px 50px 10px 40px" />
@@ -53,7 +53,8 @@ function Womenwatch() {
 
         </Box>
       </Flex>
-      <Flex>
+      <Heading mt="30px" textDecoration="underline">Make your style better</Heading>
+      <Flex >
 
 
         <Box mt="20px" h="300px" w="50%" >
@@ -63,6 +64,7 @@ function Womenwatch() {
           <Image src="https://i.pinimg.com/236x/20/c7/b9/20c7b9fbaaac4f8c9f362e49bbf7c6e9.jpg" borderRadius="0 100% 100% 0 / 50%" m="auto" w="70%" h="100%" mr="215px" />
         </Box>
       </Flex>
+      <Heading mt="30px">Trending Watches For Girls</Heading>
       {
         load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns="repeat(5,1fr)" m="auto" mt="30px" w="95%" gap="20px" >
           {

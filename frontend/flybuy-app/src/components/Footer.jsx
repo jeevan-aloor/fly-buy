@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Divider, Flex, Image, Text } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
@@ -21,10 +22,10 @@ function Footer() {
             <Text>FAQs</Text>
           </Box>
           <Box w="30%" textAlign="left" lineHeight="40px">
-            <Text>All product</Text>
-            <Text>Shoes</Text>
-            <Text>Cloths</Text>
-            <Text>Watches</Text>
+            <Link to="/"><Text>All product</Text></Link>
+            <Link to="/shoes"><Text>Shoes</Text></Link>
+            <Link to="/cloth"><Text>Cloths</Text></Link>
+           <Link to="/watches"><Text>Watches</Text></Link>
           </Box>
          
           <Box w="30%" textAlign="left" lineHeight="40px" display={{lg:"block",base:"none",sm:"none",md:"none"}}>
@@ -33,6 +34,11 @@ function Footer() {
             <Image src="https://img.icons8.com/ios/1x/facebook--v2.gif" alt="insta" w="40px" h="40px"/>
             <Image src="https://img.icons8.com/color/1x/twitter--v2.gif" alt="insta" w="40px" h="40px"/>
             <Image src="https://img.icons8.com/ios-filled/1x/pinterest--v5.gif" alt="insta" w="40px" h="40px"/>
+            </Flex>
+            <Text display={{lg:"block",base:"none",sm:"none",md:"none"}}>DOWNLOAD WORLD OF FLY-BUY APP</Text>
+            <Flex gap="20px" display={{lg:"flex",base:"none",sm:"none",md:"none"}}>
+            <Image src="https://www.fastrack.in/wps/wcm/connect/fastrackrt/2872109e-ec2b-4cd4-9aaa-da1cdb6c178a/app-store.svg?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE.Z18_90IA1H80O0L8F0647TQN6318K2-2872109e-ec2b-4cd4-9aaa-da1cdb6c178a-oizdyqz" w="150px" h="50px"/>
+            <Image src="https://www.fastrack.in/wps/wcm/connect/fastrackrt/2872109e-ec2b-4cd4-9aaa-da1cdb6c178a/app-store.svg?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE.Z18_90IA1H80O0L8F0647TQN6318K2-2872109e-ec2b-4cd4-9aaa-da1cdb6c178a-oizdyqz" w="150px" h="50px"/>
             </Flex>
           </Box>
           

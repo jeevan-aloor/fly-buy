@@ -89,7 +89,15 @@ function Navbar(props) {
     setloginemail("")
     setloginpass("")
     setEmail("")
-    onClose()
+   
+    
+  onClose()
+  // setTimeout(()=>{
+  //   onClose()
+
+  // },2000)
+   
+   
   }
 
   const handleSearch = (e) => {
@@ -443,7 +451,7 @@ function Navbar(props) {
 
             <Link to={!useremail ? "" : "/carts"}><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" onClick={handlealert} /><span>{cartdata.length}</span></Link>
             {
-              useremail === "jeevanaloor500@gmail.com" && <Box mt="30px"><Link to="/admin">IM ADMIN</Link></Box>
+              useremail === "jeevanaloor500@gmail.com" && <Box mt="20px"><Link to="/admin"><Image src="https://img.icons8.com/office/1x/businessman.png"/></Link></Box>
             }
 
 

@@ -118,7 +118,7 @@ function Cloths() {
 
   {/* <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> */ }
   return (
-    <Box >
+    <Box background="#E9E4F0">
       <Box >
         {/* position="fixed" w="100%" zIndex="100" mb="100px" */}
         <Box >
@@ -132,38 +132,40 @@ function Cloths() {
 
           <Carousel />
         </Box>
-        <Flex w="100%" gap="10px" flexDirection={{ base: "column", md: "column", md: "column", lg: "row" }} mt="100px" >
-          <Box w={{ lg: "20%", base: "40%", sm: "40%", md: "40%" }} mt="80px" h="200px" textAlign="left" pl="30px" boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px">
-            <Text fontSize="17px" borderBottom="1px solid red" w="100px">CATEGORY</Text>
+        <Heading mt="70px" textDecoration="Highlight">Get the Best</Heading>
+        <Flex w="100%" gap="10px" flexDirection={{ base: "column", md: "column", md: "column", lg: "row" }} mt="20px" >
+          <Box w={{ lg: "20%", base: "40%", sm: "40%", md: "40%" }} mt="80px" h="200px" textAlign="left" pl="30px" boxShadow="rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px" background="black" color="#FFFFFF" fontWeight="bold" >
+            <Text fontSize="17px" borderBottom="1px solid red" w="100px" mb="10px">CATEGORY</Text>
             <input type="checkbox" value="Men" checked={category.includes("Men")} onChange={handlecheck} mr="50px" />
-            <label>Men</label><br />
+            <label style={{ fontWeight: "normal", marginLeft: "10px" }}>Men</label><br />
             <input type="checkbox" value="Women" checked={category.includes("Women")} onChange={handlecheck} />
-            <label>Women</label>
-            <Text fontSize="17px" borderBottom="1px solid red" w="100px">Sorting</Text>
+            <label style={{ fontWeight: "normal", marginLeft: "10px" }}>Women</label>
+            <Text fontSize="17px" borderBottom="1px solid red" w="100px" mb="10px">Sorting</Text>
             <input type="radio" value="asc" name="sortby" onChange={handleSort} checked={sort == "asc"} />
-            <label>Low to High</label><br />
+            <label style={{ fontWeight: "normal", marginLeft: "10px" }}>Low to High</label><br />
             <input type="radio" value="desc" name="sorthigh" onChange={handleSort} checked={sort == "desc"} />
-            <label>High to Low</label>
+            <label style={{ fontWeight: "normal", marginLeft: "10px" }}>High to Low</label>
 
 
           </Box>
+          
           {
-            load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns={{ lg: 'repeat(4, 1fr)', base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }} gap={{ lg: "20px", base: "10px", md: "15px" }} w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif" background="rgb(203 213 225)" pl="10px" >
+            load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns={{ lg: 'repeat(4, 1fr)', base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }} gap={{ lg: "20px", base: "10px", md: "15px" }} w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif" pl="10px" >
 
 
               {
                 clothdata.length > 0 && clothdata.map((ele) => (
-                  <GridItem h="90%" w={{ md: "100%", base: "80%", sm: "80%", lg: "100%" }} key={ele._id} fontFamily="Times New Roman,serif" boxShadow=" rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px">
+                  <GridItem h="100%" w={{ md: "100%", base: "80%", sm: "80%", lg: "100%" }} key={ele._id} fontFamily="Times New Roman,serif" boxShadow=" rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px" background=" rgb(249 250 251)">
                     <Image w="100%" src={ele.clothimage} h="60%" />
-                    <Text fontSize="22px" textAlign="left" fontFamily="Times New Roman,serif">{ele.clothname}</Text>
+                    <Text fontSize="22px" textAlign="left" fontFamily="Times New Roman,serif" ml="10px" fontWeight="semibold">{ele.clothname}</Text>
                     <Flex m="auto">
-                      <Text fontSize="30px">₹{ele.clothrate}</Text>
-                      <Text fontSize="16px" mt="18px" textDecoration="line-through">₹{ele.clothstrikerate}</Text>
+                      <Text fontSize="30px" ml="10px">₹{ele.clothrate}</Text>
+                      <Text fontSize="16px" mt="18px" textDecoration="line-through" color="red.500">₹{ele.clothstrikerate}</Text>
                     </Flex>
-                    <Text textAlign="left" ml="20px" color="red" >{ele.clothcategory}</Text>
-                    <Box display="flex">
+                    <Text textAlign="right" mr="20px" color="red.800" >{ele.clothcategory}</Text>
+                    <Box display="flex" ml="10px">
                       <Image src="https://cdn-icons-png.flaticon.com/128/9537/9537227.png" w="40px" h="40px" mr="10px" />
-                      <Button w="70%" _hover={{ background: "red", color: "white" }}>BUY</Button>
+                      <Button w="70%" m="auto" background="#2B558D" borderRadius="0px" color="#FFFFFF" fontWeight="normal" _hover={{ background: "blackAlpha.800", color: "white" }}>BUY</Button>
                     </Box>
 
                   </GridItem>
