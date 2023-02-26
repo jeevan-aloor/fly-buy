@@ -11,7 +11,7 @@ function Menwatch() {
   const getMensWatch = async () => {
     setLoad(true)
     try {
-      let res = await axios.get("http://localhost:8000/watch/getwatchmen")
+      let res = await axios.get("https://calm-teal-beanie.cyclic.app/watch/getwatchmen")
       setData(res.data)
 
     } catch (error) {

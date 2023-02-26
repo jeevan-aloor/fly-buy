@@ -12,7 +12,7 @@ function Cart() {
 
   const getdata = async () => {
     try {
-      const res = await axios.get("https://calm-teal-beanie.cyclic.app/cart/cartdata")
+      const res = await axios.get("http://localhost:8000/cart/cartdata")
       let data = res.data
       setDate(data)
 

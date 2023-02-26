@@ -11,7 +11,7 @@ function Womenwatch() {
   const getWomensWatch = async () => {
     setLoad(true)
     try {
-      let res = await axios.get("http://localhost:8000/watch/getwatchwomen")
+      let res = await axios.get("https://calm-teal-beanie.cyclic.app/watch/getwatchwomen")
       setData(res.data)
       console.log(res.data)
 

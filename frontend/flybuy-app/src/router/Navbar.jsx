@@ -89,15 +89,15 @@ function Navbar(props) {
     setloginemail("")
     setloginpass("")
     setEmail("")
-   
-    
-  onClose()
-  // setTimeout(()=>{
-  //   onClose()
 
-  // },2000)
-   
-   
+
+    onClose()
+    // setTimeout(()=>{
+    //   onClose()
+
+    // },2000)
+
+
   }
 
   const handleSearch = (e) => {
@@ -183,17 +183,17 @@ function Navbar(props) {
     }
     try {
       console.log("lo", loginemail, loginpass)
-      let res = await axios.post("http://localhost:8000/user/userlogin", payload)
+      let res = await axios.post("https://calm-teal-beanie.cyclic.app/user/userlogin", payload)
       console.log("res", res.data)
       setResponse(res.data)
       console.log("response", response)
 
-      // const config = {
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': { token }
-      //   }
-      // };
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':  res.data 
+        }
+      };
       // console.log(payload.email)
 
       // let addHeader = await axios.post("https://calm-teal-beanie.cyclic.app/user/userlogin", config)
@@ -451,7 +451,7 @@ function Navbar(props) {
 
             <Link to={!useremail ? "" : "/carts"}><Image src="https://cdn-icons-png.flaticon.com/128/2038/2038854.png" w="30px" h="30px" mt="25px" onClick={handlealert} /><span>{cartdata.length}</span></Link>
             {
-              useremail === "jeevanaloor500@gmail.com" && <Box mt="20px"><Link to="/admin"><Image src="https://img.icons8.com/office/1x/businessman.png"/></Link></Box>
+              useremail === "jeevanaloor500@gmail.com" && <Box mt="20px"><Link to="/admin"><Image src="https://img.icons8.com/office/1x/businessman.png" /></Link></Box>
             }
 
 
