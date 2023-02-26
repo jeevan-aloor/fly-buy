@@ -112,7 +112,7 @@ function Navbar(props) {
 
   const getdata = async () => {
     try {
-      const res = await axios.get("https://calm-teal-beanie.cyclic.app/cart/cartdata")
+      const res = await axios.get("https://awful-hen-smock.cyclic.app/cart/cartdata")
       let data = res.data
       setDate(data)
 
@@ -134,7 +134,7 @@ function Navbar(props) {
 
       }
       if (name && mobilenumber && email) {
-        let res = await axios.post("https://calm-teal-beanie.cyclic.app/user/adduser", payload)
+        let res = await axios.post("https://awful-hen-smock.cyclic.app/user/adduser", payload)
         console.log("added")
         console.log(res)
         toast({
@@ -183,7 +183,7 @@ function Navbar(props) {
     }
     try {
       console.log("lo", loginemail, loginpass)
-      let res = await axios.post("https://calm-teal-beanie.cyclic.app/user/userlogin", payload)
+      let res = await axios.post("https://awful-hen-smock.cyclic.app/user/userlogin", payload)
       console.log("res", res.data)
       setResponse(res.data)
       console.log("response", response)

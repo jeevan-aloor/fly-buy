@@ -77,13 +77,13 @@ function Cloths() {
     if (category == "") {
       console.log("sorttt", sort)
       if (sort == "") {
-        let res = await axios.get(`https://calm-teal-beanie.cyclic.app/product/getcloths`)
+        let res = await axios.get(`https://awful-hen-smock.cyclic.app/product/getcloths`)
         let data = res.data
         console.log("1", data)
         setdata(data)
 
       } else {
-        let res = await axios.get(`https://calm-teal-beanie.cyclic.app/product/getcloths?sorting=${sort}`)
+        let res = await axios.get(`https://awful-hen-smock.cyclic.app/product/getcloths?sorting=${sort}`)
         let data = res.data
         console.log("1", data)
         setdata(data)
@@ -94,7 +94,7 @@ function Cloths() {
 
     }
     else {
-      let res = await axios.get(`https://calm-teal-beanie.cyclic.app/product/getcloths?clothcategory=${category}&& sorting=${sort}`)
+      let res = await axios.get(`https://awful-hen-smock.cyclic.app/product/getcloths?clothcategory=${category}&& sorting=${sort}`)
       let data = res.data
       console.log("2", data)
       setdata(data)

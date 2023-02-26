@@ -12,7 +12,7 @@ function Cart() {
 
   const getdata = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/cart/cartdata")
+      const res = await axios.get("https://awful-hen-smock.cyclic.app/cart/cartdata")
       let data = res.data
       setDate(data)
 
@@ -27,7 +27,7 @@ function Cart() {
 
   const handledelete = async (id) => {
     try {
-      setdeleteDate(await axios.delete(`https://calm-teal-beanie.cyclic.app/cart/cartdelete/${id}`))
+      setdeleteDate(await axios.delete(`https://awful-hen-smock.cyclic.app/cart/cartdelete/${id}`))
 
 
     } catch (error) {

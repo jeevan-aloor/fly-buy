@@ -13,7 +13,7 @@ function Shoes() {
   const getshoes = async () => {
     setLoad(true)
     try {
-      let res = await axios.get("https://calm-teal-beanie.cyclic.app/shoes/getshoes")
+      let res = await axios.get("https://awful-hen-smock.cyclic.app/shoes/getshoes")
       setData(res.data)
       console.log(res.data)
 

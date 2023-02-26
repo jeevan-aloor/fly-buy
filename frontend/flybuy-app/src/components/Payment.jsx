@@ -24,7 +24,7 @@ const CheckoutForm = () => {
       return;
     }
 
-    const { data } = await axios.post('https://calm-teal-beanie.cyclic.app/api/payments', {
+    const { data } = await axios.post('https://awful-hen-smock.cyclic.app/api/payments', {
       token: paymentMethod.id,
       amount: 10
     });

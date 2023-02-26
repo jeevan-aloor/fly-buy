@@ -19,7 +19,7 @@ function Admin() {
     const toast = useToast()
 
     const getUserData = async () => {
-        let res = await axios.get("http://localhost:8000/user")
+        let res = await axios.get("https://awful-hen-smock.cyclic.app/user")
         setUserData(res.data)
 
     }
@@ -41,7 +41,7 @@ function Admin() {
 
         }
         try {
-            await axios.post("http://localhost:8000/allproductpost", payload)
+            await axios.post("https://awful-hen-smock.cyclic.app/allproductpost", payload)
             console.log("added")
 
         } catch (error) {
@@ -62,7 +62,7 @@ function Admin() {
 
     const deleteProduct = async (deleteid) => {
         try {
-            await axios.delete(`http://localhost:8000/singleproductdelete/${id}`)
+            await axios.delete(`https://awful-hen-smock.cyclic.app/singleproductdelete/${id}`)
             console.log("deleted")
 
         } catch (error) {
