@@ -26,7 +26,7 @@ function Singleproduct() {
   const id = productid.id
 
   const singleproduct = async (id) => {
-    let res = await axios.get(`https://calm-teal-beanie.cyclic.app/singleproduct/${id}`)
+    let res = await axios.get(`https://awful-hen-smock.cyclic.app/singleproduct/${id}`)
     let data = res.data
     setdata(data)
   }

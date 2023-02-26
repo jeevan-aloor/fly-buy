@@ -33,10 +33,11 @@ function Home() {
     const getdata = async () => {
         console.log("envv",process.env.FLY_BUY_API)
         setLoad(true)
-        // https://calm-teal-beanie.cyclic.app
-        // https://calm-teal-beanie.cyclic.app
+        // https://awful-hen-smock.cyclic.app
+        // https://awful-hen-smock.cyclic.app
+        // https://awful-hen-smock.cyclic.app
         try {
-            let res = await axios.get(`https://calm-teal-beanie.cyclic.app?page=${pageno}&&q=${searchtext}`)
+            let res = await axios.get(`https://awful-hen-smock.cyclic.app?page=${pageno}&&q=${searchtext}`)
             let data = res.data
             setdata(data)
             console.log(data)
@@ -76,7 +77,7 @@ function Home() {
 
         }
         try {
-            let data = await axios.post("https://calm-teal-beanie.cyclic.app/cart/addtocart", payload)
+            let data = await axios.post("https://awful-hen-smock.cyclic.app/cart/addtocart", payload)
             console.log(data)
             toast({
                 title: "successfully Added to the cart",

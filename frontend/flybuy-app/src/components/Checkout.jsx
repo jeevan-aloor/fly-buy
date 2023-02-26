@@ -26,14 +26,14 @@ function Checkout() {
 
 
   const getData = async (id) => {
-    let res = await axios.get(`http://localhost:8000/singleproduct/${id}`)
+    let res = await axios.get(`https://awful-hen-smock.cyclic.app/singleproduct/${id}`)
     let data = res.data
     setdata(data)
   }
 
 
   const getAddress = async () => {
-    let res = await axios.get("http://localhost:8000/address/getaddress")
+    let res = await axios.get("https://awful-hen-smock.cyclic.app/address/getaddress")
     let data = res.data
     console.log("data", data)
     setAddressdata(data)
@@ -60,7 +60,7 @@ function Checkout() {
     }
     if (name !== "" && mobileno !== "" && pincode !== "" && address !== "" && state !== "") {
 
-      await axios.post("http://localhost:8000/address/addaddress", payload)
+      await axios.post("https://awful-hen-smock.cyclic.app/address/addaddress", payload)
       console.log("address added")
       toast({
         title: "Please select payment option",
@@ -112,7 +112,7 @@ function Checkout() {
     setShowDelete(!showdelete)
     console.log("show", showdelete)
     try {
-      await axios.delete(`http://localhost:8000/address/addressdelete/${id}`)
+      await axios.delete(`https://awful-hen-smock.cyclic.app/address/addressdelete/${id}`)
       console.log("address delete")
 
     } catch (error) {
