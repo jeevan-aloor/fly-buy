@@ -148,7 +148,7 @@ function Cloths() {
 
 
           </Box>
-          
+
           {
             load ? <Image src="https://media.tenor.com/YPOStjIfQ2IAAAAM/loading-waiting.gif" h="200px" w="200px" m="auto" /> : <Grid templateColumns={{ lg: 'repeat(4, 1fr)', base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)' }} gap={{ lg: "20px", base: "10px", md: "15px" }} w="80%" m="auto" mt="80px" alignItems="end" fontFamily="Times New Roman,serif" pl="10px" >
 
