@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
-      
+
     <Box h="540px" background="#000000" pt="20px" mt="100px">
       <Box color="#FFFFFF" >
         <Text textAlign="left" pl="30px" fontWeight="bold">Fly-buy Site Links</Text>
@@ -25,29 +25,29 @@ function Footer() {
             <Link to="/"><Text>All product</Text></Link>
             <Link to="/shoes"><Text>Shoes</Text></Link>
             <Link to="/cloth"><Text>Cloths</Text></Link>
-           <Link to="/watches"><Text>Watches</Text></Link>
+            <Link to="/watches"><Text>Watches</Text></Link>
           </Box>
-         
-          <Box w="30%" textAlign="left" lineHeight="40px" display={{lg:"block",base:"none",sm:"none",md:"none"}}>
+
+          <Box w="30%" textAlign="left" lineHeight="40px" display={{ lg: "block", base: "none", sm: "none", md: "none" }}>
             <Flex gap="20px">
-            <Image src="https://img.icons8.com/ios/1x/instagram-new--v2.gif" alt="insta" w="40px" h="40px"/>
-            <Image src="https://img.icons8.com/ios/1x/facebook--v2.gif" alt="insta" w="40px" h="40px"/>
-            <Image src="https://img.icons8.com/color/1x/twitter--v2.gif" alt="insta" w="40px" h="40px"/>
-            <Image src="https://img.icons8.com/ios-filled/1x/pinterest--v5.gif" alt="insta" w="40px" h="40px"/>
+              <Image src="https://img.icons8.com/ios/1x/instagram-new--v2.gif" alt="insta" w="40px" h="40px" />
+              <Image src="https://img.icons8.com/ios/1x/facebook--v2.gif" alt="insta" w="40px" h="40px" />
+              <Image src="https://img.icons8.com/color/1x/twitter--v2.gif" alt="insta" w="40px" h="40px" />
+              <Image src="https://img.icons8.com/ios-filled/1x/pinterest--v5.gif" alt="insta" w="40px" h="40px" />
             </Flex>
-            <Text display={{lg:"block",base:"none",sm:"none",md:"none"}}>DOWNLOAD WORLD OF FLY-BUY APP</Text>
-            <Flex gap="20px" display={{lg:"flex",base:"none",sm:"none",md:"none"}}>
-            <Image src="https://www.fastrack.in/wps/wcm/connect/fastrackrt/2872109e-ec2b-4cd4-9aaa-da1cdb6c178a/app-store.svg?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE.Z18_90IA1H80O0L8F0647TQN6318K2-2872109e-ec2b-4cd4-9aaa-da1cdb6c178a-oizdyqz" w="150px" h="50px"/>
-            <Image src="https://www.fastrack.in/wps/wcm/connect/fastrackrt/2872109e-ec2b-4cd4-9aaa-da1cdb6c178a/app-store.svg?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE.Z18_90IA1H80O0L8F0647TQN6318K2-2872109e-ec2b-4cd4-9aaa-da1cdb6c178a-oizdyqz" w="150px" h="50px"/>
+            <Text display={{ lg: "block", base: "none", sm: "none", md: "none" }}>DOWNLOAD WORLD OF FLY-BUY APP</Text>
+            <Flex gap="20px" display={{ lg: "flex", base: "none", sm: "none", md: "none" }}>
+              <Image src="https://www.fastrack.in/wps/wcm/connect/fastrackrt/2872109e-ec2b-4cd4-9aaa-da1cdb6c178a/app-store.svg?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE.Z18_90IA1H80O0L8F0647TQN6318K2-2872109e-ec2b-4cd4-9aaa-da1cdb6c178a-oizdyqz" w="150px" h="50px" />
+              <Image src="https://www.fastrack.in/wps/wcm/connect/fastrackrt/2872109e-ec2b-4cd4-9aaa-da1cdb6c178a/app-store.svg?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE.Z18_90IA1H80O0L8F0647TQN6318K2-2872109e-ec2b-4cd4-9aaa-da1cdb6c178a-oizdyqz" w="150px" h="50px" />
             </Flex>
           </Box>
-          
+
 
         </Flex>
       </Box>
       {/* <Divider /> */}
       {/* filter="blur(0.6px)" */}
-      <Box h="300px" background="#FFFFFF" mt="20px" pl="100px" w="100%"  >
+      <Box h="300px" background="#FFFFFF" mt="20px" w="100%"  >
         <Text fontSize="30px">Our partners</Text>
         <marquee >
           <Flex gap="100px" mt="20px" >

@@ -80,7 +80,7 @@ function Singleproduct() {
                   </GridItem>
                 </Grid>
                 <Box w="30%" >
-                  <Magnifier src={ele.productimage} width="100%" height="auto" border="1px solid red"  />
+                  <Magnifier src={ele.productimage} width="100%" height="100%" />
 
                   {/* <Image src={ele.productimage} w="100%" h="100%" /> */}
                 </Box>

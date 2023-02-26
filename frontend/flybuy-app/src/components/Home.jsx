@@ -8,6 +8,8 @@ import styles from './Home.css'
 import "aos/dist/aos.css";
 import Aos from "aos";
 import Footer from './Footer'
+
+
 // require('dotenv').config()
 // require("dotenv").config();
 
@@ -29,10 +31,12 @@ function Home() {
 
 
     const getdata = async () => {
+        console.log("envv",process.env.FLY_BUY_API)
         setLoad(true)
         // https://calm-teal-beanie.cyclic.app
+        // https://calm-teal-beanie.cyclic.app
         try {
-            let res = await axios.get(`http://localhost:8000?page=${pageno}&&q=${searchtext}`)
+            let res = await axios.get(`https://calm-teal-beanie.cyclic.app?page=${pageno}&&q=${searchtext}`)
             let data = res.data
             setdata(data)
             console.log(data)

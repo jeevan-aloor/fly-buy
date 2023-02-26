@@ -12,6 +12,7 @@ import Womenwatch from '../components/Womenwatch'
 import Menwatch from '../components/Menwatch'
 import Admin from '../components/Admin'
 import Showpayment from '../components/Showpayment'
+import PrivateRoute from './PrivateRoute'
 // import CheckoutForm from '../components/Payment'
 // import CheckoutForm from '../components/Payment'
 
@@ -28,7 +29,8 @@ function Routerfile() {
       <Route path="/login" element={<Login />} />
       <Route path="/womenwatch" element={<Womenwatch />} />
       <Route path="/menswatch" element={<Menwatch />} />
-      <Route path="/admin" element={<Admin />} />
+
+      <Route path="/admin" element={<PrivateRoute><Admin /></PrivateRoute>} />
       <Route path="/payment" element={<Showpayment />} />
       {/* <Route path="/payment" element={<CheckoutForm/>}/> */}
     </Routes>
