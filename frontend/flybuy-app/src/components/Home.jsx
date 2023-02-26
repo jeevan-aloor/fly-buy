@@ -8,6 +8,8 @@ import styles from './Home.css'
 import "aos/dist/aos.css";
 import Aos from "aos";
 import Footer from './Footer'
+
+
 // require('dotenv').config()
 // require("dotenv").config();
 
@@ -29,7 +31,10 @@ function Home() {
 
 
     const getdata = async () => {
+        console.log("envv",process.env.FLY_BUY_API)
         setLoad(true)
+        // https://calm-teal-beanie.cyclic.app
+        // https://calm-teal-beanie.cyclic.app
         try {
             let res = await axios.get(`https://calm-teal-beanie.cyclic.app?page=${pageno}&&q=${searchtext}`)
             let data = res.data
@@ -115,13 +120,14 @@ function Home() {
                 <Navbar val={searchtext} ser={setSearchText} />
 
             </Box>
+            
 
 
 
             <Box h="50px" background="red" pt="10px"  >
                 <Box  >
                     {
-                        searchtext && <Box w="300px" h="80px" border="1px solid black" ml="300px" overflowY="scroll" mt="70px"  >
+                        searchtext && <Box w="300px" h="80px" border="1px solid black" ml="240px" overflowY="scroll" mt="70px">
                             {
 
                                 mongodata.length > 0 && mongodata.map((ele) => (
@@ -166,13 +172,13 @@ function Home() {
             }
             <Heading mt="40px" color={searchtext ? "white" : "black"} >TRENDING PRODUCTS</Heading>
             {
-                load ? <Image src="https://prodstatic.shoppersstop.com/_ui/responsive/common/assets/images/newLoader.gif" h="170px" w="180px" m="auto" mb="20px" /> : <Grid templateColumns={{ md: "repeat(3, 1fr)", sm: "repeat(2,1fr)", base: "repeat(1,1fr)", lg: "repeat(2,1fr)" }} gap={{ md: "8px", sm: "4px", base: "2px" }} w={{ lg: "50%" }} m="auto" mt="20px"   >
+                load ? <Image src="https://prodstatic.shoppersstop.com/_ui/responsive/common/assets/images/newLoader.gif" h="170px" w="180px" m="auto" mb="20px" /> : <Grid templateColumns={{ md: "repeat(3, 1fr)", sm: "repeat(2,1fr)", base: "repeat(1,1fr)", lg: "repeat(4,1fr)" }} gap={{lg:"10px", md: "8px", sm: "4px", base: "2px" }} w={{ lg: "90%" }} m="auto" mt="20px"   >
                     {
                         mongodata.length > 0 && mongodata.map((ele) => (
                             <Box key={ele._id}>
 
-                                <GridItem mb="20px" w={{ md: '100%', base: "90%" }} h={{ md: '600px', base: "550px" }} key={ele._id} className='shape' data-aos="fade-right">
-                                    <Link to={`/singleproduct/${ele._id}`}  ><Tooltip label="Click to see product deatils"><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" border="5px solid black" /></Tooltip></Link>
+                                <GridItem mb="20px" w={{ md: '100%', base: "90%" }} h={{lg:"550px", md: '600px', base: "550px" }} key={ele._id} className='shape' data-aos="fade-right" background={"rgb(241 245 249)"} pt="10px" borderRadius="10px" >
+                                    <Link to={`/singleproduct/${ele._id}`}  ><Tooltip label="Click to see product deatils"><Image className='anim' src={ele.productimage} h="50%" w="90%" m="auto" mt="10px" borderRadius="20px" boxshadow="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px" /></Tooltip></Link>
                                     <Box textAlign="left" w="90%" m="auto" borderRadius="20px" mt="10px" >
                                         <Text fontSize="20px" fontWeight="extrabold">{ele.productname}</Text>
                                         <Text fontSize="18px" color="blue">{ele.productdesc}</Text>
@@ -189,7 +195,7 @@ function Home() {
                                                 {/* { addtocart ?<Button onClick={() => handleadd(ele.productimage, ele.productname, ele.productrate, ele.productdesc)}>Add to Cart</Button>:<Button>Go to Cart</Button>
                                             } */}
                                             </Tooltip>
-                                            <Link to={`/checkout/${ele._id}`} style={{ width: "200px" }}><Button color="white" background="black" mt="40px" w="100%" _hover={{ background: "blackAlpha.800", color: "white" }}  >BUY</Button></Link>
+                                            <Link to={`/checkout/${ele._id}`} style={{ width: "200px" }}><Button w="90%" m="auto" background="#2B558D" borderRadius="0px" color="#FFFFFF" fontWeight="normal" mt="40px" _hover={{ background: "blackAlpha.800", color: "white" }}  >BUY</Button></Link>
                                         </Box>
                                     </Box>
                                 </GridItem>

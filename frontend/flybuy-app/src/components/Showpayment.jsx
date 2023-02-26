@@ -35,12 +35,12 @@ function Showpayment() {
             {/* {
                 proceed &&
             } */}
-            <Box background="black" mt="20px">
+            <Box  mt="20px">
                 {
                     payment === "loading" && <Image src="https://cdn.dribbble.com/users/88761/screenshots/3029925/sending_payment_loading.gif" w="100%" h="100vh" m="auto" />
                 }
                 {
-                    payment === "done" && <Image src="https://assets.materialup.com/uploads/15c676ac-e724-469c-bad8-077924949947/attachment.png" w="50%" h="100vh" m="auto" />
+                    payment === "done" && <Text fontSize="30px" fontWegiht="bold" >Your product is ordered succussfully</Text>
                 }
             </Box>
             <Link to="/"><Heading>GO TO HOME PAGE</Heading></Link>

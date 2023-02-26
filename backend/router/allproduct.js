@@ -4,7 +4,7 @@ const {AllproductModel}=require("../conflict/allproductmodel")
 
 const allproductRouter = express.Router();
 
-let perpage=5
+let perpage=8
 
 
 

@@ -4,6 +4,17 @@ import axios from 'axios'
 import { Box, Flex, Grid, GridItem, Image, Text, Button, Tooltip, Heading } from '@chakra-ui/react'
 import Navbar from '../router/Navbar'
 import Footer from './Footer'
+import ReactImageMagnify from "react-image-magnify";
+import Magnifier from "react-magnifier";
+import {
+
+  GlassMagnifier,
+  SideBySideMagnifier,
+  PictureInPictureMagnifier,
+  MOUSE_ACTIVATION,
+  TOUCH_ACTIVATION, MagnifierContainer, MagnifierPreview, MagnifierZoom
+} from "react-image-magnifiers";
+
 
 function Singleproduct() {
   const [singledata, setdata] = useState([])
@@ -43,7 +54,14 @@ function Singleproduct() {
       <Navbar />
 
 
+
+
+
       <Box mt="20px">
+
+
+
+
         <Heading mb="20px"> Product Details</Heading>
 
         <Flex w="90%" h={{ lg: "600px", base: "400px", sm: "400px", md: "500px" }} gap="10px" m="auto" >
@@ -51,17 +69,20 @@ function Singleproduct() {
             singledata.map((ele) => (
               <>
                 <Grid w={{ lg: "10%", base: "20%" }} templateColumns='repeat(1, 1fr)' gap="10px" >
-                  <GridItem >
+                  <GridItem  >
                     <Image src={ele.productimage2} h="100%" />
                   </GridItem>
                   <GridItem >
                     <Image src={ele.productimage3} h="100%" /></GridItem>
                   <GridItem >
+
                     <Image src={ele.productimage4} h="100%" />
                   </GridItem>
                 </Grid>
-                <Box w="30%">
-                  <Image src={ele.productimage} w="100%" h="100%" />
+                <Box w="30%" >
+                  <Magnifier src={ele.productimage} width="100%" height="100%" />
+
+                  {/* <Image src={ele.productimage} w="100%" h="100%" /> */}
                 </Box>
                 <Box w="50%" textAlign="left" pl="10px">
                   <Text fontSize={{ lg: "20px", base: "15px" }}>{ele.productname}</Text>
@@ -97,7 +118,7 @@ function Singleproduct() {
                       <Button onClick={handleadd} background="#07294C" color="#FFFFFF">+</Button>
                     </Box>
                     <Box>
-                      <Link to={`/checkout/${ele._id}`}><Button ml={{ lg: "150px", base: "50px", sm: "50px", md: "50px" }} w="200px" display={{ base: "none", md: "none", lg: "block" }}>BUY NOW</Button></Link>
+                      <Link to={`/checkout/${ele._id}`}><Button ml={{ lg: "150px", base: "50px", sm: "50px", md: "50px" }} w="200px" display={{ base: "none", md: "none", lg: "block" }} background="#2B558D" borderRadius="0px" color="#FFFFFF" fontWeight="normal" _hover={{ background: "blackAlpha.800", color: "white" }}>BUY NOW</Button></Link>
                     </Box>
                   </Flex>
 

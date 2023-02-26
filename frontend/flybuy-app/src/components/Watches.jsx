@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
 import Navbar from '../router/Navbar'
 import { Link } from 'react-router-dom'
+import Footer from './Footer'
 
 function Watches() {
   
@@ -40,7 +41,7 @@ function Watches() {
           <Text>₹ 9,495</Text>
         </Box>
       </Flex>
-      <Button background="#2B558D" color="#FFFFFF" border="outset" _hover={{ background: "#2B557D" }} mt="30px">Shop Mens's Watches</Button>
+      <Link to="/Menswatch"><Button background="#2B558D" color="#FFFFFF" border="outset" _hover={{ background: "#2B557D" }} mt="30px">Shop Mens's Watches</Button></Link>
       <Flex w="70%" h="400px" m="auto" mt="40px" gap="10px" >
         <Box w="35%" >
           <Image src="https://cdn.shopify.com/s/files/1/0046/3454/2129/products/AP1843A_360x.jpg?v=1584943106" h="80%" w="100%" />
@@ -59,7 +60,12 @@ function Watches() {
           <Text>₹ 5,597</Text>
         </Box>
       </Flex>
-      <Button background="#2B558D" color="#FFFFFF" border="outset" _hover={{ background: "#2B557D" }} mt="30px">Shop Women's Watches</Button>
+      <Link to="/Womenwatch"><Button background="#2B558D" color="#FFFFFF" border="outset" _hover={{ background: "#2B557D" }} mt="30px">Shop Women's Watches</Button></Link>
+
+
+      <Box>
+        <Footer/>
+      </Box>
 
 
     </Box>

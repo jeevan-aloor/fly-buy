@@ -48,7 +48,7 @@ userrouter.get("/",async(req,res)=>{
 
 
     userrouter.post("/userlogin",async (req, res) => {
-        const { email, password } = req.body;
+        const { email,password } = req.body;
         console.log("pass",password)
         try {
           const data =await DataModel.find({email})
@@ -56,14 +56,13 @@ userrouter.get("/",async(req,res)=>{
           
       
           if (data.length > 0) {
-            let values = data[0].password;
+            let values = data[0].password
             console.log("jeevan");
       
-            bcrypt.compare(password, values, (err, result) => {
-                // console.log("com",password,values)
-              
-                
-                    if (password == values) {
+            bcrypt.compare(password, values, function(err, result) {
+                console.log("com",password,values)
+                console.log("res",result)
+                    if (result){ 
                         const token=jwt.sign({userID:"backend"},'masai')
                         // const token = jwt.sign({ course: "backend"}, "masai");
                         
@@ -86,6 +85,7 @@ userrouter.get("/",async(req,res)=>{
           }
           console.log(data);
         } catch (error) {
+          
           console.log(error);
           console.log("wrong credential");
         }

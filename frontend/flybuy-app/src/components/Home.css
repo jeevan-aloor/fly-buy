@@ -4,7 +4,8 @@
 
 }
 .anim:hover{
-    transform: rotate(20deg);
+    /* transform: rotate(20deg); */
+    transform: scale(1.1);
     
     
 }
@@ -36,4 +37,20 @@
     width:70%;
     margin:auto;
     border:1px solid red
+}
+.cartimage{
+    cursor: pointer;
+    transition: 650ms;
+
+}
+.cartimage:hover{
+    transform: scale(1.1);
+}
+.shoeimagehover{
+    cursor: pointer;
+    transition: 650ms;
+
+}
+.shoeimagehover:hover{
+    transform: scale(1.1);
 }
