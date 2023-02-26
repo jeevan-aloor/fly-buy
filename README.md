@@ -61,7 +61,7 @@ This project is a web application for E-Commerce Called as Fly-buy mostly Tried 
 
 ## Deployed Link
 
-deployed link for demo:- 
+deployed link for demo:- https://sensational-cranachan-8a8b08.netlify.app/
 
 
 
@@ -77,11 +77,23 @@ deployed link for demo:-
    - "product/getcloths" --> This API for getting  Men and Women  cloths
    - "user/adduser" --> For user Register
    - "user/userlogin"  --> For User Login 
+   - "shoes/getshoes" ---> Getting All shoes
+   - "cart/cartdata" ---> getting cart details
+   - "cart/addtocart" ---> for adding item to cart
+   - "cart/cartdelete" --> delete item from the cart
+   - "watch/getwatchmen" --> Get mens watch
+   - "watch/getwatchwomen" --> Get mens watch
+   - "address/getaddress" ---> get address from data base
+   - "address/addaddress" ---> add address to data base
+   - "address/addressdelete" --> Delete address from checkoutpage
+   
 
  ### Admin End ponits
    
    - "/allproductpost" --> Adding All Trending Products 
    - "/product/postdata" --> Adding Mens and Womens cloths for Data Base
+   - "/shoes/postshoes" --> Adding Mens and Womens shoes for Data Base
+    - "watch/postwatches" --> Add watch to data base
 
 
 ## Status
